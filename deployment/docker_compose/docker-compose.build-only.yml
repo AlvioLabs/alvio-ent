@@ -1,0 +1,47 @@
+# Docker Compose Override for Building from Source Only
+# This file removes image references to force building from source code
+
+name: onyx
+
+services:
+  api_server:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    # Remove image reference to force build from source
+
+  background:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    # Remove image reference to force build from source
+
+  web_server:
+    build:
+      context: ../../web
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_POSITIVE_PREDEFINED_FEEDBACK_OPTIONS=${NEXT_PUBLIC_POSITIVE_PREDEFINED_FEEDBACK_OPTIONS:-}
+        - NEXT_PUBLIC_NEGATIVE_PREDEFINED_FEEDBACK_OPTIONS=${NEXT_PUBLIC_NEGATIVE_PREDEFINED_FEEDBACK_OPTIONS:-}
+        - NEXT_PUBLIC_DISABLE_LOGOUT=${NEXT_PUBLIC_DISABLE_LOGOUT:-}
+        - NEXT_PUBLIC_DEFAULT_SIDEBAR_OPEN=${NEXT_PUBLIC_DEFAULT_SIDEBAR_OPEN:-}
+        - NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED=${NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED:-}
+        # Enterprise Edition only
+        - NEXT_PUBLIC_THEME=${NEXT_PUBLIC_THEME:-}
+        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Onyx.
+        - NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED=${NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED:-false}
+        - NODE_OPTIONS=${NODE_OPTIONS:-"--max-old-space-size=4096"}
+    # Remove image reference to force build from source
+
+  inference_model_server:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile.model_server
+    # Remove image reference to force build from source
+
+  indexing_model_server:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile.model_server
+    # Remove image reference to force build from source
+

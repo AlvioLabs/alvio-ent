@@ -2,7 +2,6 @@ name: onyx
 
 services:
   api_server:
-    image: onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile.cloud
@@ -18,8 +17,15 @@ services:
       - minio
     restart: unless-stopped
     environment:
-      - AUTH_TYPE=${AUTH_TYPE:-oidc}
+      - ENABLE_PAID_ENTERPRISE_EDITION_FEATURES=${ENABLE_PAID_ENTERPRISE_EDITION_FEATURES:-true}
+      - MULTI_TENANT=${MULTI_TENANT:-true}
+      - AUTH_TYPE=${AUTH_TYPE:-cloud}
+      - WEB_DOMAIN=${WEB_DOMAIN}
+      - ENCRYPTION_KEY_SECRET=${ENCRYPTION_KEY_SECRET}
       - POSTGRES_HOST=relational_db
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
       - VESPA_HOST=index
       - REDIS_HOST=cache
       - MODEL_SERVER_HOST=${MODEL_SERVER_HOST:-inference_model_server}
@@ -36,7 +42,6 @@ services:
         max-file: "6"
 
   background:
-    image: onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -49,8 +54,15 @@ services:
       - indexing_model_server
     restart: unless-stopped
     environment:
-      - AUTH_TYPE=${AUTH_TYPE:-oidc}
+      - ENABLE_PAID_ENTERPRISE_EDITION_FEATURES=${ENABLE_PAID_ENTERPRISE_EDITION_FEATURES:-true}
+      - MULTI_TENANT=${MULTI_TENANT:-true}
+      - AUTH_TYPE=${AUTH_TYPE:-cloud}
+      - WEB_DOMAIN=${WEB_DOMAIN}
+      - ENCRYPTION_KEY_SECRET=${ENCRYPTION_KEY_SECRET}
       - POSTGRES_HOST=relational_db
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
       - VESPA_HOST=index
       - REDIS_HOST=cache
       - MODEL_SERVER_HOST=${MODEL_SERVER_HOST:-inference_model_server}
@@ -68,7 +80,6 @@ services:
         max-file: "6"
 
   web_server:
-    image: onyxdotapp/onyx-web-server:${IMAGE_TAG:-latest}
     build:
       context: ../../web
       dockerfile: Dockerfile
@@ -82,7 +93,9 @@ services:
       - api_server
     restart: unless-stopped
     environment:
+      - ENABLE_PAID_ENTERPRISE_EDITION_FEATURES=${ENABLE_PAID_ENTERPRISE_EDITION_FEATURES:-true}
       - INTERNAL_URL=http://api_server:8080
+      - WEB_DOMAIN=${WEB_DOMAIN}
     logging:
       driver: json-file
       options:
@@ -94,7 +107,10 @@ services:
     shm_size: 1g
     command: -c 'max_connections=250'
     restart: unless-stopped
-    # POSTGRES_USER and POSTGRES_PASSWORD should be set in .env file
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
     volumes:
       - db_volume:/var/lib/postgresql/data
     logging:
@@ -104,7 +120,6 @@ services:
         max-file: "6"
 
   inference_model_server:
-    image: onyxdotapp/onyx-model-server:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -130,7 +145,6 @@ services:
         max-file: "6"
 
   indexing_model_server:
-    image: onyxdotapp/onyx-model-server:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
