@@ -22,6 +22,8 @@ backend/onyx/evals/data/
 
 # secret files
 .env
+.env.*
+*.env
 jira_test_env
 settings.json
 
