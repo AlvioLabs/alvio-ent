@@ -2,33 +2,33 @@ import time
 
 import pytest
 
-from onyx.background.celery.tasks.kg_processing.kg_indexing import (
+from alvio.background.celery.tasks.kg_processing.kg_indexing import (
     try_creating_kg_processing_task,
 )
-from onyx.background.celery.tasks.kg_processing.utils import (
+from alvio.background.celery.tasks.kg_processing.utils import (
     is_kg_processing_blocked,
 )
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.kg_config import get_kg_config_settings
-from onyx.db.kg_config import set_kg_config_settings
-from onyx.db.models import Connector
-from onyx.db.models import Document
-from onyx.db.models import KGEntity
-from onyx.db.models import KGEntityExtractionStaging
-from onyx.db.models import KGEntityType
-from onyx.db.models import KGRelationship
-from onyx.db.models import KGRelationshipExtractionStaging
-from onyx.db.models import KGStage
-from onyx.kg.models import KGAttributeEntityOption
-from onyx.kg.models import KGAttributeImplicationProperty
-from onyx.kg.models import KGAttributeProperty
-from onyx.kg.models import KGAttributeTrackInfo
-from onyx.kg.models import KGAttributeTrackType
-from onyx.kg.models import KGEntityTypeAttributes
-from onyx.kg.models import KGEntityTypeDefinition
-from onyx.kg.models import KGGroundingType
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.models import InputType
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.kg_config import get_kg_config_settings
+from alvio.db.kg_config import set_kg_config_settings
+from alvio.db.models import Connector
+from alvio.db.models import Document
+from alvio.db.models import KGEntity
+from alvio.db.models import KGEntityExtractionStaging
+from alvio.db.models import KGEntityType
+from alvio.db.models import KGRelationship
+from alvio.db.models import KGRelationshipExtractionStaging
+from alvio.db.models import KGStage
+from alvio.kg.models import KGAttributeEntityOption
+from alvio.kg.models import KGAttributeImplicationProperty
+from alvio.kg.models import KGAttributeProperty
+from alvio.kg.models import KGAttributeTrackInfo
+from alvio.kg.models import KGAttributeTrackType
+from alvio.kg.models import KGEntityTypeAttributes
+from alvio.kg.models import KGEntityTypeDefinition
+from alvio.kg.models import KGGroundingType
 from shared_configs.contextvars import get_current_tenant_id
 from tests.integration.common_utils.managers.api_key import APIKeyManager
 from tests.integration.common_utils.managers.cc_pair import CCPairManager
@@ -48,7 +48,7 @@ def reset_for_test() -> None:
     kg_config_settings.KG_EXPOSED = True
     kg_config_settings.KG_ENABLED = True
     kg_config_settings.KG_VENDOR = "Test"
-    kg_config_settings.KG_VENDOR_DOMAINS = ["onyx-test.com.app", "tester.ai"]
+    kg_config_settings.KG_VENDOR_DOMAINS = ["alvio-test.com.io", "tester.ai"]
     kg_config_settings.KG_IGNORE_EMAIL_DOMAINS = ["gmail.com"]
     kg_config_settings.KG_COVERAGE_START = "2020-01-01"
     set_kg_config_settings(kg_config_settings)
@@ -58,7 +58,7 @@ def reset_for_test() -> None:
 def kg_test_docs() -> tuple[list[str], int, list[KGEntityType]]:
 
     # create admin user
-    admin_user: DATestUser = UserManager.create(email="admin@onyx-test.com.app")
+    admin_user: DATestUser = UserManager.create(email="admin@alvio-test.com.io")
 
     # create a minimal file connector
     cc_pair = CCPairManager.create_from_scratch(

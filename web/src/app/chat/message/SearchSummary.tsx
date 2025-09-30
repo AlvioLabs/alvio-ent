@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument } from "@/lib/search/interfaces";
 import { useEffect, useRef, useState } from "react";
 import { FiBook, FiCheck, FiEdit2, FiSearch, FiX } from "react-icons/fi";
 
@@ -55,7 +55,7 @@ export function SearchSummary({
   finished: boolean;
   query: string;
   handleSearchQueryEdit?: (query: string) => void;
-  docs: OnyxDocument[];
+  docs: AlvioDocument[];
   toggleDocumentSelection: () => void;
   userFileSearch: boolean;
 }) {

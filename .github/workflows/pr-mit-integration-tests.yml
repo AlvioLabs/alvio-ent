@@ -82,7 +82,7 @@ jobs:
         env:
           PYTHONPATH: "."
         run: |
-          python scripts/onyx_openapi_schema.py --filename generated/openapi.json
+          python scripts/alvio_openapi_schema.py --filename generated/openapi.json
 
       - name: Generate OpenAPI Python client
         working-directory: ./backend
@@ -92,8 +92,8 @@ jobs:
             openapitools/openapi-generator-cli generate \
             -i /local/openapi.json \
             -g python \
-            -o /local/onyx_openapi_client \
-            --package-name onyx_openapi_client \
+            -o /local/alvio_openapi_client \
+            --package-name alvio_openapi_client \
             --skip-validate-spec \
             --openapi-normalizer "SIMPLIFY_ONEOF_ANYOF=true,SET_OAS3_NULLABLE=true"
 
@@ -125,7 +125,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           platforms: linux/arm64
-          tags: ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-backend:test-${{ github.run_id }}
+          tags: ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-backend:test-${{ github.run_id }}
           push: true
           outputs: type=registry
 
@@ -151,7 +151,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile.model_server
           platforms: linux/arm64
-          tags: ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-model-server:test-${{ github.run_id }}
+          tags: ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-model-server:test-${{ github.run_id }}
           push: true
           outputs: type=registry
           provenance: false
@@ -185,7 +185,7 @@ jobs:
           context: ./backend
           file: ./backend/tests/integration/Dockerfile
           platforms: linux/arm64
-          tags: ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-integration:test-${{ github.run_id }}
+          tags: ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-integration:test-${{ github.run_id }}
           push: true
           outputs: type=registry
 
@@ -230,18 +230,18 @@ jobs:
           # Pull all images from registry in parallel
           echo "Pulling Docker images in parallel..."
           # Pull images from private registry
-          (docker pull --platform linux/arm64 ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-backend:test-${{ github.run_id }}) &
-          (docker pull --platform linux/arm64 ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-model-server:test-${{ github.run_id }}) &
-          (docker pull --platform linux/arm64 ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-integration:test-${{ github.run_id }}) &
+          (docker pull --platform linux/arm64 ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-backend:test-${{ github.run_id }}) &
+          (docker pull --platform linux/arm64 ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-model-server:test-${{ github.run_id }}) &
+          (docker pull --platform linux/arm64 ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-integration:test-${{ github.run_id }}) &
 
           # Wait for all background jobs to complete
           wait
           echo "All Docker images pulled successfully"
 
           # Re-tag to remove registry prefix for docker-compose
-          docker tag ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-backend:test-${{ github.run_id }} onyxdotapp/onyx-backend:test
-          docker tag ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-model-server:test-${{ github.run_id }} onyxdotapp/onyx-model-server:test
-          docker tag ${{ env.PRIVATE_REGISTRY }}/integration-test-onyx-integration:test-${{ github.run_id }} onyxdotapp/onyx-integration:test
+          docker tag ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-backend:test-${{ github.run_id }} alviodotio/alvio-backend:test
+          docker tag ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-model-server:test-${{ github.run_id }} alviodotio/alvio-model-server:test
+          docker tag ${{ env.PRIVATE_REGISTRY }}/integration-test-alvio-integration:test-${{ github.run_id }} alviodotio/alvio-integration:test
 
       # NOTE: Use pre-ping/null pool to reduce flakiness due to dropped connections
       # NOTE: don't need web server for integration tests
@@ -271,7 +271,7 @@ jobs:
         run: |
           echo "Starting wait-for-service script..."
 
-          docker logs -f onyx-api_server-1 &
+          docker logs -f alvio-api_server-1 &
 
           start_time=$(date +%s)
           timeout=300  # 5 minutes in seconds
@@ -316,7 +316,7 @@ jobs:
           retry_wait_seconds: 10
           command: |
             echo "Running integration tests for ${{ matrix.test-dir.path }}..."
-            docker run --rm --network onyx_default \
+            docker run --rm --network alvio_default \
               --name test-runner \
               -e POSTGRES_HOST=relational_db \
               -e POSTGRES_USER=postgres \
@@ -344,7 +344,7 @@ jobs:
               -e TEST_WEB_HOSTNAME=test-runner \
               -e MOCK_CONNECTOR_SERVER_HOST=mock_connector_server \
               -e MOCK_CONNECTOR_SERVER_PORT=8001 \
-              onyxdotapp/onyx-integration:test \
+              alviodotio/alvio-integration:test \
               /app/tests/integration/${{ matrix.test-dir.path }}
 
       # ------------------------------------------------------------

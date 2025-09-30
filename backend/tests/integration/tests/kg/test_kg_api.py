@@ -5,19 +5,19 @@ from http import HTTPStatus
 import pytest
 import requests
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.db.connector import create_connector
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.kg_config import get_kg_config_settings
-from onyx.db.kg_config import set_kg_config_settings
-from onyx.db.models import Connector
-from onyx.server.documents.models import ConnectorBase
-from onyx.server.kg.models import DisableKGConfigRequest
-from onyx.server.kg.models import EnableKGConfigRequest
-from onyx.server.kg.models import EntityType
-from onyx.server.kg.models import KGConfig as KGConfigAPIModel
-from onyx.server.kg.models import SourceAndEntityTypeView
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.models import InputType
+from alvio.db.connector import create_connector
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.kg_config import get_kg_config_settings
+from alvio.db.kg_config import set_kg_config_settings
+from alvio.db.models import Connector
+from alvio.server.documents.models import ConnectorBase
+from alvio.server.kg.models import DisableKGConfigRequest
+from alvio.server.kg.models import EnableKGConfigRequest
+from alvio.server.kg.models import EntityType
+from alvio.server.kg.models import KGConfig as KGConfigAPIModel
+from alvio.server.kg.models import SourceAndEntityTypeView
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.managers.user import UserManager
 from tests.integration.common_utils.reset import reset_all
@@ -60,7 +60,7 @@ def test_kg_enable_and_disable() -> None:
     req1 = json.loads(
         EnableKGConfigRequest(
             vendor="Test",
-            vendor_domains=["test.app", "tester.ai"],
+            vendor_domains=["test.io", "tester.ai"],
             ignore_domains=[],
             coverage_start=datetime(1970, 1, 1, 0, 0),
         ).model_dump_json()
@@ -87,7 +87,7 @@ def test_kg_enable_and_disable() -> None:
     assert actual_config == KGConfigAPIModel(
         enabled=True,
         vendor="Test",
-        vendor_domains=["test.app", "tester.ai"],
+        vendor_domains=["test.io", "tester.ai"],
         ignore_domains=[],
         coverage_start=datetime(1970, 1, 1, 0, 0),
     )
@@ -116,7 +116,7 @@ def test_kg_enable_and_disable() -> None:
     assert actual_config == KGConfigAPIModel(
         enabled=False,
         vendor="Test",
-        vendor_domains=["test.app", "tester.ai"],
+        vendor_domains=["test.io", "tester.ai"],
         ignore_domains=[],
         coverage_start=datetime(1970, 1, 1, 0, 0),
     )
@@ -148,7 +148,7 @@ def test_update_kg_entity_types(connectors: None) -> None:
     req1 = json.loads(
         EnableKGConfigRequest(
             vendor="Test",
-            vendor_domains=["test.app", "tester.ai"],
+            vendor_domains=["test.io", "tester.ai"],
             ignore_domains=[],
             coverage_start=datetime(1970, 1, 1, 0, 0),
         ).model_dump_json()
@@ -241,7 +241,7 @@ def test_update_invalid_kg_entity_type_should_do_nothing(connectors: None) -> No
     req1 = json.loads(
         EnableKGConfigRequest(
             vendor="Test",
-            vendor_domains=["test.app", "tester.ai"],
+            vendor_domains=["test.io", "tester.ai"],
             ignore_domains=[],
             coverage_start=datetime(1970, 1, 1, 0, 0),
         ).model_dump_json()

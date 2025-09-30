@@ -96,7 +96,7 @@ import {
   WEB_SEARCH_TOOL_ID,
 } from "@/app/chat/components/tools/constants";
 import TextView from "@/components/chat/TextView";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalAlvioDocument } from "@/lib/search/interfaces";
 import { MAX_CHARACTERS_PERSONA_DESCRIPTION } from "@/lib/constants";
 import { FormErrorFocus } from "@/components/FormErrorHelpers";
 import { ProjectFile } from "@/app/chat/projects/projectsService";
@@ -169,7 +169,7 @@ export function AssistantEditor({
   ];
 
   const [presentingDocument, setPresentingDocument] =
-    useState<MinimalOnyxDocument | null>(null);
+    useState<MinimalAlvioDocument | null>(null);
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
   const [showAllUserFiles, setShowAllUserFiles] = useState(false);
 
@@ -1088,12 +1088,12 @@ export function AssistantEditor({
                                     >
                                       <div className="flex flex-col overflow-hidden h-12 p-1">
                                         <div className="flex items-center justify-between gap-2 w-full">
-                                          <span className="text-onyx-medium text-sm truncate flex-1">
+                                          <span className="text-alvio-medium text-sm truncate flex-1">
                                             View All
                                           </span>
-                                          <MultipleFilesIcon className="h-5 w-5 text-onyx-medium" />
+                                          <MultipleFilesIcon className="h-5 w-5 text-alvio-medium" />
                                         </div>
-                                        <span className="text-onyx-muted text-sm">
+                                        <span className="text-alvio-muted text-sm">
                                           {values.user_file_ids.length} files
                                         </span>
                                       </div>
@@ -1809,7 +1809,7 @@ export function AssistantEditor({
                         setFieldValue("task_prompt", e.target.value);
                       }}
                       explanationText="Learn about prompting in our docs!"
-                      explanationLink="https://docs.onyx.app/admin/agents/overview"
+                      explanationLink="https://docs.alvio.io/admin/agents/overview"
                       className="[&_textarea]:placeholder:text-text-muted/50"
                     />
                   </>

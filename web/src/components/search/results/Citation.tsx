@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { CompactDocumentCard, CompactQuestionCard } from "../DocumentDisplay";
-import { LoadedOnyxDocument, OnyxDocument } from "@/lib/search/interfaces";
+import { LoadedAlvioDocument, AlvioDocument } from "@/lib/search/interfaces";
 import {
   Tooltip,
   TooltipContent,
@@ -16,8 +16,8 @@ import { ValidSources } from "@/lib/types";
 const MAX_CITATION_TEXT_LENGTH = 40;
 
 export interface DocumentCardProps {
-  document: LoadedOnyxDocument;
-  updatePresentingDocument: (document: OnyxDocument) => void;
+  document: LoadedAlvioDocument;
+  updatePresentingDocument: (document: AlvioDocument) => void;
   icon?: React.ReactNode;
   url?: string;
 }

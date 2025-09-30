@@ -16,11 +16,11 @@ test.describe("Message Edit and Regenerate Tests", () => {
   test("Complete message editing functionality", async ({ page }) => {
     // Step 1: Send initial message
     await sendMessage(page, "What is 2+2?");
-    await page.waitForSelector('[data-testid="onyx-ai-message"]');
+    await page.waitForSelector('[data-testid="alvio-ai-message"]');
     await page.waitForTimeout(3000);
 
     // Step 2: Test cancel editing
-    let userMessage = page.locator("#onyx-human-message").first();
+    let userMessage = page.locator("#alvio-human-message").first();
     await userMessage.hover();
     let editButton = userMessage.locator('[data-testid="edit-button"]').first();
     await editButton.click();
@@ -50,7 +50,7 @@ test.describe("Message Edit and Regenerate Tests", () => {
 
     // Verify edited message is displayed
     messageContent = await page
-      .locator("#onyx-human-message")
+      .locator("#alvio-human-message")
       .first()
       .textContent();
     expect(messageContent).toContain("What is 3+3?");
@@ -65,7 +65,7 @@ test.describe("Message Edit and Regenerate Tests", () => {
     messageSwitcher = messageSwitcher.locator("..").first();
 
     // Step 5: Edit again to create a third version
-    userMessage = page.locator("#onyx-human-message").first();
+    userMessage = page.locator("#alvio-human-message").first();
     await userMessage.hover();
     editButton = userMessage.locator('[data-testid="edit-button"]').first();
     await editButton.click();
@@ -125,11 +125,11 @@ test.describe("Message Edit and Regenerate Tests", () => {
   test("Message regeneration with model selection", async ({ page }) => {
     // Step 1: Send initial message
     await sendMessage(page, "hi!");
-    await page.waitForSelector('[data-testid="onyx-ai-message"]');
+    await page.waitForSelector('[data-testid="alvio-ai-message"]');
     await page.waitForTimeout(3000);
 
     // Step 2: Capture the original AI response text (just the message content, not buttons/switcher)
-    const aiMessage = page.locator('[data-testid="onyx-ai-message"]').first();
+    const aiMessage = page.locator('[data-testid="alvio-ai-message"]').first();
     // Target the actual message content div (the one with select-text class)
     const messageContent = aiMessage.locator(".select-text").first();
     const originalResponseText = await messageContent.textContent();

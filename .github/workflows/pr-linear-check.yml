@@ -12,8 +12,8 @@ jobs:
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: |
-          # Looking for "https://linear.app" in the body
-          if echo "$PR_BODY" | grep -qE "https://linear\.app"; then
+          # Looking for "https://linear.io" in the body
+          if echo "$PR_BODY" | grep -qE "https://linear\.io"; then
             echo "Found a Linear link. Check passed."
             exit 0
           fi

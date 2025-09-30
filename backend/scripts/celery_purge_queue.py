@@ -7,9 +7,9 @@ from logging import getLogger
 
 from redis import Redis
 
-from onyx.background.celery.celery_redis import celery_get_queue_length
-from onyx.configs.app_configs import REDIS_DB_NUMBER_CELERY
-from onyx.redis.redis_pool import RedisPool
+from alvio.background.celery.celery_redis import celery_get_queue_length
+from alvio.configs.app_configs import REDIS_DB_NUMBER_CELERY
+from alvio.redis.redis_pool import RedisPool
 
 # Configure the logger
 logging.basicConfig(
@@ -51,7 +51,7 @@ def celery_purge_queue(queue: str, tenant_id: str) -> None:
 
     # processed = 0
     # deleted = 0
-    # for i in range(len(OnyxCeleryPriority)):
+    # for i in range(len(AlvioCeleryPriority)):
     #     queue_name = queue
     #     if i > 0:
     #         queue_name += CELERY_SEPARATOR

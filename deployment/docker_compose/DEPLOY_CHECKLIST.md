@@ -112,8 +112,8 @@ docker compose -f docker-compose.prod-cloud.yml up -d --build
 docker compose -f docker-compose.prod-cloud.yml logs -f
 
 # Watch specific services
-docker logs -f onyx-api_server-1
-docker logs -f onyx-nginx-1
+docker logs -f alvio-api_server-1
+docker logs -f alvio-nginx-1
 ```
 
 ---
@@ -125,32 +125,32 @@ docker logs -f onyx-nginx-1
 docker ps
 
 # Should see these containers:
-# - onyx-api_server-1
-# - onyx-background-1
-# - onyx-web_server-1
-# - onyx-relational_db-1
-# - onyx-inference_model_server-1
-# - onyx-indexing_model_server-1
-# - onyx-index-1
-# - onyx-nginx-1
-# - onyx-certbot-1
-# - onyx-minio-1
-# - onyx-cache-1
+# - alvio-api_server-1
+# - alvio-background-1
+# - alvio-web_server-1
+# - alvio-relational_db-1
+# - alvio-inference_model_server-1
+# - alvio-indexing_model_server-1
+# - alvio-index-1
+# - alvio-nginx-1
+# - alvio-certbot-1
+# - alvio-minio-1
+# - alvio-cache-1
 ```
 
 ### 2. Verify Multi-Tenant is Enabled
 ```bash
-docker exec onyx-api_server-1 env | grep MULTI_TENANT
+docker exec alvio-api_server-1 env | grep MULTI_TENANT
 # Output: MULTI_TENANT=true
 
-docker exec onyx-api_server-1 env | grep ENABLE_PAID
+docker exec alvio-api_server-1 env | grep ENABLE_PAID
 # Output: ENABLE_PAID_ENTERPRISE_EDITION_FEATURES=true
 ```
 
 ### 3. Check Database Migrations
 ```bash
 # Check migration status (should use schema_private for multi-tenant)
-docker exec onyx-api_server-1 alembic -n schema_private current
+docker exec alvio-api_server-1 alembic -n schema_private current
 ```
 
 ### 4. Test API Health
@@ -204,7 +204,7 @@ https://enterprise.alvio.io
 docker compose -f docker-compose.prod-cloud.yml logs -f
 
 # Specific service
-docker logs -f onyx-api_server-1
+docker logs -f alvio-api_server-1
 ```
 
 ### Restart Services
@@ -240,7 +240,7 @@ docker compose -f docker-compose.prod-cloud.yml pull
 dig enterprise.alvio.io
 
 # Check certbot logs
-docker logs onyx-certbot-1
+docker logs alvio-certbot-1
 
 # Try with staging (avoids rate limits)
 # Edit init-letsencrypt.sh: change staging=0 to staging=1
@@ -261,7 +261,7 @@ docker compose -f docker-compose.prod-cloud.yml restart api_server background
 ### Issue: Can't Login with Google OAuth
 ```bash
 # Check OAuth settings
-docker exec onyx-api_server-1 env | grep GOOGLE_OAUTH
+docker exec alvio-api_server-1 env | grep GOOGLE_OAUTH
 
 # Verify callback URL in Google Console:
 # https://enterprise.alvio.io/api/auth/google/callback
@@ -270,13 +270,13 @@ docker exec onyx-api_server-1 env | grep GOOGLE_OAUTH
 ### Issue: Database Connection Failed
 ```bash
 # Check database is running
-docker logs onyx-relational_db-1
+docker logs alvio-relational_db-1
 
 # Check credentials match
-docker exec onyx-api_server-1 env | grep POSTGRES
+docker exec alvio-api_server-1 env | grep POSTGRES
 
 # Test connection
-docker exec onyx-relational_db-1 psql -U postgres -c "SELECT 1"
+docker exec alvio-relational_db-1 psql -U postgres -c "SELECT 1"
 ```
 
 ---
@@ -321,7 +321,7 @@ docker exec onyx-relational_db-1 psql -U postgres -c "SELECT 1"
 
 ## 🎉 You're Done!
 
-Your multi-tenant Onyx instance is now running at:
+Your multi-tenant Alvio instance is now running at:
 **https://enterprise.alvio.io**
 
 Features enabled:

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument } from "@/lib/search/interfaces";
 import { FiChevronDown, FiChevronUp, FiFile } from "react-icons/fi";
 
 interface DocumentsDisplayProps {
-  documents: OnyxDocument[];
+  documents: AlvioDocument[];
 }
 
 const DocumentsDisplay: React.FC<DocumentsDisplayProps> = ({ documents }) => {

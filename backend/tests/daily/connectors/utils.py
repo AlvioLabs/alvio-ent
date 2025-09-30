@@ -3,16 +3,16 @@ from collections.abc import Iterator
 from typing import cast
 from typing import TypeVar
 
-from onyx.connectors.connector_runner import CheckpointOutputWrapper
-from onyx.connectors.interfaces import CheckpointedConnector
-from onyx.connectors.interfaces import CheckpointedConnectorWithPermSync
-from onyx.connectors.interfaces import CheckpointOutput
-from onyx.connectors.interfaces import SecondsSinceUnixEpoch
-from onyx.connectors.models import ConnectorCheckpoint
-from onyx.connectors.models import ConnectorFailure
-from onyx.connectors.models import Document
-from onyx.connectors.models import ImageSection
-from onyx.connectors.models import TextSection
+from alvio.connectors.connector_runner import CheckpointOutputWrapper
+from alvio.connectors.interfaces import CheckpointedConnector
+from alvio.connectors.interfaces import CheckpointedConnectorWithPermSync
+from alvio.connectors.interfaces import CheckpointOutput
+from alvio.connectors.interfaces import SecondsSinceUnixEpoch
+from alvio.connectors.models import ConnectorCheckpoint
+from alvio.connectors.models import ConnectorFailure
+from alvio.connectors.models import Document
+from alvio.connectors.models import ImageSection
+from alvio.connectors.models import TextSection
 
 _ITERATION_LIMIT = 100_000
 

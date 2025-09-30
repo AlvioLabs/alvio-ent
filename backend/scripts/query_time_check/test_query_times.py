@@ -5,14 +5,14 @@ RUN THIS AFTER SEED_DUMMY_DOCS.PY
 import random
 import time
 
-from onyx.agents.agent_search.shared_graph_utils.models import QueryExpansionType
-from onyx.configs.constants import DocumentSource
-from onyx.configs.model_configs import DOC_EMBEDDING_DIM
-from onyx.context.search.models import IndexFilters
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.search_settings import get_current_search_settings
-from onyx.document_index.document_index_utils import get_multipass_config
-from onyx.document_index.vespa.index import VespaIndex
+from alvio.agents.agent_search.shared_graph_utils.models import QueryExpansionType
+from alvio.configs.constants import DocumentSource
+from alvio.configs.model_configs import DOC_EMBEDDING_DIM
+from alvio.context.search.models import IndexFilters
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.search_settings import get_current_search_settings
+from alvio.document_index.document_index_utils import get_multipass_config
+from alvio.document_index.vespa.index import VespaIndex
 from scripts.query_time_check.seed_dummy_docs import TOTAL_ACL_ENTRIES_PER_CATEGORY
 from scripts.query_time_check.seed_dummy_docs import TOTAL_DOC_SETS
 from shared_configs.model_server_models import Embedding

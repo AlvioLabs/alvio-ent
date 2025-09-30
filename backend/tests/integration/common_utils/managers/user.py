@@ -6,12 +6,12 @@ import pytest
 import requests
 from requests import HTTPError
 
-from onyx.auth.schemas import UserRole
-from onyx.configs.constants import FASTAPI_USERS_AUTH_COOKIE_NAME
-from onyx.server.documents.models import PaginatedReturn
-from onyx.server.manage.models import UserInfo
-from onyx.server.models import FullUserSnapshot
-from onyx.server.models import InvitedUserSnapshot
+from alvio.auth.schemas import UserRole
+from alvio.configs.constants import FASTAPI_USERS_AUTH_COOKIE_NAME
+from alvio.server.documents.models import PaginatedReturn
+from alvio.server.manage.models import UserInfo
+from alvio.server.models import FullUserSnapshot
+from alvio.server.models import InvitedUserSnapshot
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.constants import GENERAL_HEADERS
 from tests.integration.common_utils.test_models import DATestUser

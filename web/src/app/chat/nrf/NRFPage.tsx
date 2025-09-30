@@ -49,7 +49,7 @@ export default function NRFPage({
     defaultDarkBackgroundUrl,
     shortcuts: shortCuts,
     setShortcuts: setShortCuts,
-    setUseOnyxAsNewTab,
+    setUseAlvioAsNewTab,
     showShortcuts,
   } = useNRFPreferences();
 
@@ -96,12 +96,12 @@ export default function NRFPage({
     setSettingsOpen((prev) => !prev);
   };
 
-  // If user toggles the "Use Onyx" switch to off, prompt a modal
-  const handleUseOnyxToggle = (checked: boolean) => {
+  // If user toggles the "Use Alvio" switch to off, prompt a modal
+  const handleUseAlvioToggle = (checked: boolean) => {
     if (!checked) {
       setShowTurnOffModal(true);
     } else {
-      setUseOnyxAsNewTab(true);
+      setUseAlvioAsNewTab(true);
       sendSetDefaultNewTabMessage(true);
     }
   };
@@ -147,7 +147,7 @@ export default function NRFPage({
   };
 
   const confirmTurnOff = () => {
-    setUseOnyxAsNewTab(false);
+    setUseAlvioAsNewTab(false);
     setShowTurnOffModal(false);
     sendSetDefaultNewTabMessage(false);
   };
@@ -242,8 +242,8 @@ export default function NRFPage({
                 }`}
               >
                 {isNight
-                  ? "End your day with Onyx"
-                  : "Start your day with Onyx"}
+                  ? "End your day with Alvio"
+                  : "Start your day with Alvio"}
               </h1>
 
               <SimplifiedChatInputBar
@@ -315,17 +315,17 @@ export default function NRFPage({
       <SettingsPanel
         settingsOpen={settingsOpen}
         toggleSettings={toggleSettings}
-        handleUseOnyxToggle={handleUseOnyxToggle}
+        handleUseAlvioToggle={handleUseAlvioToggle}
       />
 
       <Dialog open={showTurnOffModal} onOpenChange={setShowTurnOffModal}>
         <DialogContent className="w-fit max-w-[95%]">
           <DialogHeader>
-            <DialogTitle>Turn off Onyx new tab page?</DialogTitle>
+            <DialogTitle>Turn off Alvio new tab page?</DialogTitle>
             <DialogDescription>
               You&apos;ll see your browser&apos;s default new tab page instead.
               <br />
-              You can turn it back on anytime in your Onyx settings.
+              You can turn it back on anytime in your Alvio settings.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex gap-2 justify-center">
@@ -360,7 +360,7 @@ export default function NRFPage({
           ) : (
             <div className="flex flex-col items-center">
               <h2 className="text-center text-xl text-strong font-bold mb-4">
-                Welcome to Onyx
+                Welcome to Alvio
               </h2>
               <Button
                 className="bg-agent w-full hover:bg-accent-hover text-white"

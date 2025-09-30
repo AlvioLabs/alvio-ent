@@ -21,19 +21,19 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --help|-h)
-            echo "Onyx Installation Script"
+            echo "Alvio Installation Script"
             echo ""
             echo "Usage: $0 [OPTIONS]"
             echo ""
             echo "Options:"
-            echo "  --shutdown     Stop (pause) Onyx containers"
-            echo "  --delete-data  Remove all Onyx data (containers, volumes, and files)"
+            echo "  --shutdown     Stop (pause) Alvio containers"
+            echo "  --delete-data  Remove all Alvio data (containers, volumes, and files)"
             echo "  --help, -h     Show this help message"
             echo ""
             echo "Examples:"
-            echo "  $0                    # Install Onyx"
-            echo "  $0 --shutdown         # Pause Onyx services"
-            echo "  $0 --delete-data      # Completely remove Onyx and all data"
+            echo "  $0                    # Install Alvio"
+            echo "  $0 --shutdown         # Pause Alvio services"
+            echo "  $0 --delete-data      # Completely remove Alvio and all data"
             exit 0
             ;;
         *)
@@ -83,14 +83,14 @@ print_warning() {
 # Handle shutdown mode
 if [ "$SHUTDOWN_MODE" = true ]; then
     echo ""
-    echo -e "${BLUE}${BOLD}=== Shutting down Onyx ===${NC}"
+    echo -e "${BLUE}${BOLD}=== Shutting down Alvio ===${NC}"
     echo ""
     
-    if [ -d "onyx_data/deployment" ]; then
-        print_info "Stopping Onyx containers..."
+    if [ -d "alvio_data/deployment" ]; then
+        print_info "Stopping Alvio containers..."
 
         # Check if docker-compose.yml exists
-        if [ -f "onyx_data/deployment/docker-compose.yml" ]; then
+        if [ -f "alvio_data/deployment/docker-compose.yml" ]; then
             # Determine compose command
             if docker compose version &> /dev/null; then
                 COMPOSE_CMD="docker compose"
@@ -102,32 +102,32 @@ if [ "$SHUTDOWN_MODE" = true ]; then
             fi
 
             # Stop containers (without removing them)
-            (cd onyx_data/deployment && $COMPOSE_CMD -f docker-compose.yml stop)
+            (cd alvio_data/deployment && $COMPOSE_CMD -f docker-compose.yml stop)
             if [ $? -eq 0 ]; then
-                print_success "Onyx containers stopped (paused)"
+                print_success "Alvio containers stopped (paused)"
             else
                 print_error "Failed to stop containers"
                 exit 1
             fi
         else
-            print_warning "docker-compose.yml not found in onyx_data/deployment"
+            print_warning "docker-compose.yml not found in alvio_data/deployment"
         fi
     else
-        print_warning "Onyx data directory not found. Nothing to shutdown."
+        print_warning "Alvio data directory not found. Nothing to shutdown."
     fi
     
     echo ""
-    print_success "Onyx shutdown complete!"
+    print_success "Alvio shutdown complete!"
     exit 0
 fi
 
 # Handle delete data mode
 if [ "$DELETE_DATA_MODE" = true ]; then
     echo ""
-    echo -e "${RED}${BOLD}=== WARNING: This will permanently delete all Onyx data ===${NC}"
+    echo -e "${RED}${BOLD}=== WARNING: This will permanently delete all Alvio data ===${NC}"
     echo ""
     print_warning "This action will remove:"
-    echo "  • All Onyx containers and volumes"
+    echo "  • All Alvio containers and volumes"
     echo "  • All downloaded files and configurations"
     echo "  • All user data and documents"
     echo ""
@@ -139,11 +139,11 @@ if [ "$DELETE_DATA_MODE" = true ]; then
         exit 0
     fi
     
-    print_info "Removing Onyx containers and volumes..."
+    print_info "Removing Alvio containers and volumes..."
     
-    if [ -d "onyx_data/deployment" ]; then
+    if [ -d "alvio_data/deployment" ]; then
         # Check if docker-compose.yml exists
-        if [ -f "onyx_data/deployment/docker-compose.yml" ]; then
+        if [ -f "alvio_data/deployment/docker-compose.yml" ]; then
             # Determine compose command
             if docker compose version &> /dev/null; then
                 COMPOSE_CMD="docker compose"
@@ -155,9 +155,9 @@ if [ "$DELETE_DATA_MODE" = true ]; then
             fi
 
             # Stop and remove containers with volumes
-            (cd onyx_data/deployment && $COMPOSE_CMD -f docker-compose.yml down -v)
+            (cd alvio_data/deployment && $COMPOSE_CMD -f docker-compose.yml down -v)
             if [ $? -eq 0 ]; then
-                print_success "Onyx containers and volumes removed"
+                print_success "Alvio containers and volumes removed"
             else
                 print_error "Failed to remove containers and volumes"
             fi
@@ -165,15 +165,15 @@ if [ "$DELETE_DATA_MODE" = true ]; then
     fi
     
     print_info "Removing data directories..."
-    if [ -d "onyx_data" ]; then
-        rm -rf onyx_data
+    if [ -d "alvio_data" ]; then
+        rm -rf alvio_data
         print_success "Data directories removed"
     else
-        print_warning "No onyx_data directory found"
+        print_warning "No alvio_data directory found"
     fi
     
     echo ""
-    print_success "All Onyx data has been permanently deleted!"
+    print_success "All Alvio data has been permanently deleted!"
     exit 0
 fi
 
@@ -189,13 +189,13 @@ echo " \____/|_| |_|\__, /_/\_\ "
 echo "               __/ |      "
 echo "              |___/       "
 echo -e "${NC}"
-echo "Welcome to Onyx Installation Script"
+echo "Welcome to Alvio Installation Script"
 echo "===================================="
 echo ""
 
 # User acknowledgment section
 echo -e "${YELLOW}${BOLD}This script will:${NC}"
-echo "1. Download deployment files for Onyx into a new 'onyx_data' directory"
+echo "1. Download deployment files for Alvio into a new 'alvio_data' directory"
 echo "2. Check your system resources (Docker, memory, disk space)"
 echo "3. Guide you through deployment options (version, authentication)"
 echo ""
@@ -211,7 +211,7 @@ else
 fi
 
 # GitHub repo base URL - using docker-compose-easy branch
-GITHUB_RAW_URL="https://raw.githubusercontent.com/onyx-dot-app/onyx/main/deployment/docker_compose"
+GITHUB_RAW_URL="https://raw.githubusercontent.com/alvio-dot-io/alvio/main/deployment/docker_compose"
 
 # Check system requirements
 print_step "Verifying Docker installation"
@@ -349,7 +349,7 @@ fi
 
 if [ "$RESOURCE_WARNING" = true ]; then
     echo ""
-    print_warning "Onyx recommends at least ${EXPECTED_DOCKER_RAM_GB}GB RAM and ${EXPECTED_DISK_GB}GB disk space for optimal performance."
+    print_warning "Alvio recommends at least ${EXPECTED_DOCKER_RAM_GB}GB RAM and ${EXPECTED_DISK_GB}GB disk space for optimal performance."
     echo ""
     read -p "Do you want to continue anyway? (y/N): " -n 1 -r
     echo ""
@@ -362,17 +362,17 @@ fi
 
 # Create directory structure
 print_step "Creating directory structure"
-if [ -d "onyx_data" ]; then
+if [ -d "alvio_data" ]; then
     print_info "Directory structure already exists"
-    print_success "Using existing onyx_data directory"
+    print_success "Using existing alvio_data directory"
 else
-    mkdir -p onyx_data/deployment
-    mkdir -p onyx_data/data/nginx/local
+    mkdir -p alvio_data/deployment
+    mkdir -p alvio_data/data/nginx/local
     print_success "Directory structure created"
 fi
 
 # Download all required files
-print_step "Downloading Onyx configuration files"
+print_step "Downloading Alvio configuration files"
 print_info "This step downloads all necessary configuration files from GitHub..."
 echo ""
 print_info "Downloading the following files:"
@@ -384,7 +384,7 @@ echo "  • README.md - Documentation and setup instructions"
 echo ""
 
 # Download Docker Compose file
-COMPOSE_FILE="onyx_data/deployment/docker-compose.yml"
+COMPOSE_FILE="alvio_data/deployment/docker-compose.yml"
 print_info "Downloading docker-compose.yml..."
 if curl -fsSL -o "$COMPOSE_FILE" "${GITHUB_RAW_URL}/docker-compose.yml" 2>/dev/null; then
     print_success "Docker Compose file downloaded successfully"
@@ -425,7 +425,7 @@ else
 fi
 
 # Download env.template file
-ENV_TEMPLATE="onyx_data/deployment/env.template"
+ENV_TEMPLATE="alvio_data/deployment/env.template"
 print_info "Downloading env.template..."
 if curl -fsSL -o "$ENV_TEMPLATE" "${GITHUB_RAW_URL}/env.template" 2>/dev/null; then
     print_success "Environment template downloaded successfully"
@@ -436,10 +436,10 @@ else
 fi
 
 # Download nginx config files
-NGINX_BASE_URL="https://raw.githubusercontent.com/onyx-dot-app/onyx/main/deployment/data/nginx"
+NGINX_BASE_URL="https://raw.githubusercontent.com/alvio-dot-io/alvio/main/deployment/data/nginx"
 
 # Download app.conf.template
-NGINX_CONFIG="onyx_data/data/nginx/app.conf.template"
+NGINX_CONFIG="alvio_data/data/nginx/app.conf.template"
 print_info "Downloading nginx configuration template..."
 if curl -fsSL -o "$NGINX_CONFIG" "$NGINX_BASE_URL/app.conf.template" 2>/dev/null; then
     print_success "Nginx configuration template downloaded"
@@ -450,7 +450,7 @@ else
 fi
 
 # Download run-nginx.sh script
-NGINX_RUN_SCRIPT="onyx_data/data/nginx/run-nginx.sh"
+NGINX_RUN_SCRIPT="alvio_data/data/nginx/run-nginx.sh"
 print_info "Downloading nginx startup script..."
 if curl -fsSL -o "$NGINX_RUN_SCRIPT" "$NGINX_BASE_URL/run-nginx.sh" 2>/dev/null; then
     chmod +x "$NGINX_RUN_SCRIPT"
@@ -462,7 +462,7 @@ else
 fi
 
 # Download README file
-README_FILE="onyx_data/README.md"
+README_FILE="alvio_data/README.md"
 print_info "Downloading README.md..."
 if curl -fsSL -o "$README_FILE" "${GITHUB_RAW_URL}/README.md" 2>/dev/null; then
     print_success "README.md downloaded successfully"
@@ -473,15 +473,15 @@ else
 fi
 
 # Create empty local directory marker (if needed)
-touch "onyx_data/data/nginx/local/.gitkeep"
+touch "alvio_data/data/nginx/local/.gitkeep"
 print_success "All configuration files downloaded successfully"
 
 # Set up deployment configuration
 print_step "Setting up deployment configs"
-ENV_FILE="onyx_data/deployment/.env"
+ENV_FILE="alvio_data/deployment/.env"
 
 # Check if services are already running
-if [ -d "onyx_data/deployment" ] && [ -f "onyx_data/deployment/docker-compose.yml" ]; then
+if [ -d "alvio_data/deployment" ] && [ -f "alvio_data/deployment/docker-compose.yml" ]; then
     # Determine compose command
     if docker compose version &> /dev/null; then
         COMPOSE_CMD="docker compose"
@@ -493,13 +493,13 @@ if [ -d "onyx_data/deployment" ] && [ -f "onyx_data/deployment/docker-compose.ym
 
     if [ -n "$COMPOSE_CMD" ]; then
         # Check if any containers are running
-        RUNNING_CONTAINERS=$(cd onyx_data/deployment && $COMPOSE_CMD -f docker-compose.yml ps -q 2>/dev/null | wc -l)
+        RUNNING_CONTAINERS=$(cd alvio_data/deployment && $COMPOSE_CMD -f docker-compose.yml ps -q 2>/dev/null | wc -l)
         if [ "$RUNNING_CONTAINERS" -gt 0 ]; then
-            print_error "Onyx services are currently running!"
+            print_error "Alvio services are currently running!"
             echo ""
             print_info "To make configuration changes, you must first shut down the services."
             echo ""
-            print_info "Please run the following command to shut down Onyx:"
+            print_info "Please run the following command to shut down Alvio:"
             echo -e "   ${BOLD}./install.sh --shutdown${NC}"
             echo ""
             print_info "Then run this script again to make your changes."
@@ -694,7 +694,7 @@ print_step "Pulling Docker images"
 print_info "This may take several minutes depending on your internet connection..."
 echo ""
 print_info "Downloading Docker images (this may take a while)..."
-(cd onyx_data/deployment && $COMPOSE_CMD -f docker-compose.yml pull --quiet)
+(cd alvio_data/deployment && $COMPOSE_CMD -f docker-compose.yml pull --quiet)
 if [ $? -eq 0 ]; then
     print_success "Docker images downloaded successfully"
 else
@@ -703,12 +703,12 @@ else
 fi
 
 # Start services
-print_step "Starting Onyx services"
+print_step "Starting Alvio services"
 print_info "Launching containers..."
 echo ""
-(cd onyx_data/deployment && $COMPOSE_CMD -f docker-compose.yml up -d)
+(cd alvio_data/deployment && $COMPOSE_CMD -f docker-compose.yml up -d)
 if [ $? -ne 0 ]; then
-    print_error "Failed to start Onyx services"
+    print_error "Failed to start Alvio services"
     exit 1
 fi
 
@@ -727,10 +727,10 @@ echo ""
 # Check for restart loops
 print_info "Checking container health status..."
 RESTART_ISSUES=false
-CONTAINERS=$(cd onyx_data/deployment && $COMPOSE_CMD -f docker-compose.yml ps -q 2>/dev/null)
+CONTAINERS=$(cd alvio_data/deployment && $COMPOSE_CMD -f docker-compose.yml ps -q 2>/dev/null)
 
 for CONTAINER in $CONTAINERS; do
-    CONTAINER_NAME=$(docker inspect --format '{{.Name}}' "$CONTAINER" | sed 's/^\/\|^onyx_data_deployment_//g')
+    CONTAINER_NAME=$(docker inspect --format '{{.Name}}' "$CONTAINER" | sed 's/^\/\|^alvio_data_deployment_//g')
     RESTART_COUNT=$(docker inspect --format '{{.RestartCount}}' "$CONTAINER")
     STATUS=$(docker inspect --format '{{.State.Status}}' "$CONTAINER")
 
@@ -755,20 +755,20 @@ if [ "$RESTART_ISSUES" = true ]; then
     print_error "Some containers are experiencing issues!"
     echo ""
     print_info "Please check the logs for more information:"
-    echo "  (cd onyx_data/deployment && $COMPOSE_CMD -f docker-compose.yml logs)"
+    echo "  (cd alvio_data/deployment && $COMPOSE_CMD -f docker-compose.yml logs)"
     echo ""
-    print_info "If the issue persists, please contact: founders@onyx.app"
+    print_info "If the issue persists, please contact: founders@alvio.io"
     echo "Include the output of the logs command in your message."
     exit 1
 fi
 
 # Health check function
-check_onyx_health() {
+check_alvio_health() {
     local max_attempts=600  # 10 minutes * 60 attempts per minute (every 1 second)
     local attempt=1
     local port=${HOST_PORT:-3000}
 
-    print_info "Checking Onyx service health..."
+    print_info "Checking Alvio service health..."
     echo "Containers are healthy, waiting for database migrations and service initialization to finish."
     echo ""
 
@@ -793,7 +793,7 @@ check_onyx_health() {
         esac
 
         # Clear line and show progress with fixed spacing
-        printf "\r\033[KChecking Onyx service%s (%dm %ds elapsed)" "$dots" "$minutes" "$seconds"
+        printf "\r\033[KChecking Alvio service%s (%dm %ds elapsed)" "$dots" "$minutes" "$seconds"
 
         sleep 1
         attempt=$((attempt + 1))
@@ -809,28 +809,28 @@ print_success "All containers are running successfully!"
 echo ""
 
 # Run health check
-if check_onyx_health; then
+if check_alvio_health; then
     echo ""
     echo -e "${GREEN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${GREEN}${BOLD}   🎉 Onyx service is ready! 🎉${NC}"
+    echo -e "${GREEN}${BOLD}   🎉 Alvio service is ready! 🎉${NC}"
     echo -e "${GREEN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 else
     print_warning "Health check timed out after 10 minutes"
     print_info "Containers are running, but the web service may still be initializing (or something went wrong)"
     echo ""
     echo -e "${YELLOW}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${YELLOW}${BOLD}   ⚠️  Onyx containers are running ⚠️${NC}"
+    echo -e "${YELLOW}${BOLD}   ⚠️  Alvio containers are running ⚠️${NC}"
     echo -e "${YELLOW}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 fi
 echo ""
-print_info "Access Onyx at:"
+print_info "Access Alvio at:"
 echo -e "   ${BOLD}http://localhost:${HOST_PORT}${NC}"
 echo ""
 print_info "If authentication is enabled, you can create your admin account here:"
 echo "   • Visit http://localhost:${HOST_PORT}/auth/signup to create your admin account"
 echo "   • The first user created will automatically have admin privileges"
 echo ""
-print_info "Refer to the README in the onyx_data directory for more information."
+print_info "Refer to the README in the alvio_data directory for more information."
 echo ""
-print_info "For help or issues, contact: founders@onyx.app"
+print_info "For help or issues, contact: founders@alvio.io"
 echo ""

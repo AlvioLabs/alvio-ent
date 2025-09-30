@@ -28,16 +28,16 @@ export async function navigateToAssistantInHistorySidebar(
 }
 
 export async function sendMessage(page: Page, message: string) {
-  await page.locator("#onyx-chat-input-textarea").click();
-  await page.locator("#onyx-chat-input-textarea").fill(message);
-  await page.locator("#onyx-chat-input-send-button").click();
-  await page.waitForSelector('[data-testid="onyx-ai-message"]');
+  await page.locator("#alvio-chat-input-textarea").click();
+  await page.locator("#alvio-chat-input-textarea").fill(message);
+  await page.locator("#alvio-chat-input-send-button").click();
+  await page.waitForSelector('[data-testid="alvio-ai-message"]');
   await page.waitForTimeout(2000);
 }
 
 export async function verifyCurrentModel(page: Page, modelName: string) {
   await page.waitForTimeout(1000);
-  const chatInput = page.locator("#onyx-chat-input");
+  const chatInput = page.locator("#alvio-chat-input");
   const text = await chatInput.textContent();
   expect(text).toContain(modelName);
   await page.waitForTimeout(1000);

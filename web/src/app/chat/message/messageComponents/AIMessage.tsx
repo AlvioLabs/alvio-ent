@@ -11,7 +11,7 @@ import { Logo } from "@/components/logo/Logo";
 import { CopyButton } from "@/components/CopyButton";
 import { LikeFeedback, DislikeFeedback } from "@/components/icons/icons";
 import { HoverableIcon } from "@/components/Hoverable";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument } from "@/lib/search/interfaces";
 import { CitedSourcesToggle } from "./CitedSourcesToggle";
 import {
   CustomTooltip,
@@ -85,7 +85,7 @@ export function AIMessage({
   const lastProcessedIndexRef = useRef<number>(0);
   const citationsRef = useRef<StreamingCitation[]>([]);
   const seenCitationDocIdsRef = useRef<Set<string>>(new Set());
-  const documentMapRef = useRef<Map<string, OnyxDocument>>(new Map());
+  const documentMapRef = useRef<Map<string, AlvioDocument>>(new Map());
   const groupedPacketsMapRef = useRef<Map<number, Packet[]>>(new Map());
   const groupedPacketsRef = useRef<{ ind: number; packets: Packet[] }[]>([]);
   const finalAnswerComingRef = useRef<boolean>(isFinalAnswerComing(rawPackets));
@@ -233,7 +233,7 @@ export function AIMessage({
   return (
     <div
       // for e2e tests
-      data-testid={displayComplete ? "onyx-ai-message" : undefined}
+      data-testid={displayComplete ? "alvio-ai-message" : undefined}
       className="py-5 ml-4 lg:px-5 relative flex"
     >
       <div className="mx-auto w-[90%] max-w-message-max">

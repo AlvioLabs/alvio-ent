@@ -6,13 +6,13 @@ from uuid import UUID
 import requests
 from requests.models import Response
 
-from onyx.context.search.models import RetrievalDetails
-from onyx.context.search.models import SavedSearchDoc
-from onyx.file_store.models import FileDescriptor
-from onyx.llm.override_models import LLMOverride
-from onyx.llm.override_models import PromptOverride
-from onyx.server.query_and_chat.models import ChatSessionCreationRequest
-from onyx.server.query_and_chat.models import CreateChatMessageRequest
+from alvio.context.search.models import RetrievalDetails
+from alvio.context.search.models import SavedSearchDoc
+from alvio.file_store.models import FileDescriptor
+from alvio.llm.override_models import LLMOverride
+from alvio.llm.override_models import PromptOverride
+from alvio.server.query_and_chat.models import ChatSessionCreationRequest
+from alvio.server.query_and_chat.models import CreateChatMessageRequest
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.constants import GENERAL_HEADERS
 from tests.integration.common_utils.test_models import DATestChatMessage

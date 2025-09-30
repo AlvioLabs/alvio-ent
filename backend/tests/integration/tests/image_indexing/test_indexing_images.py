@@ -4,10 +4,10 @@ from datetime import timezone
 
 import pytest
 
-from onyx.connectors.models import InputType
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.enums import AccessType
-from onyx.server.documents.models import DocumentSource
+from alvio.connectors.models import InputType
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.enums import AccessType
+from alvio.server.documents.models import DocumentSource
 from tests.integration.common_utils.managers.cc_pair import CCPairManager
 from tests.integration.common_utils.managers.connector import ConnectorManager
 from tests.integration.common_utils.managers.credential import CredentialManager

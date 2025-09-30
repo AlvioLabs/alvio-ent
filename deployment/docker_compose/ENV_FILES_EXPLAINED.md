@@ -59,8 +59,8 @@ docker compose -f docker-compose.prod-cloud.yml --env-file .env.prod up -d --bui
 ```bash
 DOMAIN=enterprise.alvio.io
 EMAIL=verify@alvio.io
-ONYX_BACKEND_API_HOST=api_server
-ONYX_WEB_SERVER_HOST=web_server
+ALVIO_BACKEND_API_HOST=api_server
+ALVIO_WEB_SERVER_HOST=web_server
 ```
 **Status:** ✅ Ready - No changes needed
 
@@ -227,7 +227,7 @@ docker compose -f docker-compose.prod-cloud.yml up -d --build
 docker compose -f docker-compose.prod-cloud.yml logs -f api_server
 
 # Verify multi-tenant is enabled
-docker exec onyx-api_server-1 env | grep MULTI_TENANT
+docker exec alvio-api_server-1 env | grep MULTI_TENANT
 ```
 
 ---

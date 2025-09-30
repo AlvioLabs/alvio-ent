@@ -6,7 +6,7 @@ chart-dirs:
 
 # must be kept in sync with Chart.yaml
 chart-repos:
-  - vespa=https://onyx-dot-app.github.io/vespa-helm-charts
+  - vespa=https://alvio-dot-io.github.io/vespa-helm-charts
   - postgresql=https://charts.bitnami.com/bitnami
   
 # have seen postgres take 10 min to pull ... so 15 min seems like a good timeout?

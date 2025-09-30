@@ -3,7 +3,7 @@ import {
   QuestionCardProps,
   DocumentCardProps,
 } from "@/components/search/results/Citation";
-import { LoadedOnyxDocument, OnyxDocument } from "@/lib/search/interfaces";
+import { LoadedAlvioDocument, AlvioDocument } from "@/lib/search/interfaces";
 import React, { memo } from "react";
 import isEqual from "lodash/isEqual";
 import { SourceIcon } from "@/components/SourceIcon";
@@ -25,9 +25,9 @@ export const MemoizedAnchor = memo(
   }: {
     subQuestions?: SubQuestionDetail[];
     openQuestion?: (question: SubQuestionDetail) => void;
-    docs?: OnyxDocument[] | null;
+    docs?: AlvioDocument[] | null;
     userFiles?: ProjectFile[] | null;
-    updatePresentingDocument: (doc: OnyxDocument) => void;
+    updatePresentingDocument: (doc: AlvioDocument) => void;
     href?: string;
     children: React.ReactNode;
   }): JSX.Element => {
@@ -152,7 +152,7 @@ export const MemoizedLink = memo(
         ? {
             url: document.link,
             icon: document.icon as unknown as React.ReactNode,
-            document: document as LoadedOnyxDocument,
+            document: document as LoadedAlvioDocument,
             updatePresentingDocument: updatePresentingDocument!,
           }
         : undefined;

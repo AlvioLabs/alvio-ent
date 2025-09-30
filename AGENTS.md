@@ -9,21 +9,21 @@ to assume the python venv.
 - To make tests work, check the `.env` file at the root of the project to find an OpenAI key.
 - If using `playwright` to explore the frontend, you can usually log in with username `a@test.com` and password
 `a`. The app can be accessed at `http://localhost:3000`.
-- You should assume that all Onyx services are running. To verify, you can check the `backend/log` directory to
+- You should assume that all Alvio services are running. To verify, you can check the `backend/log` directory to
 make sure we see logs coming out from the relevant service.
-- To connect to the Postgres database, use: `docker exec -it onyx-relational_db-1 psql -U postgres -c "<SQL>"`
+- To connect to the Postgres database, use: `docker exec -it alvio-relational_db-1 psql -U postgres -c "<SQL>"`
 - When making calls to the backend, always go through the frontend. E.g. make a call to `http://localhost:3000/api/persona` not `http://localhost:8080/api/persona`
-- Put ALL db operations under the `backend/onyx/db` / `backend/ee/onyx/db` directories. Don't run queries
+- Put ALL db operations under the `backend/alvio/db` / `backend/ee/alvio/db` directories. Don't run queries
 outside of those directories.
 
 ## Project Overview
 
-**Onyx** (formerly Danswer) is an open-source Gen-AI and Enterprise Search platform that connects to company documents, apps, and people. It features a modular architecture with both Community Edition (MIT licensed) and Enterprise Edition offerings.
+**Alvio** is an open-source Gen-AI and Enterprise Search platform that connects to company documents, apps, and people. It features a modular architecture with both Community Edition (MIT licensed) and Enterprise Edition offerings.
 
 
 ### Background Workers (Celery)
 
-Onyx uses Celery for asynchronous task processing with multiple specialized workers:
+Alvio uses Celery for asynchronous task processing with multiple specialized workers:
 
 #### Worker Types
 
@@ -132,7 +132,7 @@ NOTE: Always make sure everything is strictly typed (both in Python and Typescri
 
 ```
 backend/
-├── onyx/
+├── alvio/
 │   ├── auth/                    # Authentication & authorization
 │   ├── chat/                    # Chat functionality & LLM interactions
 │   ├── connectors/              # Data source connectors
@@ -173,10 +173,10 @@ alembic -n schema_private revision --autogenerate -m "description"
 
 ## Testing Strategy
 
-There are 4 main types of tests within Onyx:
+There are 4 main types of tests within Alvio:
 
 ### Unit Tests
-These should not assume any Onyx/external services are available to be called.
+These should not assume any Alvio/external services are available to be called.
 Interactions with the outside world should be mocked using `unittest.mock`. Generally, only 
 write these for complex, isolated modules e.g. `citation_processing.py`.
 
@@ -187,10 +187,10 @@ python -m dotenv -f .vscode/.env run -- pytest -xv backend/tests/unit
 ```
 
 ### External Dependency Unit Tests
-These tests assume that all external dependencies of Onyx are available and callable (e.g. Postgres, Redis, 
+These tests assume that all external dependencies of Alvio are available and callable (e.g. Postgres, Redis, 
 MinIO/S3, Vespa are running + OpenAI can be called + any request to the internet is fine + etc.).
 
-However, the actual Onyx containers are not running and with these tests we call the function to test directly.
+However, the actual Alvio containers are not running and with these tests we call the function to test directly.
 We can also mock components/calls at will. 
 
 The goal with these tests are to minimize mocking while giving some flexibility to mock things that are flakey, 
@@ -206,7 +206,7 @@ python -m dotenv -f .vscode/.env run -- pytest backend/tests/external_dependency
 ```
 
 ### Integration Tests
-Standard integration tests. Every test in `backend/tests/integration` runs against a real Onyx deployment. We cannot 
+Standard integration tests. Every test in `backend/tests/integration` runs against a real Alvio deployment. We cannot 
 mock anything in these tests. Prefer writing integration tests (or External Dependency Unit Tests if mocking/internal 
 verification is necessary) over any other type of test.
 
@@ -226,7 +226,7 @@ python -m dotenv -f .vscode/.env run -- pytest backend/tests/integration
 ```
 
 ### Playwright (E2E) Tests
-These tests are an even more complete version of the Integration Tests mentioned above. Has all services of Onyx 
+These tests are an even more complete version of the Integration Tests mentioned above. Has all services of Alvio 
 running, *including* the Web Server.
 
 Use these tests for anything that requires significant frontend <-> backend coordination.
@@ -243,7 +243,7 @@ npx playwright test <TEST_NAME>
 ## Logs
 
 When (1) writing integration tests or (2) doing live tests (e.g. curl / playwright) you can get access
-to logs via the `backend/log/<service_name>_debug.log` file. All Onyx services (api_server, web_server, celery_X)
+to logs via the `backend/log/<service_name>_debug.log` file. All Alvio services (api_server, web_server, celery_X)
 will be tailing their logs to this file. 
 
 

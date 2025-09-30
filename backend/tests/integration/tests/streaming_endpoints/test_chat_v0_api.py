@@ -9,9 +9,9 @@ from uuid import UUID
 
 import requests
 
-from onyx.context.search.enums import OptionalSearchSetting
-from onyx.context.search.models import RetrievalDetails
-from onyx.server.query_and_chat.models import CreateChatMessageRequest
+from alvio.context.search.enums import OptionalSearchSetting
+from alvio.context.search.models import RetrievalDetails
+from alvio.server.query_and_chat.models import CreateChatMessageRequest
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.managers.chat import ChatSessionManager
 from tests.integration.common_utils.managers.llm_provider import LLMProviderManager
@@ -93,7 +93,7 @@ class TestChatV0API:
         # Send a message using v0 API
         responses = send_message_v0(
             chat_session_id=chat_session.id,
-            message="What is Onyx?",
+            message="What is Alvio?",
             user_performing_action=admin_user,
         )
 
@@ -144,7 +144,7 @@ class TestChatV0API:
         LLMProviderManager.create(user_performing_action=admin_user)
 
         # Create test documents
-        document_builder(["This is a test document about Onyx"])
+        document_builder(["This is a test document about Alvio"])
 
         # Create a chat session
         chat_session = ChatSessionManager.create(
@@ -155,7 +155,7 @@ class TestChatV0API:
         # Send a message that triggers search
         responses = send_message_v0(
             chat_session_id=chat_session.id,
-            message="Search for information about Onyx",
+            message="Search for information about Alvio",
             user_performing_action=admin_user,
             retrieval_options=RetrievalDetails(
                 run_search=OptionalSearchSetting.ALWAYS,
@@ -216,7 +216,7 @@ class TestChatV0API:
         # Send a message that might trigger tool use
         responses = send_message_v0(
             chat_session_id=chat_session.id,
-            message="Search for information about Onyx features",
+            message="Search for information about Alvio features",
             user_performing_action=admin_user,
             retrieval_options=RetrievalDetails(
                 run_search=OptionalSearchSetting.ALWAYS,
@@ -276,8 +276,8 @@ class TestChatV0API:
         # Create test documents with specific content
         _ = document_builder(
             [
-                "Onyx is an AI assistant that helps with information retrieval.",
-                "Onyx supports multiple document sources and search capabilities.",
+                "Alvio is an AI assistant that helps with information retrieval.",
+                "Alvio supports multiple document sources and search capabilities.",
             ]
         )
 
@@ -290,7 +290,7 @@ class TestChatV0API:
         # Send a message that should generate citations
         responses = send_message_v0(
             chat_session_id=chat_session.id,
-            message="What are the key features of Onyx? Please cite your sources.",
+            message="What are the key features of Alvio? Please cite your sources.",
             user_performing_action=admin_user,
             retrieval_options=RetrievalDetails(
                 run_search=OptionalSearchSetting.ALWAYS,
@@ -325,11 +325,11 @@ class TestChatV0API:
         # Create multiple test documents
         _ = document_builder(
             [
-                "Onyx is an AI assistant",
+                "Alvio is an AI assistant",
                 "This document is about something else",
-                "Another document about Onyx features",
+                "Another document about Alvio features",
                 "Unrelated content here",
-                "More Onyx documentation",
+                "More Alvio documentation",
             ]
         )
 
@@ -342,7 +342,7 @@ class TestChatV0API:
         # Send a message that should trigger filtering
         responses = send_message_v0(
             chat_session_id=chat_session.id,
-            message="Tell me specifically about Onyx features",
+            message="Tell me specifically about Alvio features",
             user_performing_action=admin_user,
             retrieval_options=RetrievalDetails(
                 run_search=OptionalSearchSetting.ALWAYS,

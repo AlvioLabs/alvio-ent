@@ -4,9 +4,9 @@ from unittest.mock import patch
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.jira.connector import JiraConnector
-from onyx.connectors.models import Document
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.jira.connector import JiraConnector
+from alvio.connectors.models import Document
 from tests.daily.connectors.utils import load_all_docs_from_checkpoint_connector
 
 
@@ -43,7 +43,7 @@ def jira_connector_with_jql() -> JiraConnector:
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "alvio.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> None:
@@ -79,8 +79,8 @@ def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> Non
         "assignee": "Chris Weaver",
         "issuetype": "Story",
         "created": "2025-04-16T16:44:06.716-0700",
-        "reporter_email": "chris@onyx.app",
-        "assignee_email": "chris@onyx.app",
+        "reporter_email": "chris@alvio.io",
+        "assignee_email": "chris@alvio.io",
         "project_name": "DailyConnectorTestProject",
         "project": "AS",
         "parent": "AS-4",
@@ -96,7 +96,7 @@ def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> Non
     section = story.sections[0]
     assert (
         section.text
-        == "This is a critical request for super-human answer quality in Onyx! We need magic!\n"
+        == "This is a critical request for super-human answer quality in Alvio! We need magic!\n"
     )
     assert section.link == "https://danswerai.atlassian.net/browse/AS-3"
 
@@ -107,12 +107,12 @@ def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> Non
     assert epic.metadata == {
         "priority": "Medium",
         "status": "Backlog",
-        "reporter": "Founder Onyx",
+        "reporter": "Founder Alvio",
         "assignee": "Chris Weaver",
         "issuetype": "Epic",
         "created": "2025-04-16T16:55:53.068-0700",
-        "reporter_email": "founders@onyx.app",
-        "assignee_email": "chris@onyx.app",
+        "reporter_email": "founders@alvio.io",
+        "assignee_email": "chris@alvio.io",
         "project_name": "DailyConnectorTestProject",
         "project": "AS",
         "key": "AS-4",
@@ -130,7 +130,7 @@ def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> Non
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "alvio.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_jira_connector_with_jql(

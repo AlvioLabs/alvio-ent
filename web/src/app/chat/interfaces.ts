@@ -1,7 +1,7 @@
 import {
-  OnyxDocument,
+  AlvioDocument,
   Filters,
-  SearchOnyxDocument,
+  SearchAlvioDocument,
   StreamStopReason,
 } from "@/lib/search/interfaces";
 import { Packet } from "./services/streamingModels";
@@ -102,7 +102,7 @@ export interface ChatSession {
 
 export interface SearchSession {
   search_session_id: string;
-  documents: SearchOnyxDocument[];
+  documents: SearchAlvioDocument[];
   messages: BackendMessage[];
   description: string;
 }
@@ -130,7 +130,7 @@ export interface Message {
   packets: Packet[];
 
   // cached values for easy access
-  documents?: OnyxDocument[] | null;
+  documents?: AlvioDocument[] | null;
   citations?: CitationMap;
 }
 
@@ -158,7 +158,7 @@ export interface BackendMessage {
   latest_child_message: number | null;
   message: string;
   rephrased_query: string | null;
-  context_docs: { top_documents: OnyxDocument[] } | null;
+  context_docs: { top_documents: AlvioDocument[] } | null;
   time_sent: string;
   overridden_model: string;
   alternate_assistant_id: number | null;
@@ -185,7 +185,7 @@ export interface UserKnowledgeFilePacket {
 }
 
 export interface DocumentsResponse {
-  top_documents: OnyxDocument[];
+  top_documents: AlvioDocument[];
   rephrased_query: string | null;
   level?: number | null;
   level_question_num?: number | null;
@@ -245,7 +245,7 @@ export interface SubQuestionDetail extends BaseQuestionIdentifier {
   question: string;
   answer: string;
   sub_queries?: SubQueryDetail[] | null;
-  context_docs?: { top_documents: OnyxDocument[] } | null;
+  context_docs?: { top_documents: AlvioDocument[] } | null;
   is_complete?: boolean;
   is_stopped?: boolean;
   answer_streaming?: boolean;

@@ -1,7 +1,7 @@
 variable "name" {
   type        = string
-  description = "Name of the Onyx resources. Example: 'onyx'"
-  default     = "onyx"
+  description = "Name of the Alvio resources. Example: 'alvio'"
+  default     = "alvio"
 }
 
 variable "region" {
@@ -44,7 +44,7 @@ variable "tags" {
   type        = map(string)
   description = "Base tags applied to all AWS resources"
   default = {
-    "project" = "onyx"
+    "project" = "alvio"
   }
 }
 

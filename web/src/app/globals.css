@@ -682,42 +682,42 @@ ul > li > p {
 }
 
 @layer components {
-  .text-onyx-ultra-strong {
+  .text-alvio-ultra-strong {
     @apply not-italic font-semibold;
     color: rgba(0, 0, 0, 0.92);
   }
-  .dark .text-onyx-ultra-strong {
+  .dark .text-alvio-ultra-strong {
     color: rgba(255, 255, 255, 0.92);
   }
-  .text-onyx-strong {
+  .text-alvio-strong {
     @apply not-italic font-semibold;
     color: rgba(0, 0, 0, 0.8);
   }
-  .dark .text-onyx-strong {
+  .dark .text-alvio-strong {
     color: rgba(255, 255, 255, 0.92);
   }
 
-  .text-onyx-medium {
+  .text-alvio-medium {
     @apply not-italic font-medium;
     color: rgba(0, 0, 0, 0.8);
   }
-  .dark .text-onyx-medium {
+  .dark .text-alvio-medium {
     color: rgba(255, 255, 255, 0.85);
   }
 
-  .text-onyx-emphasis {
+  .text-alvio-emphasis {
     @apply not-italic font-semibold;
     color: rgba(0, 0, 0, 0.6);
   }
-  .dark .text-onyx-emphasis {
+  .dark .text-alvio-emphasis {
     color: rgba(255, 255, 255, 0.7);
   }
 
-  .text-onyx-muted {
+  .text-alvio-muted {
     @apply not-italic font-normal;
     color: rgba(0, 0, 0, 0.4);
   }
-  .dark .text-onyx-muted {
+  .dark .text-alvio-muted {
     color: rgba(255, 255, 255, 0.55);
   }
 }

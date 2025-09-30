@@ -2,11 +2,11 @@ import uuid
 from datetime import datetime
 from datetime import timezone
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import ConnectorFailure
-from onyx.connectors.models import Document
-from onyx.connectors.models import DocumentFailure
-from onyx.connectors.models import TextSection
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.models import ConnectorFailure
+from alvio.connectors.models import Document
+from alvio.connectors.models import DocumentFailure
+from alvio.connectors.models import TextSection
 
 
 def create_test_document(

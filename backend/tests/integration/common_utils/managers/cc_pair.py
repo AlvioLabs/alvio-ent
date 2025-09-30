@@ -5,16 +5,16 @@ from uuid import uuid4
 
 import requests
 
-import generated.onyx_openapi_client.onyx_openapi_client as api
-from onyx.connectors.models import InputType
-from onyx.db.enums import AccessType
-from onyx.db.enums import ConnectorCredentialPairStatus
-from onyx.server.documents.models import CCPairFullInfo
-from onyx.server.documents.models import ConnectorCredentialPairIdentifier
-from onyx.server.documents.models import ConnectorIndexingStatusLite
-from onyx.server.documents.models import ConnectorStatus
-from onyx.server.documents.models import DocumentSource
-from onyx.server.documents.models import DocumentSyncStatus
+import generated.alvio_openapi_client.alvio_openapi_client as api
+from alvio.connectors.models import InputType
+from alvio.db.enums import AccessType
+from alvio.db.enums import ConnectorCredentialPairStatus
+from alvio.server.documents.models import CCPairFullInfo
+from alvio.server.documents.models import ConnectorCredentialPairIdentifier
+from alvio.server.documents.models import ConnectorIndexingStatusLite
+from alvio.server.documents.models import ConnectorStatus
+from alvio.server.documents.models import DocumentSource
+from alvio.server.documents.models import DocumentSyncStatus
 from tests.integration.common_utils.config import api_config
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.constants import GENERAL_HEADERS

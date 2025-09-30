@@ -47,9 +47,9 @@ const Page = () => {
           {NEXT_PUBLIC_CLOUD_ENABLED && (
             <span className="block mt-1 text-blue-600">
               If you continue to experience problems please reach out to the
-              Onyx team at{" "}
-              <a href="mailto:support@onyx.app" className="text-blue-600">
-                support@onyx.app
+              Alvio team at{" "}
+              <a href="mailto:support@alvio.io" className="text-blue-600">
+                support@alvio.io
               </a>
             </span>
           )}

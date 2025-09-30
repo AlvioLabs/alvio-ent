@@ -1,22 +1,22 @@
 FROM python:3.11.7-slim-bookworm
 
-LABEL com.danswer.maintainer="founders@onyx.app"
-LABEL com.danswer.description="This image is the web/frontend container of Onyx which \
-contains code for both the Community and Enterprise editions of Onyx. If you do not \
-have a contract or agreement with DanswerAI, you are not permitted to use the Enterprise \
+LABEL com.alvio.maintainer="info@alvio.io"
+LABEL com.alvio.description="This image is the backend container of Alvio which \
+contains code for both the Community and Enterprise editions of Alvio. If you do not \
+have a contract or agreement with Alvio, you are not permitted to use the Enterprise \
 Edition features outside of personal development or testing purposes. Please reach out to \
-founders@onyx.app for more information. Please visit https://github.com/onyx-dot-app/onyx"
+info@alvio.io for more information. Please visit https://alvio.io"
 
-# Default ONYX_VERSION, typically overriden during builds by GitHub Actions.
-ARG ONYX_VERSION=0.0.0-dev
+# Default ALVIO_VERSION, typically overriden during builds by GitHub Actions.
+ARG ALVIO_VERSION=0.0.0-dev
 # DO_NOT_TRACK is used to disable telemetry for Unstructured
-ENV ONYX_VERSION=${ONYX_VERSION} \
-    DANSWER_RUNNING_IN_DOCKER="true" \
+ENV ALVIO_VERSION=${ALVIO_VERSION} \
+    ALVIO_RUNNING_IN_DOCKER="true" \
     DO_NOT_TRACK="true" \
     PLAYWRIGHT_BROWSERS_PATH="/app/.cache/ms-playwright"
 
 
-RUN echo "ONYX_VERSION: ${ONYX_VERSION}"
+RUN echo "ALVIO_VERSION: ${ALVIO_VERSION}"
 # Install system dependencies
 # cmake needed for psycopg (postgres)
 # libpq-dev needed for psycopg (postgres)
@@ -61,7 +61,7 @@ RUN pip install --no-cache-dir --upgrade \
 # Cleanup for CVEs and size reduction
 # https://github.com/tornadoweb/tornado/issues/3107
 # xserver-common and xvfb included by playwright installation but not needed after
-# perl-base is part of the base Python Debian image but not needed for Onyx functionality
+# perl-base is part of the base Python Debian image but not needed for Alvio functionality
 # perl-base could only be removed with --allow-remove-essential
 RUN apt-get update && \
     apt-get remove -y --allow-remove-essential \
@@ -100,7 +100,7 @@ COPY ./ee /app/ee
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Set up application files
-COPY ./onyx /app/onyx
+COPY ./alvio /app/alvio
 COPY ./shared_configs /app/shared_configs
 COPY ./alembic /app/alembic
 COPY ./alembic_tenants /app/alembic_tenants
@@ -118,12 +118,12 @@ COPY ./assets /app/assets
 ENV PYTHONPATH=/app
 
 # Create non-root user for security best practices
-RUN groupadd -g 1001 onyx && \
-    useradd -u 1001 -g onyx -m -s /bin/bash onyx && \
-    chown -R onyx:onyx /app && \
-    mkdir -p /var/log/onyx && \
-    chmod 755 /var/log/onyx && \
-    chown onyx:onyx /var/log/onyx
+RUN groupadd -g 1001 alvio && \
+    useradd -u 1001 -g alvio -m -s /bin/bash alvio && \
+    chown -R alvio:alvio /app && \
+    mkdir -p /var/log/alvio && \
+    chmod 755 /var/log/alvio && \
+    chown alvio:alvio /var/log/alvio
 
 # Default command which does nothing
 # This container is used by api server and background which specify their own CMD

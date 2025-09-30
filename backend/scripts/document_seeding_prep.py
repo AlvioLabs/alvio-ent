@@ -27,7 +27,7 @@ class SeedPresaveDocument(BaseModel):
 model = SentenceTransformer("nomic-ai/nomic-embed-text-v1", trust_remote_code=True)
 _ = model.tokenizer  # kept for parity; unused but ensures tokenizer loads
 
-base_path = Path("./backend/onyx/seeding")
+base_path = Path("./backend/alvio/seeding")
 input_path = base_path / "initial_docs_cohere.json"
 output_path = base_path / "initial_docs.json"
 

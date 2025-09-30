@@ -1,12 +1,12 @@
 from typing import Any, Literal
-from onyx.db.engine.iam_auth import get_iam_auth_token
-from onyx.configs.app_configs import USE_IAM_AUTH
-from onyx.configs.app_configs import POSTGRES_HOST
-from onyx.configs.app_configs import POSTGRES_PORT
-from onyx.configs.app_configs import POSTGRES_USER
-from onyx.configs.app_configs import AWS_REGION_NAME
-from onyx.db.engine.sql_engine import build_connection_string
-from onyx.db.engine.tenant_utils import get_all_tenant_ids
+from alvio.db.engine.iam_auth import get_iam_auth_token
+from alvio.configs.app_configs import USE_IAM_AUTH
+from alvio.configs.app_configs import POSTGRES_HOST
+from alvio.configs.app_configs import POSTGRES_PORT
+from alvio.configs.app_configs import POSTGRES_USER
+from alvio.configs.app_configs import AWS_REGION_NAME
+from alvio.db.engine.sql_engine import build_connection_string
+from alvio.db.engine.tenant_utils import get_all_tenant_ids
 from sqlalchemy import event
 from sqlalchemy import pool
 from sqlalchemy import text
@@ -20,15 +20,15 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.sql.schema import SchemaItem
-from onyx.configs.constants import SSL_CERT_FILE
+from alvio.configs.constants import SSL_CERT_FILE
 from shared_configs.configs import (
     MULTI_TENANT,
     POSTGRES_DEFAULT_SCHEMA,
     TENANT_ID_PREFIX,
 )
-from onyx.db.models import Base
+from alvio.db.models import Base
 from celery.backends.database.session import ResultModelBase  # type: ignore
-from onyx.db.engine.sql_engine import SqlEngine
+from alvio.db.engine.sql_engine import SqlEngine
 
 # Make sure in alembic.ini [logger_root] level=INFO is set or most logging will be
 # hidden! (defaults to level=WARN)

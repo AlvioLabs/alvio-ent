@@ -59,11 +59,11 @@ const RadioOption = ({
 export const SettingsPanel = ({
   settingsOpen,
   toggleSettings,
-  handleUseOnyxToggle,
+  handleUseAlvioToggle,
 }: {
   settingsOpen: boolean;
   toggleSettings: () => void;
-  handleUseOnyxToggle: (checked: boolean) => void;
+  handleUseAlvioToggle: (checked: boolean) => void;
 }) => {
   const {
     theme,
@@ -72,7 +72,7 @@ export const SettingsPanel = ({
     setDefaultLightBackgroundUrl,
     defaultDarkBackgroundUrl,
     setDefaultDarkBackgroundUrl,
-    useOnyxAsNewTab,
+    useAlvioAsNewTab,
     showShortcuts,
     setShowShortcuts,
   } = useNRFPreferences();
@@ -113,9 +113,9 @@ export const SettingsPanel = ({
 
         <h3 className="text-sm font-semibold mb-2">General</h3>
         <SidebarSwitch
-          checked={useOnyxAsNewTab}
-          onCheckedChange={handleUseOnyxToggle}
-          label="Use Onyx as new tab page"
+          checked={useAlvioAsNewTab}
+          onCheckedChange={handleUseAlvioToggle}
+          label="Use Alvio as new tab page"
         />
 
         <SidebarSwitch

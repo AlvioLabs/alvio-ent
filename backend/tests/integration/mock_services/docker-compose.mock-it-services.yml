@@ -13,8 +13,8 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - onyx_default
+      - alvio_default
 networks:
-  onyx_default:
-    name: onyx_default
+  alvio_default:
+    name: alvio_default
     external: true

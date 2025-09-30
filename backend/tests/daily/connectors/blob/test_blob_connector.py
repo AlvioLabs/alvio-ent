@@ -4,19 +4,19 @@ from unittest.mock import patch
 
 import pytest
 
-from onyx.configs.constants import BlobType
-from onyx.connectors.blob.connector import BlobStorageConnector
-from onyx.connectors.models import Document
-from onyx.connectors.models import TextSection
-from onyx.file_processing.extract_file_text import ACCEPTED_DOCUMENT_FILE_EXTENSIONS
-from onyx.file_processing.extract_file_text import ACCEPTED_PLAIN_TEXT_FILE_EXTENSIONS
-from onyx.file_processing.extract_file_text import get_file_ext
+from alvio.configs.constants import BlobType
+from alvio.connectors.blob.connector import BlobStorageConnector
+from alvio.connectors.models import Document
+from alvio.connectors.models import TextSection
+from alvio.file_processing.extract_file_text import ACCEPTED_DOCUMENT_FILE_EXTENSIONS
+from alvio.file_processing.extract_file_text import ACCEPTED_PLAIN_TEXT_FILE_EXTENSIONS
+from alvio.file_processing.extract_file_text import get_file_ext
 
 
 @pytest.fixture
 def blob_connector(request: pytest.FixtureRequest) -> BlobStorageConnector:
     connector = BlobStorageConnector(
-        bucket_type=BlobType.S3, bucket_name="onyx-connector-tests"
+        bucket_type=BlobType.S3, bucket_name="alvio-connector-tests"
     )
 
     connector.load_credentials(
@@ -32,7 +32,7 @@ def blob_connector(request: pytest.FixtureRequest) -> BlobStorageConnector:
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "alvio.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_blob_s3_connector(

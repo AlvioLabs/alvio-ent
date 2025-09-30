@@ -2,7 +2,7 @@
 
 import { FiEdit2 } from "react-icons/fi";
 import React, { useEffect, useRef, useState } from "react";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalAlvioDocument } from "@/lib/search/interfaces";
 import { ChatFileType, FileDescriptor } from "@/app/chat/interfaces";
 import { Hoverable, HoverableIcon } from "@/components/Hoverable";
 import { DocumentPreview } from "../components/files/documents/DocumentPreview";
@@ -27,7 +27,7 @@ function FileDisplay({
 }: {
   files: FileDescriptor[];
   alignBubble?: boolean;
-  setPresentingDocument: (document: MinimalOnyxDocument) => void;
+  setPresentingDocument: (document: MinimalAlvioDocument) => void;
 }) {
   const [close, setClose] = useState(true);
   const imageFiles = files.filter((file) => file.type === ChatFileType.IMAGE);
@@ -41,7 +41,7 @@ function FileDisplay({
     <>
       {textFiles && textFiles.length > 0 && (
         <div
-          id="onyx-file"
+          id="alvio-file"
           className={` ${alignBubble && "ml-auto"} mt-2 auto mb-4`}
         >
           <div className="flex flex-col gap-2">
@@ -61,7 +61,7 @@ function FileDisplay({
 
       {imageFiles && imageFiles.length > 0 && (
         <div
-          id="onyx-image"
+          id="alvio-image"
           className={` ${alignBubble && "ml-auto"} mt-2 auto mb-4`}
         >
           <div className="flex flex-col gap-2">
@@ -126,7 +126,7 @@ export const HumanMessage = ({
   onMessageSelection?: (messageId: number) => void;
   stopGenerating?: () => void;
   disableSwitchingForStreaming?: boolean;
-  setPresentingDocument: (document: MinimalOnyxDocument) => void;
+  setPresentingDocument: (document: MinimalAlvioDocument) => void;
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -190,7 +190,7 @@ export const HumanMessage = ({
 
   return (
     <div
-      id="onyx-human-message"
+      id="alvio-human-message"
       className="pt-5 pb-1 w-full lg:px-5 flex -mr-6 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

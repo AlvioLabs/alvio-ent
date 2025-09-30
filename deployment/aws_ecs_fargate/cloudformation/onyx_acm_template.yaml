@@ -28,4 +28,4 @@ Outputs:
     Description: ACM Cert Id
     Value: !Ref Certificate
     Export:
-      Name: !Sub ${AWS::StackName}-OnyxCertificate
+      Name: !Sub ${AWS::StackName}-AlvioCertificate

@@ -23,7 +23,7 @@ export default function MoveCustomAgentChatModal({
 
   return (
     <Modal onOutsideClick={onCancel} width="rounded-xl max-w-lg w-full">
-      <div className="space-y-5 text-onyx-medium">
+      <div className="space-y-5 text-alvio-medium">
         <div className="flex flex-col gap-2">
           <InfoIcon size={24} />
           <h2 className="text-2xl font-bold">Move Custom Agent Chat</h2>

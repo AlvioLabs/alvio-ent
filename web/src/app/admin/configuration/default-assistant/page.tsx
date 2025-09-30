@@ -8,7 +8,7 @@ import { errorHandlingFetcher } from "@/lib/fetcher";
 import Text from "@/components/ui/text";
 import useSWR, { mutate } from "swr";
 import { ErrorCallout } from "@/components/ErrorCallout";
-import { OnyxSparkleIcon } from "@/components/icons/icons";
+import { AlvioSparkleIcon } from "@/components/icons/icons";
 import { usePopup } from "@/components/admin/connectors/Popup";
 import { useAssistantsContext } from "@/components/context/AssistantsContext";
 import { Switch } from "@/components/ui/switch";
@@ -314,7 +314,7 @@ export default function Page() {
     <div className="mx-auto max-w-4xl w-full">
       <AdminPageTitle
         title="Default Assistant"
-        icon={<OnyxSparkleIcon size={32} className="my-auto" />}
+        icon={<AlvioSparkleIcon size={32} className="my-auto" />}
       />
       <DefaultAssistantConfig />
     </div>

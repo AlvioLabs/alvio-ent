@@ -10,14 +10,14 @@ export default function Error() {
       </h1>
       <div className="space-y-4 text-gray-600 dark:text-gray-300">
         <p>
-          It seems there was a problem loading your Onyx settings. This could be
+          It seems there was a problem loading your Alvio settings. This could be
           due to a configuration issue or incomplete setup.
         </p>
         <p>
           If you&apos;re an admin, please review our{" "}
           <a
             className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-            href="https://docs.onyx.app/?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
+            href="https://docs.alvio.io/?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -30,7 +30,7 @@ export default function Error() {
           Need help? Join our{" "}
           <a
             className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-            href="https://join.slack.com/t/onyx-dot-app/shared_invite/zt-34lu4m7xg-TsKGO6h8PDvR5W27zTdyhA"
+            href="https://join.slack.com/t/alvio-dot-io/shared_invite/zt-34lu4m7xg-TsKGO6h8PDvR5W27zTdyhA"
             target="_blank"
             rel="noopener noreferrer"
           >

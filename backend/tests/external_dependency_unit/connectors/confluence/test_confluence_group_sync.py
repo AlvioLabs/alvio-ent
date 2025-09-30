@@ -2,14 +2,14 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from ee.onyx.external_permissions.confluence.group_sync import confluence_group_sync
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.db.enums import AccessType
-from onyx.db.enums import ConnectorCredentialPairStatus
-from onyx.db.models import Connector
-from onyx.db.models import ConnectorCredentialPair
-from onyx.db.models import Credential
+from ee.alvio.external_permissions.confluence.group_sync import confluence_group_sync
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.models import InputType
+from alvio.db.enums import AccessType
+from alvio.db.enums import ConnectorCredentialPairStatus
+from alvio.db.models import Connector
+from alvio.db.models import ConnectorCredentialPair
+from alvio.db.models import Credential
 from shared_configs.contextvars import get_current_tenant_id
 from tests.daily.connectors.confluence.models import ExternalUserGroupSet
 
@@ -20,22 +20,22 @@ from tests.daily.connectors.confluence.models import ExternalUserGroupSet
 _EXPECTED_CONFLUENCE_GROUPS = [
     ExternalUserGroupSet(
         id="confluence-admins-danswerai",
-        user_emails={"chris@onyx.app", "yuhong@onyx.app"},
+        user_emails={"chris@alvio.io", "yuhong@alvio.io"},
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
         id="org-admins",
-        user_emails={"founders@onyx.app", "chris@onyx.app", "yuhong@onyx.app"},
+        user_emails={"founders@alvio.io", "chris@alvio.io", "yuhong@alvio.io"},
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
         id="confluence-users-danswerai",
         user_emails={
-            "chris@onyx.app",
+            "chris@alvio.io",
             "hagen@danswer.ai",
-            "founders@onyx.app",
-            "pablo@onyx.app",
-            "yuhong@onyx.app",
+            "founders@alvio.io",
+            "pablo@alvio.io",
+            "yuhong@alvio.io",
         },
         gives_anyone_access=False,
     ),
@@ -43,15 +43,15 @@ _EXPECTED_CONFLUENCE_GROUPS = [
         id="jira-users-danswerai",
         user_emails={
             "hagen@danswer.ai",
-            "founders@onyx.app",
-            "pablo@onyx.app",
-            "chris@onyx.app",
+            "founders@alvio.io",
+            "pablo@alvio.io",
+            "chris@alvio.io",
         },
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
         id="jira-admins-danswerai",
-        user_emails={"hagen@danswer.ai", "founders@onyx.app", "pablo@onyx.app"},
+        user_emails={"hagen@danswer.ai", "founders@alvio.io", "pablo@alvio.io"},
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
@@ -66,17 +66,17 @@ _EXPECTED_CONFLUENCE_GROUPS = [
     ),
     ExternalUserGroupSet(
         id="Yuhong Only No Chris Allowed",
-        user_emails={"yuhong@onyx.app"},
+        user_emails={"yuhong@alvio.io"},
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
-        id="All_Confluence_Users_Found_By_Onyx",
+        id="All_Confluence_Users_Found_By_Alvio",
         user_emails={
-            "chris@onyx.app",
+            "chris@alvio.io",
             "hagen@danswer.ai",
-            "founders@onyx.app",
-            "pablo@onyx.app",
-            "yuhong@onyx.app",
+            "founders@alvio.io",
+            "pablo@alvio.io",
+            "yuhong@alvio.io",
         },
         gives_anyone_access=False,
     ),

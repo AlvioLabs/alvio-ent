@@ -8,25 +8,25 @@ import requests
 
 from alembic import command
 from alembic.config import Config
-from onyx.configs.app_configs import POSTGRES_HOST
-from onyx.configs.app_configs import POSTGRES_PASSWORD
-from onyx.configs.app_configs import POSTGRES_PORT
-from onyx.configs.app_configs import POSTGRES_USER
-from onyx.db.engine.sql_engine import build_connection_string
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.engine.sql_engine import get_session_with_tenant
-from onyx.db.engine.sql_engine import SYNC_DB_API
-from onyx.db.engine.tenant_utils import get_all_tenant_ids
-from onyx.db.search_settings import get_current_search_settings
-from onyx.db.swap_index import check_and_perform_index_swap
-from onyx.document_index.document_index_utils import get_multipass_config
-from onyx.document_index.vespa.index import DOCUMENT_ID_ENDPOINT
-from onyx.document_index.vespa.index import VespaIndex
-from onyx.file_store.file_store import get_default_file_store
-from onyx.indexing.models import IndexingSetting
-from onyx.setup import setup_postgres
-from onyx.setup import setup_vespa
-from onyx.utils.logger import setup_logger
+from alvio.configs.app_configs import POSTGRES_HOST
+from alvio.configs.app_configs import POSTGRES_PASSWORD
+from alvio.configs.app_configs import POSTGRES_PORT
+from alvio.configs.app_configs import POSTGRES_USER
+from alvio.db.engine.sql_engine import build_connection_string
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.engine.sql_engine import get_session_with_tenant
+from alvio.db.engine.sql_engine import SYNC_DB_API
+from alvio.db.engine.tenant_utils import get_all_tenant_ids
+from alvio.db.search_settings import get_current_search_settings
+from alvio.db.swap_index import check_and_perform_index_swap
+from alvio.document_index.document_index_utils import get_multipass_config
+from alvio.document_index.vespa.index import DOCUMENT_ID_ENDPOINT
+from alvio.document_index.vespa.index import VespaIndex
+from alvio.file_store.file_store import get_default_file_store
+from alvio.indexing.models import IndexingSetting
+from alvio.setup import setup_postgres
+from alvio.setup import setup_vespa
+from alvio.utils.logger import setup_logger
 from tests.integration.common_utils.timeout import run_with_timeout_multiproc
 
 logger = setup_logger()
@@ -249,7 +249,7 @@ def drop_multitenant_postgres_task(dbname: str) -> None:
 def reset_postgres(
     database: str = "postgres",
     config_name: str = "alembic",
-    setup_onyx: bool = True,
+    setup_alvio: bool = True,
 ) -> None:
     """Reset the Postgres database."""
     # this seems to hang due to locking issues, so run with a timeout with a few retries
@@ -285,7 +285,7 @@ def reset_postgres(
 
     logger.info("Upgrading Postgres...")
     upgrade_postgres(database=database, config_name=config_name, revision="head")
-    if setup_onyx:
+    if setup_alvio:
         logger.info("Setting up Postgres...")
         with get_session_with_current_tenant() as db_session:
             setup_postgres(db_session)
@@ -343,7 +343,7 @@ def reset_postgres_multitenant() -> None:
     """Reset the Postgres database for all tenants in a multitenant setup."""
 
     drop_multitenant_postgres()
-    reset_postgres(config_name="schema_private", setup_onyx=False)
+    reset_postgres(config_name="schema_private", setup_alvio=False)
 
 
 def reset_vespa_multitenant() -> None:

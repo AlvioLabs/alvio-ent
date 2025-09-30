@@ -1,7 +1,7 @@
 # Docker Compose Override for Building from Source Only
 # This file removes image references to force building from source code
 
-name: onyx
+name: alvio
 
 services:
   api_server:
@@ -28,7 +28,7 @@ services:
         - NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED=${NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED:-}
         # Enterprise Edition only
         - NEXT_PUBLIC_THEME=${NEXT_PUBLIC_THEME:-}
-        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Onyx.
+        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Alvio.
         - NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED=${NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED:-false}
         - NODE_OPTIONS=${NODE_OPTIONS:-"--max-old-space-size=4096"}
     # Remove image reference to force build from source

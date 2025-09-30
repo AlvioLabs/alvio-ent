@@ -7,7 +7,7 @@ import time
 
 import pytest
 
-from onyx.tools.tool_implementations.images.image_generation_tool import (
+from alvio.tools.tool_implementations.images.image_generation_tool import (
     HEARTBEAT_INTERVAL,
 )
 from tests.integration.common_utils.managers.chat import ChatSessionManager

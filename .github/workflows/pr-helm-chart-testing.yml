@@ -66,7 +66,7 @@ jobs:
       run: |
         echo "=== Adding Helm repositories ==="
         helm repo add bitnami https://charts.bitnami.com/bitnami
-        helm repo add vespa https://onyx-dot-app.github.io/vespa-helm-charts
+        helm repo add vespa https://alvio-dot-io.github.io/vespa-helm-charts
         helm repo update
 
     - name: Pre-pull critical images
@@ -86,20 +86,20 @@ jobs:
         docker pull redis:7-alpine || echo "Failed to pull redis:7-alpine"
         kind load docker-image redis:7-alpine --name $KIND_CLUSTER || echo "Failed to load redis image"
         
-        echo "Pre-pulling Onyx images..."
-        docker pull docker.io/onyxdotapp/onyx-web-server:latest || echo "Failed to pull onyx web server"
-        docker pull docker.io/onyxdotapp/onyx-backend:latest || echo "Failed to pull onyx backend"
-        kind load docker-image docker.io/onyxdotapp/onyx-web-server:latest --name $KIND_CLUSTER || echo "Failed to load onyx web server"
-        kind load docker-image docker.io/onyxdotapp/onyx-backend:latest --name $KIND_CLUSTER || echo "Failed to load onyx backend"
+        echo "Pre-pulling Alvio images..."
+        docker pull docker.io/alviodotio/alvio-web-server:latest || echo "Failed to pull alvio web server"
+        docker pull docker.io/alviodotio/alvio-backend:latest || echo "Failed to pull alvio backend"
+        kind load docker-image docker.io/alviodotio/alvio-web-server:latest --name $KIND_CLUSTER || echo "Failed to load alvio web server"
+        kind load docker-image docker.io/alviodotio/alvio-backend:latest --name $KIND_CLUSTER || echo "Failed to load alvio backend"
         
         echo "=== Images loaded into Kind cluster ==="
-        docker exec $KIND_CLUSTER-control-plane crictl images | grep -E "(postgres|redis|onyx)" || echo "Some images may still be loading..."
+        docker exec $KIND_CLUSTER-control-plane crictl images | grep -E "(postgres|redis|alvio)" || echo "Some images may still be loading..."
 
     - name: Validate chart dependencies
       if: steps.list-changed.outputs.changed == 'true'
       run: |
         echo "=== Validating chart dependencies ==="
-        cd deployment/helm/charts/onyx
+        cd deployment/helm/charts/alvio
         helm dependency update
         helm lint .
 

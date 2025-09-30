@@ -35,7 +35,7 @@ export function WelcomeMessage({ assistant }: WelcomeMessageProps) {
       <div className="flex items-center">
         {isUnifiedAssistant ? (
           <>
-            <div data-testid="onyx-logo">
+            <div data-testid="alvio-logo">
               <Logo size="large" />
             </div>
             <div

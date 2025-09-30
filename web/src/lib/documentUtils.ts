@@ -1,12 +1,12 @@
-import { OnyxDocument } from "./search/interfaces";
+import { AlvioDocument } from "./search/interfaces";
 
 export function removeDuplicateDocs(
-  documents: OnyxDocument[],
+  documents: AlvioDocument[],
   agentic?: boolean,
   relevance?: any
 ) {
   const seen = new Set<string>();
-  const output: OnyxDocument[] = [];
+  const output: AlvioDocument[] = [];
   documents.forEach((document) => {
     if (
       document.document_id &&

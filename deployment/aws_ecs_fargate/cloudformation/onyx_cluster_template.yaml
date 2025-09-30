@@ -5,9 +5,9 @@ Parameters:
   Environment:
     Type: String
     Description: The environment that is used in the name of the cluster as well.
-  OnyxNamespace:
+  AlvioNamespace:
     Type: String
-    Default: onyx
+    Default: alvio
   VpcID:
     Type: String
     Default: vpc-098cfa79d637dabff
@@ -16,7 +16,7 @@ Resources:
   ECSCluster:
     Type: AWS::ECS::Cluster
     Properties:
-      ClusterName: !Sub ${Environment}-onyx-cluster
+      ClusterName: !Sub ${Environment}-alvio-cluster
       CapacityProviders:
         - FARGATE
         - FARGATE_SPOT
@@ -24,17 +24,17 @@ Resources:
         - Name: containerInsights
           Value: enhanced
       ServiceConnectDefaults:
-        Namespace: !Sub ${Environment}-onyx-cluster
+        Namespace: !Sub ${Environment}-alvio-cluster
       Tags:
         - Key: env
           Value: !Ref Environment
         - Key: app
-          Value: onyx
+          Value: alvio
 
   S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub ${Environment}-onyx-ecs-fargate-configs
+      BucketName: !Sub ${Environment}-alvio-ecs-fargate-configs
       AccessControl: Private
       BucketEncryption:
         ServerSideEncryptionConfiguration:
@@ -49,9 +49,9 @@ Resources:
   PrivateDnsNamespace:
     Type: AWS::ServiceDiscovery::PrivateDnsNamespace
     Properties:
-      Description: AWS Cloud Map private DNS namespace for resources for onyx website.
+      Description: AWS Cloud Map private DNS namespace for resources for alvio website.
       Vpc: !Ref VpcID
-      Name: !Ref OnyxNamespace
+      Name: !Ref AlvioNamespace
       Properties:
         DnsProperties:
           SOA:
@@ -60,7 +60,7 @@ Resources:
   ECSTaskRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Sub ${Environment}-OnyxEcsTaskRole
+      RoleName: !Sub ${Environment}-AlvioEcsTaskRole
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -94,13 +94,13 @@ Resources:
                   - "s3:GetObject"
                   - "s3:ListBucket"
                 Resource:
-                  - !Sub "arn:aws:s3:::${Environment}-onyx-ecs-fargate-configs/*"
-                  - !Sub "arn:aws:s3:::${Environment}-onyx-ecs-fargate-configs"
+                  - !Sub "arn:aws:s3:::${Environment}-alvio-ecs-fargate-configs/*"
+                  - !Sub "arn:aws:s3:::${Environment}-alvio-ecs-fargate-configs"
 
   ECSTaskExecutionRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Sub ${Environment}-OnyxECSTaskExecutionRole
+      RoleName: !Sub ${Environment}-AlvioECSTaskExecutionRole
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -130,27 +130,27 @@ Resources:
 
 Outputs:
   OutputEcsCluster:
-    Description: Onyx ECS Cluster
+    Description: Alvio ECS Cluster
     Value: !Ref ECSCluster
     Export:
       Name: !Sub ${AWS::StackName}-ECSClusterName
   OutputECSTaskRole:
-    Description: Onyx ECS Task Role
+    Description: Alvio ECS Task Role
     Value: !Ref ECSTaskRole
     Export:
       Name: !Sub ${AWS::StackName}-ECSTaskRole
   OutputECSTaskExecutionRole:
-    Description: Onyx ECS TaskExecutionRole
+    Description: Alvio ECS TaskExecutionRole
     Value: !Ref ECSTaskExecutionRole
     Export:
       Name: !Sub ${AWS::StackName}-ECSTaskExecutionRole
-  OutputOnyxNamespace:
-    Description: Onyx CloudMap namespace ID for ECS service discvoery.
+  OutputAlvioNamespace:
+    Description: Alvio CloudMap namespace ID for ECS service discvoery.
     Value: !Ref PrivateDnsNamespace
     Export:
-      Name: !Sub ${AWS::StackName}-OnyxNamespace
-  OutputOnyxNamespaceName:
-    Description: Onyx CloudMap namespace domain name for ECS service discvoery.
-    Value: !Ref OnyxNamespace
+      Name: !Sub ${AWS::StackName}-AlvioNamespace
+  OutputAlvioNamespaceName:
+    Description: Alvio CloudMap namespace domain name for ECS service discvoery.
+    Value: !Ref AlvioNamespace
     Export:
-      Name: !Sub ${AWS::StackName}-OnyxNamespaceName
+      Name: !Sub ${AWS::StackName}-AlvioNamespaceName

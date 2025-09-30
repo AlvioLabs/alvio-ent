@@ -1,15 +1,15 @@
-"""Model Context Protocol server that proxies to Onyx's chat API.
+"""Model Context Protocol server that proxies to Alvio's chat API.
 
-The server exposes a single MCP tool, ``onyx_chat``, that sends a question to
-Onyx's ``/chat/send-message`` endpoint. A fresh chat session is created on every
+The server exposes a single MCP tool, ``alvio_chat``, that sends a question to
+Alvio's ``/chat/send-message`` endpoint. A fresh chat session is created on every
 invocation so the only value supplied by the LLM is the question string. The
 tool returns the composed answer text and any top documents surfaced during the
 streamed response.
 
 Environment variables used:
-    - ``ONYX_API_BASE_URL``: Base URL for the Onyx deployment. Defaults to
+    - ``ALVIO_API_BASE_URL``: Base URL for the Alvio deployment. Defaults to
       ``http://localhost:3000/api``.
-    - ``ONYX_API_KEY``: Bearer token for authenticating with the Onyx API. The
+    - ``ALVIO_API_KEY``: Bearer token for authenticating with the Alvio API. The
       tool will raise an error if authentication is required but the key is not
       provided.
 
@@ -37,12 +37,12 @@ logger = logging.getLogger(__name__)
 DEFAULT_BASE_URL = "http://localhost:3000/api"
 
 
-class OnyxAPIError(RuntimeError):
-    """Raised when the Onyx API returns an error payload."""
+class AlvioAPIError(RuntimeError):
+    """Raised when the Alvio API returns an error payload."""
 
 
 @dataclass
-class OnyxConfig:
+class AlvioConfig:
     base_url: str
     api_key: Optional[str]
     default_persona_id: int
@@ -60,10 +60,10 @@ class OnyxConfig:
         return f"{self.base_url.rstrip('/')}{path}"
 
 
-class OnyxClient:
+class AlvioClient:
     """Thin async HTTP client for creating sessions and sending chat messages."""
 
-    def __init__(self, config: OnyxConfig) -> None:
+    def __init__(self, config: AlvioConfig) -> None:
         self._config = config
         # Use a single reusable client – it is safe for concurrent use.
         self._client = httpx.AsyncClient(timeout=httpx.Timeout(60.0, read=120.0))
@@ -122,7 +122,7 @@ class OnyxClient:
                     continue
 
                 if "error" in data:
-                    raise OnyxAPIError(data["error"])
+                    raise AlvioAPIError(data["error"])
 
                 # Handle the new streaming format
                 obj = data.get("obj", {})
@@ -172,23 +172,23 @@ async def _iter_sse_lines(source: AsyncIterator[str]) -> AsyncIterator[str]:
         yield line
 
 
-def build_mcp_server(config: OnyxConfig) -> FastMCP:
-    client = OnyxClient(config)
-    mcp = FastMCP("Onyx MCP Server")
+def build_mcp_server(config: AlvioConfig) -> FastMCP:
+    client = AlvioClient(config)
+    mcp = FastMCP("Alvio MCP Server")
 
     @mcp.tool(
-        name="onyx_chat",
+        name="alvio_chat",
         description=(
-            "Search Onyx internal knowledge base for company information. Use this tool for ANY questions about "
-            "the Onyx office, employees, team members, company culture, internal discussions, workplace activities, "
+            "Search Alvio internal knowledge base for company information. Use this tool for ANY questions about "
+            "the Alvio office, employees, team members, company culture, internal discussions, workplace activities, "
             "office events, internal communications, company policies, team dynamics, or any company-specific "
-            "information. This includes questions about who works at Onyx, what people are working on, office "
+            "information. This includes questions about who works at Alvio, what people are working on, office "
             "activities like ping pong games, internal chat discussions, team relationships, and general "
             "workplace-related queries. A new chat session is created for every invocation."
         ),
     )
-    async def onyx_chat(question: str) -> dict[str, Any]:
-        """Send a prompt to Onyx and return the concatenated answer and top documents."""
+    async def alvio_chat(question: str) -> dict[str, Any]:
+        """Send a prompt to Alvio and return the concatenated answer and top documents."""
 
         chat_session_id = await client.create_chat_session(persona_id=None)
 
@@ -215,21 +215,21 @@ def build_mcp_server(config: OnyxConfig) -> FastMCP:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the Onyx MCP server")
+    parser = argparse.ArgumentParser(description="Run the Alvio MCP server")
     parser.add_argument(
         "--base-url",
-        default=os.environ.get("ONYX_API_BASE_URL", DEFAULT_BASE_URL),
-        help="Base URL for the Onyx API (default: %(default)s)",
+        default=os.environ.get("ALVIO_API_BASE_URL", DEFAULT_BASE_URL),
+        help="Base URL for the Alvio API (default: %(default)s)",
     )
     parser.add_argument(
         "--api-key",
-        default=os.environ.get("ONYX_API_KEY"),
-        help="Bearer token for Onyx API authentication (default: env ONYX_API_KEY)",
+        default=os.environ.get("ALVIO_API_KEY"),
+        help="Bearer token for Alvio API authentication (default: env ALVIO_API_KEY)",
     )
     parser.add_argument(
         "--persona-id",
         type=int,
-        default=int(os.environ.get("ONYX_DEFAULT_PERSONA_ID", 0)),
+        default=int(os.environ.get("ALVIO_DEFAULT_PERSONA_ID", 0)),
         help="Persona ID used when creating new chat sessions (default: %(default)s)",
     )
     parser.add_argument(
@@ -255,7 +255,7 @@ def main() -> None:
     logging.basicConfig(level=logging.INFO)
     args = parse_args()
 
-    config = OnyxConfig(
+    config = AlvioConfig(
         base_url=args.base_url,
         api_key=args.api_key,
         default_persona_id=args.persona_id,
@@ -263,7 +263,7 @@ def main() -> None:
 
     if not config.api_key:
         logger.warning(
-            "No ONYX_API_KEY provided. The Onyx deployment must allow unauthenticated access or the tool will fail."
+            "No ALVIO_API_KEY provided. The Alvio deployment must allow unauthenticated access or the tool will fail."
         )
 
     mcp = build_mcp_server(config)

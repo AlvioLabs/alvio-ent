@@ -29,7 +29,7 @@ import type {
 import { UserFileStatus } from "../../projects/projectsService";
 import { ChatFileType } from "@/app/chat/interfaces";
 import { usePopup } from "@/components/admin/connectors/Popup";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalAlvioDocument } from "@/lib/search/interfaces";
 import {
   MultipleFilesIcon,
   OpenFolderIcon,
@@ -98,18 +98,18 @@ export function FileCard({
       )}
       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-transparent">
         {isProcessing ? (
-          <Loader2 className="h-5 w-5 text-onyx-muted animate-spin" />
+          <Loader2 className="h-5 w-5 text-alvio-muted animate-spin" />
         ) : (
           <div className="bg-accent-background p-2 rounded-lg shadow-sm">
-            <DocumentIcon className="h-5 w-5 text-onyx-muted" />
+            <DocumentIcon className="h-5 w-5 text-alvio-muted" />
           </div>
         )}
       </div>
       <div className="flex flex-col overflow-hidden">
-        <span className="text-onyx-medium text-sm truncate" title={file.name}>
+        <span className="text-alvio-medium text-sm truncate" title={file.name}>
           {file.name}
         </span>
-        <span className="text-onyx-muted text-xs truncate">
+        <span className="text-alvio-muted text-xs truncate">
           {isProcessing
             ? file.status === UserFileStatus.UPLOADING
               ? "Uploading..."
@@ -128,7 +128,7 @@ export default function ProjectContextPanel({
 }: {
   projectTokenCount?: number;
   availableContextTokens?: number;
-  setPresentingDocument?: (document: MinimalOnyxDocument) => void;
+  setPresentingDocument?: (document: MinimalAlvioDocument) => void;
 }) {
   const [isInstrOpen, setIsInstrOpen] = useState(false);
   const [showProjectFiles, setShowProjectFiles] = useState(false);
@@ -136,12 +136,12 @@ export default function ProjectContextPanel({
   const { popup, setPopup } = usePopup();
   const [tempProjectFiles, setTempProjectFiles] = useState<ProjectFile[]>([]);
 
-  // Convert ProjectFile to MinimalOnyxDocument format for viewing
+  // Convert ProjectFile to MinimalAlvioDocument format for viewing
   const handleFileClick = useCallback(
     (file: ProjectFile) => {
       if (!setPresentingDocument) return;
 
-      const documentForViewer: MinimalOnyxDocument = {
+      const documentForViewer: MinimalAlvioDocument = {
         document_id: `project_file__${file.file_id}`,
         semantic_identifier: file.name,
       };
@@ -230,8 +230,8 @@ export default function ProjectContextPanel({
   return (
     <div className="flex flex-col gap-5 p-4 w-full max-w-[800px] mx-auto mt-10">
       <div className="flex flex-col gap-2">
-        <OpenFolderIcon size={34} className="text-onyx-ultra-strong" />
-        <h1 className="text-onyx-strong text-4xl">
+        <OpenFolderIcon size={34} className="text-alvio-ultra-strong" />
+        <h1 className="text-alvio-strong text-4xl">
           {currentProjectDetails?.project?.name || "Loading project..."}
         </h1>
       </div>
@@ -239,16 +239,16 @@ export default function ProjectContextPanel({
       <Separator className="my-0" />
       <div className="flex flex-row gap-2 justify-between">
         <div className="min-w-0">
-          <p className="text-onyx-medium text-2xl">Instructions</p>
+          <p className="text-alvio-medium text-2xl">Instructions</p>
           {currentProjectDetails?.project?.instructions ? (
             <p
-              className="text-onyx-muted text-base truncate"
+              className="text-alvio-muted text-base truncate"
               title={currentProjectDetails.project.instructions || ""}
             >
               {currentProjectDetails.project.instructions}
             </p>
           ) : (
-            <p className="text-onyx-muted text-base truncate">
+            <p className="text-alvio-muted text-base truncate">
               Add instructions to tailor the response in this project.
             </p>
           )}
@@ -257,8 +257,8 @@ export default function ProjectContextPanel({
           onClick={() => setIsInstrOpen(true)}
           className="flex flex-row gap-2 items-center justify-center p-2 rounded-md bg-background-dark/75 hover:dark:bg-neutral-800/75 hover:bg-accent-background-hovered cursor-pointer transition-all duration-150 shrink-0 whitespace-nowrap h-12"
         >
-          <ListSettingsIcon size={20} className="text-onyx-emphasis" />
-          <p className="text-onyx-emphasis text-lg whitespace-nowrap">
+          <ListSettingsIcon size={20} className="text-alvio-emphasis" />
+          <p className="text-alvio-emphasis text-lg whitespace-nowrap">
             Set Instructions
           </p>
         </button>
@@ -266,9 +266,9 @@ export default function ProjectContextPanel({
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2 justify-between">
           <div>
-            <p className="text-onyx-medium text-2xl">Files</p>
+            <p className="text-alvio-medium text-2xl">Files</p>
 
-            <p className="text-onyx-muted text-base">
+            <p className="text-alvio-muted text-base">
               Chats in this project can access these files.
             </p>
           </div>
@@ -283,7 +283,7 @@ export default function ProjectContextPanel({
               await linkFileToProject(currentProjectId, file.id);
             }}
             handleUploadChange={handleUploadChange}
-            triggerLabelClassName="text-lg text-onyx-emphasis"
+            triggerLabelClassName="text-lg text-alvio-emphasis"
             triggerClassName="h-12"
           />
         </div>
@@ -300,12 +300,12 @@ export default function ProjectContextPanel({
               >
                 <div className="flex flex-col overflow-hidden">
                   <div className="flex items-center justify-between gap-2 w-full">
-                    <span className="text-onyx-medium text-sm truncate flex-1">
+                    <span className="text-alvio-medium text-sm truncate flex-1">
                       View files
                     </span>
-                    <MultipleFilesIcon className="h-5 w-5 text-onyx-medium" />
+                    <MultipleFilesIcon className="h-5 w-5 text-alvio-medium" />
                   </div>
-                  <span className="text-onyx-muted text-sm">
+                  <span className="text-alvio-muted text-sm">
                     {displayFileCount} files
                   </span>
                 </div>
@@ -346,12 +346,12 @@ export default function ProjectContextPanel({
                 >
                   <div className="flex flex-col overflow-hidden h-12 p-1">
                     <div className="flex items-center justify-between gap-2 w-full">
-                      <span className="text-onyx-medium text-sm truncate flex-1">
+                      <span className="text-alvio-medium text-sm truncate flex-1">
                         View All
                       </span>
-                      <MultipleFilesIcon className="h-5 w-5 text-onyx-medium" />
+                      <MultipleFilesIcon className="h-5 w-5 text-alvio-medium" />
                     </div>
-                    <span className="text-onyx-muted text-sm">
+                    <span className="text-alvio-muted text-sm">
                       {displayFileCount} files
                     </span>
                   </div>
@@ -359,7 +359,7 @@ export default function ProjectContextPanel({
               )}
             </div>
             {projectTokenCount > availableContextTokens && (
-              <p className="text-onyx-muted text-base">
+              <p className="text-alvio-muted text-base">
                 This project exceeds the model&apos;s context limits. Sessions
                 will automatically search for relevant files first before
                 generating response.
@@ -367,7 +367,7 @@ export default function ProjectContextPanel({
             )}
           </>
         ) : (
-          <p className="text-onyx-muted text-base">No files yet.</p>
+          <p className="text-alvio-muted text-base">No files yet.</p>
         )}
       </div>
 
@@ -416,7 +416,7 @@ export default function ProjectContextPanel({
           }}
         >
           <DialogHeader>
-            <MultipleFilesIcon className="h-8 w-8 text-onyx-ultra-strong" />
+            <MultipleFilesIcon className="h-8 w-8 text-alvio-ultra-strong" />
             <DialogTitle>Project files</DialogTitle>
             <DialogDescription>
               Sessions in this project can access the files here.

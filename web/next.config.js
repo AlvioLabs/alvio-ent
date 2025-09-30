@@ -1,6 +1,6 @@
-// Get Onyx Web Version
+// Get Alvio Web Version
 const { version: package_version } = require("./package.json"); // version from package.json
-const env_version = process.env.ONYX_VERSION; // version from env variable
+const env_version = process.env.ALVIO_VERSION; // version from env variable
 // Use env version if set & valid, otherwise default to package version
 const version = env_version || package_version;
 
@@ -104,8 +104,8 @@ const sentryEnabled = Boolean(
 
 // Sentry webpack plugin options
 const sentryWebpackPluginOptions = {
-  org: process.env.SENTRY_ORG || "onyx-vl",
-  project: process.env.SENTRY_PROJECT || "onyx-web",
+  org: process.env.SENTRY_ORG || "alvio-vl",
+  project: process.env.SENTRY_PROJECT || "alvio-web",
   authToken: process.env.SENTRY_AUTH_TOKEN,
   silent: !sentryEnabled, // Silence output when Sentry is disabled
   dryRun: !sentryEnabled, // Don't upload source maps when Sentry is disabled

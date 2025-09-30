@@ -5,10 +5,10 @@ import pytest
 from fastapi_users.password import PasswordHelper
 from sqlalchemy.orm import Session
 
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.engine.sql_engine import SqlEngine
-from onyx.db.models import User
-from onyx.db.models import UserRole
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.engine.sql_engine import SqlEngine
+from alvio.db.models import User
+from alvio.db.models import UserRole
 from shared_configs.contextvars import CURRENT_TENANT_ID_CONTEXTVAR
 from tests.external_dependency_unit.constants import TEST_TENANT_ID
 from tests.external_dependency_unit.full_setup import (

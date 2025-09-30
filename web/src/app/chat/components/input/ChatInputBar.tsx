@@ -21,7 +21,7 @@ import {
   SendIcon,
   StopGeneratingIcon,
 } from "@/components/icons/icons";
-import { OnyxDocument, MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument, MinimalAlvioDocument } from "@/lib/search/interfaces";
 import { ChatState } from "@/app/chat/interfaces";
 import { useAssistantsContext } from "@/components/context/AssistantsContext";
 import { CalendarIcon, TagIcon, XIcon } from "lucide-react";
@@ -96,7 +96,7 @@ export const SourceChip = ({
 interface ChatInputBarProps {
   removeDocs: () => void;
   showConfigureAPIKey: () => void;
-  selectedDocuments: OnyxDocument[];
+  selectedDocuments: AlvioDocument[];
   message: string;
   setMessage: (message: string) => void;
   stopGenerating: () => void;
@@ -114,7 +114,7 @@ interface ChatInputBarProps {
   filterManager: FilterManager;
   retrievalEnabled: boolean;
   deepResearchEnabled: boolean;
-  setPresentingDocument?: (document: MinimalOnyxDocument) => void;
+  setPresentingDocument?: (document: MinimalAlvioDocument) => void;
   toggleDeepResearch: () => void;
   placeholder?: string;
 }
@@ -156,12 +156,12 @@ export const ChatInputBar = React.memo(function ChatInputBar({
     );
   }, [currentMessageFiles]);
 
-  // Convert ProjectFile to MinimalOnyxDocument format for viewing
+  // Convert ProjectFile to MinimalAlvioDocument format for viewing
   const handleFileClick = useCallback(
     (file: ProjectFile) => {
       if (!setPresentingDocument) return;
 
-      const documentForViewer: MinimalOnyxDocument = {
+      const documentForViewer: MinimalAlvioDocument = {
         document_id: `project_file__${file.file_id}`,
         semantic_identifier: file.name,
       };
@@ -354,7 +354,7 @@ export const ChatInputBar = React.memo(function ChatInputBar({
   };
 
   return (
-    <div id="onyx-chat-input">
+    <div id="alvio-chat-input">
       <div className="flex justify-center mx-auto">
         <div
           className="
@@ -449,7 +449,7 @@ export const ChatInputBar = React.memo(function ChatInputBar({
                 onKeyDownCapture={handleKeyDown}
                 onChange={handleInputChange}
                 ref={textAreaRef}
-                id="onyx-chat-input-textarea"
+                id="alvio-chat-input-textarea"
                 className={`
                 m-0
                 w-full
@@ -483,7 +483,7 @@ export const ChatInputBar = React.memo(function ChatInputBar({
                 placeholder={
                   placeholder ||
                   (selectedAssistant.id === 0
-                    ? `How can ${settings?.enterpriseSettings?.application_name || "Onyx"} help you today`
+                    ? `How can ${settings?.enterpriseSettings?.application_name || "Alvio"} help you today`
                     : `How can ${selectedAssistant.name} help you today`)
                 }
                 value={message}
@@ -641,7 +641,7 @@ export const ChatInputBar = React.memo(function ChatInputBar({
                   />
 
                   <button
-                    id="onyx-chat-input-send-button"
+                    id="alvio-chat-input-send-button"
                     className={`cursor-pointer ${
                       chatState == "streaming" ||
                       chatState == "toolBuilding" ||

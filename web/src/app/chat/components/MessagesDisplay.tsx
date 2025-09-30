@@ -1,6 +1,6 @@
 import React, { RefObject, useCallback, useMemo } from "react";
 import { Message } from "../interfaces";
-import { OnyxDocument, MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument, MinimalAlvioDocument } from "@/lib/search/interfaces";
 import { MemoizedHumanMessage } from "../message/MemoizedHumanMessage";
 import { ErrorBanner } from "../message/Resubmit";
 import { FeedbackType } from "@/app/chat/interfaces";
@@ -18,7 +18,7 @@ interface MessagesDisplayProps {
   llmManager: { currentLlm: LlmDescriptor | null };
   deepResearchEnabled: boolean;
   currentMessageFiles: ProjectFile[];
-  setPresentingDocument: (doc: MinimalOnyxDocument | null) => void;
+  setPresentingDocument: (doc: MinimalAlvioDocument | null) => void;
   setCurrentFeedback: (feedback: [FeedbackType, number] | null) => void;
   onSubmit: (args: {
     message: string;
@@ -76,7 +76,7 @@ export const MessagesDisplay: React.FC<MessagesDisplayProps> = ({
   enterpriseSettings,
 }) => {
   // Stable fallbacks to avoid changing prop identities on each render
-  const emptyDocs = useMemo<OnyxDocument[]>(() => [], []);
+  const emptyDocs = useMemo<AlvioDocument[]>(() => [], []);
   const emptyChildrenIds = useMemo<number[]>(() => [], []);
   const createRegenerator = useCallback(
     (regenerationRequest: {

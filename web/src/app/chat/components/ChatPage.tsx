@@ -24,11 +24,11 @@ import { SEARCH_PARAM_NAMES } from "../services/searchParams";
 import { useFederatedConnectors, useFilters, useLlmManager } from "@/lib/hooks";
 import { useFederatedOAuthStatus } from "@/lib/hooks/useFederatedOAuthStatus";
 import { FeedbackType } from "@/app/chat/interfaces";
-import { OnyxInitializingLoader } from "@/components/OnyxInitializingLoader";
+import { AlvioInitializingLoader } from "@/components/AlvioInitializingLoader";
 import { FeedbackModal } from "./modal/FeedbackModal";
 import { ShareChatSessionModal } from "./modal/ShareChatSessionModal";
 import { FiArrowDown } from "react-icons/fi";
-import { OnyxDocument, MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument, MinimalAlvioDocument } from "@/lib/search/interfaces";
 import { SettingsContext } from "@/components/settings/SettingsProvider";
 import Dropzone from "react-dropzone";
 import { ChatInputBar } from "./input/ChatInputBar";
@@ -232,7 +232,7 @@ export function ChatPage({
   });
 
   const [presentingDocument, setPresentingDocument] =
-    useState<MinimalOnyxDocument | null>(null);
+    useState<MinimalAlvioDocument | null>(null);
 
   const llmManager = useLlmManager(
     llmProviders,
@@ -446,7 +446,7 @@ export function ChatPage({
     documentSidebarInitialWidth = Math.min(700, maxDocumentSidebarWidth);
   }
 
-  const [selectedDocuments, setSelectedDocuments] = useState<OnyxDocument[]>(
+  const [selectedDocuments, setSelectedDocuments] = useState<AlvioDocument[]>(
     []
   );
 
@@ -705,7 +705,7 @@ export function ChatPage({
     redirect("/auth/login");
   }
 
-  const toggleDocumentSelection = useCallback((document: OnyxDocument) => {
+  const toggleDocumentSelection = useCallback((document: AlvioDocument) => {
     setSelectedDocuments((prev) =>
       prev.some((d) => d.document_id === document.document_id)
         ? prev.filter((d) => d.document_id !== document.document_id)
@@ -1345,7 +1345,7 @@ export function ChatPage({
                         }`}
                   />
                   <div className="my-auto">
-                    <OnyxInitializingLoader />
+                    <AlvioInitializingLoader />
                   </div>
                 </div>
               )}

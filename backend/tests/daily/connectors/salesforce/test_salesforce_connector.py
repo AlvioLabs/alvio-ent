@@ -8,10 +8,10 @@ from typing import cast
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import Document
-from onyx.connectors.salesforce.connector import SalesforceConnector
-from onyx.connectors.salesforce.utils import ACCOUNT_OBJECT_TYPE
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.models import Document
+from alvio.connectors.salesforce.connector import SalesforceConnector
+from alvio.connectors.salesforce.utils import ACCOUNT_OBJECT_TYPE
 
 
 def extract_key_value_pairs_to_set(

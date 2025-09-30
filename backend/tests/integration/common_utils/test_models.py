@@ -7,15 +7,15 @@ from uuid import UUID
 from pydantic import BaseModel
 from pydantic import Field
 
-from onyx.auth.schemas import UserRole
-from onyx.configs.constants import QAFeedbackType
-from onyx.context.search.enums import RecencyBiasSetting
-from onyx.context.search.models import SavedSearchDoc
-from onyx.db.enums import AccessType
-from onyx.server.documents.models import DocumentSource
-from onyx.server.documents.models import IndexAttemptSnapshot
-from onyx.server.documents.models import IndexingStatus
-from onyx.server.documents.models import InputType
+from alvio.auth.schemas import UserRole
+from alvio.configs.constants import QAFeedbackType
+from alvio.context.search.enums import RecencyBiasSetting
+from alvio.context.search.models import SavedSearchDoc
+from alvio.db.enums import AccessType
+from alvio.server.documents.models import DocumentSource
+from alvio.server.documents.models import IndexAttemptSnapshot
+from alvio.server.documents.models import IndexingStatus
+from alvio.server.documents.models import InputType
 
 """
 These data models are used to represent the data on the testing side of things.

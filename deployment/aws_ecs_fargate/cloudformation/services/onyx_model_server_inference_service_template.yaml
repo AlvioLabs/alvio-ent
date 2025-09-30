@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: CloudFormation template for Onyx Model Server Inference TaskDefinition
+Description: CloudFormation template for Alvio Model Server Inference TaskDefinition
 Parameters:
   Environment:
     Type: String
@@ -11,7 +11,7 @@ Parameters:
     Default: vpc-098cfa79d637dabff
   ServiceName:
     Type: String
-    Default: onyx-model-server-inference
+    Default: alvio-model-server-inference
   TaskCpu:
     Type: String
     Default: "2048"
@@ -29,7 +29,7 @@ Resources:
     Properties:
       Cluster:
         Fn::ImportValue:
-          Fn::Sub: "${Environment}-onyx-cluster-ECSClusterName"
+          Fn::Sub: "${Environment}-alvio-cluster-ECSClusterName"
       CapacityProviderStrategy:
         - CapacityProvider: FARGATE
           Base: 0
@@ -60,7 +60,7 @@ Resources:
         - RegistryArn: !GetAtt ServiceDiscoveryService.Arn
       Tags:
         - Key: app
-          Value: onyx
+          Value: alvio
         - Key: service
           Value: !Ref ServiceName
         - Key: env
@@ -70,7 +70,7 @@ Resources:
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: !Sub Onyx SecurityGroup access to EFS mount and ${ServiceName}.
+      GroupDescription: !Sub Alvio SecurityGroup access to EFS mount and ${ServiceName}.
       GroupName: !Sub ${Environment}-ecs-${ServiceName}
       VpcId: !Ref VpcID
       SecurityGroupIngress:
@@ -93,7 +93,7 @@ Resources:
             TTL: 15
       NamespaceId:
         Fn::ImportValue:
-          Fn::Sub: "${Environment}-onyx-cluster-OnyxNamespace"
+          Fn::Sub: "${Environment}-alvio-cluster-AlvioNamespace"
       HealthCheckCustomConfig:
         FailureThreshold: 1
   
@@ -103,10 +103,10 @@ Resources:
       Family: !Sub ${Environment}-${ServiceName}-TaskDefinition
       TaskRoleArn:
         Fn::ImportValue:
-          Fn::Sub: "${Environment}-onyx-cluster-ECSTaskRole"
+          Fn::Sub: "${Environment}-alvio-cluster-ECSTaskRole"
       ExecutionRoleArn:
         Fn::ImportValue:
-          Fn::Sub: "${Environment}-onyx-cluster-ECSTaskExecutionRole"
+          Fn::Sub: "${Environment}-alvio-cluster-ECSTaskExecutionRole"
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
@@ -116,8 +116,8 @@ Resources:
         CpuArchitecture: ARM64
         OperatingSystemFamily: LINUX
       ContainerDefinitions:
-        - Name: onyx-model-server-inference
-          Image: onyxdotapp/onyx-model-server:latest
+        - Name: alvio-model-server-inference
+          Image: alviodotio/alvio-model-server:latest
           Cpu: 0
           Essential: true
           Command:
@@ -155,7 +155,7 @@ Resources:
           EFSVolumeConfiguration:
             FilesystemId:
               Fn::ImportValue:
-                Fn::Sub: "${Environment}-onyx-efs-OnyxEfsId" 
+                Fn::Sub: "${Environment}-alvio-efs-AlvioEfsId" 
             RootDirectory: "/"
 
   ECSAutoScalingTarget:
@@ -167,7 +167,7 @@ Resources:
       ResourceId: !Sub
         - "service/${ImportedCluster}/${Environment}-${ServiceName}-service"
         - ImportedCluster: !ImportValue
-            'Fn::Sub': "${Environment}-onyx-cluster-ECSClusterName"
+            'Fn::Sub': "${Environment}-alvio-cluster-ECSClusterName"
           ServiceName: !Ref ServiceName
           Environment: !Ref Environment
       ScalableDimension: ecs:service:DesiredCount

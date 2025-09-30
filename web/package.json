@@ -114,5 +114,12 @@
   },
   "overrides": {
     "react-is": "^19.0.0-rc-69d4b800-20241021"
-  }
+  },
+  "description": "<!-- ALVIO_METADATA={\"link\": \"https://github.com/alvio-dot-io/alvio/blob/main/web/README.md\"} -->",
+  "main": "jest.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "author": "",
+  "license": "ISC"
 }

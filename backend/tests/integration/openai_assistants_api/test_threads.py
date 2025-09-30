@@ -2,7 +2,7 @@ from uuid import UUID
 
 import requests
 
-from onyx.db.models import ChatSessionSharedStatus
+from alvio.db.models import ChatSessionSharedStatus
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.constants import GENERAL_HEADERS
 from tests.integration.common_utils.test_models import DATestUser

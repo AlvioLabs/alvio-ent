@@ -4,12 +4,12 @@ from typing import Any
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.exceptions import ConnectorValidationError
-from onyx.connectors.exceptions import CredentialExpiredError
-from onyx.connectors.models import ConnectorMissingCredentialError
-from onyx.connectors.models import Document
-from onyx.connectors.outline.connector import OutlineConnector
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.exceptions import ConnectorValidationError
+from alvio.connectors.exceptions import CredentialExpiredError
+from alvio.connectors.models import ConnectorMissingCredentialError
+from alvio.connectors.models import Document
+from alvio.connectors.outline.connector import OutlineConnector
 
 
 class TestOutlineConnector:

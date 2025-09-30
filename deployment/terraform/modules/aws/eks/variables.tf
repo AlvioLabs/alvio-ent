@@ -117,13 +117,13 @@ variable "s3_bucket_names" {
 variable "irsa_service_account_namespace" {
   type        = string
   description = "Namespace for IRSA-enabled Kubernetes service accounts (used by S3 and RDS)"
-  default     = "onyx"
+  default     = "alvio"
 }
 
 variable "irsa_service_account_name" {
   type        = string
   description = "Name of the IRSA-enabled Kubernetes service account for workload access (S3 + optional RDS)"
-  default     = "onyx-workload-access"
+  default     = "alvio-workload-access"
 }
 
 variable "enable_rds_iam_for_service_account" {

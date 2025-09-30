@@ -1,5 +1,5 @@
 import { SourceIcon } from "@/components/SourceIcon";
-import { MinimalOnyxDocument, OnyxDocument } from "@/lib/search/interfaces";
+import { MinimalAlvioDocument, AlvioDocument } from "@/lib/search/interfaces";
 import { FiTag } from "react-icons/fi";
 import { DocumentSelector } from "./DocumentSelector";
 import { buildDocumentSummaryDisplay } from "@/components/search/DocumentDisplay";
@@ -12,13 +12,13 @@ import { ValidSources } from "@/lib/types";
 
 interface DocumentDisplayProps {
   closeSidebar: () => void;
-  document: OnyxDocument;
+  document: AlvioDocument;
   modal?: boolean;
   isSelected: boolean;
   handleSelect: (documentId: string) => void;
   tokenLimitReached: boolean;
   hideSelection?: boolean;
-  setPresentingDocument: Dispatch<SetStateAction<MinimalOnyxDocument | null>>;
+  setPresentingDocument: Dispatch<SetStateAction<MinimalAlvioDocument | null>>;
 }
 
 export function DocumentMetadataBlock({
@@ -26,7 +26,7 @@ export function DocumentMetadataBlock({
   document,
 }: {
   modal?: boolean;
-  document: OnyxDocument;
+  document: AlvioDocument;
 }) {
   const MAX_METADATA_ITEMS = 3;
   const metadataEntries = Object.entries(document.metadata);

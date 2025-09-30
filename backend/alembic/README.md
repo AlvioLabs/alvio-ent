@@ -1,13 +1,13 @@
-<!-- ONYX_METADATA={"link": "https://github.com/onyx-dot-app/onyx/blob/main/backend/alembic/README.md"} -->
+<!-- ALVIO_METADATA={"link": "https://github.com/alvio-dot-io/alvio/blob/main/backend/alembic/README.md"} -->
 
 # Alembic DB Migrations
 
 These files are for creating/updating the tables in the Relational DB (Postgres).
-Onyx migrations use a generic single-database configuration with an async dbapi.
+Alvio migrations use a generic single-database configuration with an async dbapi.
 
 ## To generate new migrations:
 
-run from onyx/backend:
+run from alvio/backend:
 `alembic revision --autogenerate -m <DESCRIPTION_OF_MIGRATION>`
 
 More info can be found here: https://alembic.sqlalchemy.org/en/latest/autogenerate.html

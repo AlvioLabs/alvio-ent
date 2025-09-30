@@ -2,7 +2,7 @@ Parameters:
 
   EFSName:
     Type: String
-    Default: onyx-efs
+    Default: alvio-efs
   Environment:
     Type: String
     Default: production
@@ -15,7 +15,7 @@ Parameters:
 
 Resources:
 
-  OnyxEfs:
+  AlvioEfs:
     Type: AWS::EFS::FileSystem
     Properties:
       BackupPolicy: 
@@ -35,7 +35,7 @@ Resources:
       AccessPointTags: 
         - Key: Name
           Value: vespaengine-tmp
-      FileSystemId: !Ref OnyxEfs
+      FileSystemId: !Ref AlvioEfs
       RootDirectory: 
         CreationInfo:
           OwnerGid: "1000"
@@ -49,7 +49,7 @@ Resources:
       AccessPointTags: 
         - Key: Name
           Value: vespaengine-data
-      FileSystemId: !Ref OnyxEfs
+      FileSystemId: !Ref AlvioEfs
       RootDirectory: 
         CreationInfo:
           OwnerGid: "1000"
@@ -63,7 +63,7 @@ Resources:
       AccessPointTags: 
         - Key: Name
           Value: postgres-data
-      FileSystemId: !Ref OnyxEfs
+      FileSystemId: !Ref AlvioEfs
       RootDirectory: 
         CreationInfo:
           OwnerGid: "1000"
@@ -72,19 +72,19 @@ Resources:
         Path: /var/lib/postgresql/data
 
   EFSMountTarget1:
-    DependsOn: OnyxEfs
+    DependsOn: AlvioEfs
     Type: AWS::EFS::MountTarget
     Properties:
-      FileSystemId: !Ref OnyxEfs
+      FileSystemId: !Ref AlvioEfs
       SubnetId: !Select [0, !Ref SubnetIDs]
       SecurityGroups:
         - !Ref EFSSecurityGroupMountTargets
 
   EFSMountTarget2:
-    DependsOn: OnyxEfs
+    DependsOn: AlvioEfs
     Type: AWS::EFS::MountTarget
     Properties:
-      FileSystemId: !Ref OnyxEfs
+      FileSystemId: !Ref AlvioEfs
       SubnetId: !Select [1, !Ref SubnetIDs]
       SecurityGroups:
         - !Ref EFSSecurityGroupMountTargets
@@ -101,11 +101,11 @@ Resources:
           CidrIp: 0.0.0.0/0
 
 Outputs:
-  OutputOnyxEfsId:
-    Description: Onyx Filesystem Id
-    Value: !Ref OnyxEfs
+  OutputAlvioEfsId:
+    Description: Alvio Filesystem Id
+    Value: !Ref AlvioEfs
     Export:
-      Name: !Sub ${AWS::StackName}-OnyxEfsId
+      Name: !Sub ${AWS::StackName}-AlvioEfsId
   OutputVespaEngineTmpEfsAccessPoint:
     Description: VespaEngine Tmp AP
     Value: !Ref VespaEngineTmpEfsAccessPoint

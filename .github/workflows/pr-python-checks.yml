@@ -36,7 +36,7 @@ jobs:
       env:
         PYTHONPATH: "."
       run: |
-        python scripts/onyx_openapi_schema.py --filename generated/openapi.json
+        python scripts/alvio_openapi_schema.py --filename generated/openapi.json
 
     - name: Generate OpenAPI Python client
       working-directory: ./backend
@@ -46,8 +46,8 @@ jobs:
           openapitools/openapi-generator-cli generate \
           -i /local/openapi.json \
           -g python \
-          -o /local/onyx_openapi_client \
-          --package-name onyx_openapi_client \
+          -o /local/alvio_openapi_client \
+          --package-name alvio_openapi_client \
           --skip-validate-spec \
           --openapi-normalizer "SIMPLIFY_ONEOF_ANYOF=true,SET_OAS3_NULLABLE=true"
             
@@ -59,7 +59,7 @@ jobs:
     - name: Check import order with reorder-python-imports
       run: |
         cd backend
-        find ./onyx -name "*.py" | xargs reorder-python-imports --py311-plus
+        find ./alvio -name "*.py" | xargs reorder-python-imports --py311-plus
 
     - name: Check code formatting with Black
       run: |

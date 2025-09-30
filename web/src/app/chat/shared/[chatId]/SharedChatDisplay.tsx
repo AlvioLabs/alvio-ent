@@ -10,9 +10,9 @@ import { AIMessage } from "../../message/messageComponents/AIMessage";
 import { Callout } from "@/components/ui/callout";
 import { useContext, useEffect, useState } from "react";
 import { SettingsContext } from "@/components/settings/SettingsProvider";
-import { OnyxInitializingLoader } from "@/components/OnyxInitializingLoader";
+import { AlvioInitializingLoader } from "@/components/AlvioInitializingLoader";
 import { Persona } from "@/app/admin/assistants/interfaces";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalAlvioDocument } from "@/lib/search/interfaces";
 import TextView from "@/components/chat/TextView";
 import { DocumentResults } from "../../components/documentSidebar/DocumentResults";
 import { Modal } from "@/components/Modal";
@@ -20,7 +20,7 @@ import FunctionalHeader from "@/components/chat/Header";
 import FixedLogo from "@/components/logo/FixedLogo";
 import Link from "next/link";
 
-function BackToOnyxButton({
+function BackToAlvioButton({
   documentSidebarVisible,
 }: {
   documentSidebarVisible: boolean;
@@ -31,7 +31,7 @@ function BackToOnyxButton({
     <div className="absolute bottom-0 bg-background w-full flex border-t border-border py-4">
       <div className="mx-auto">
         <Link href="/chat">
-          Back to {enterpriseSettings?.application_name || "Onyx Chat"}
+          Back to {enterpriseSettings?.application_name || "Alvio Chat"}
         </Link>
       </div>
       <div
@@ -60,7 +60,7 @@ export function SharedChatDisplay({
   const [documentSidebarVisible, setDocumentSidebarVisible] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [presentingDocument, setPresentingDocument] =
-    useState<MinimalOnyxDocument | null>(null);
+    useState<MinimalAlvioDocument | null>(null);
 
   useEffect(() => {
     Prism.highlightAll();
@@ -74,7 +74,7 @@ export function SharedChatDisplay({
             Did not find a shared chat with the specified ID.
           </Callout>
         </div>
-        <BackToOnyxButton documentSidebarVisible={documentSidebarVisible} />
+        <BackToAlvioButton documentSidebarVisible={documentSidebarVisible} />
       </div>
     );
   }
@@ -93,7 +93,7 @@ export function SharedChatDisplay({
             No messages found in shared chat.
           </Callout>
         </div>
-        <BackToOnyxButton documentSidebarVisible={documentSidebarVisible} />
+        <BackToAlvioButton documentSidebarVisible={documentSidebarVisible} />
       </div>
     );
   }
@@ -261,7 +261,7 @@ export function SharedChatDisplay({
                 ) : (
                   <div className="grow flex-0 h-screen w-full flex items-center justify-center">
                     <div className="mb-[33vh]">
-                      <OnyxInitializingLoader />
+                      <AlvioInitializingLoader />
                     </div>
                   </div>
                 )}
@@ -283,7 +283,7 @@ export function SharedChatDisplay({
           </div>
 
           <FixedLogo backgroundToggled={false} />
-          <BackToOnyxButton documentSidebarVisible={documentSidebarVisible} />
+          <BackToAlvioButton documentSidebarVisible={documentSidebarVisible} />
         </div>
       </div>
     </>

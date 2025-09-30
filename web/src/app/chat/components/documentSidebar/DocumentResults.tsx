@@ -1,4 +1,4 @@
-import { MinimalOnyxDocument, OnyxDocument } from "@/lib/search/interfaces";
+import { MinimalAlvioDocument, AlvioDocument } from "@/lib/search/interfaces";
 import { ChatDocumentDisplay } from "./ChatDocumentDisplay";
 import { removeDuplicateDocs } from "@/lib/documentUtils";
 import {
@@ -16,12 +16,12 @@ import {
   useSelectedNodeForDocDisplay,
 } from "../../stores/useChatSessionStore";
 
-// Build an OnyxDocument from basic file info
-const buildOnyxDocumentFromFile = (
+// Build an AlvioDocument from basic file info
+const buildAlvioDocumentFromFile = (
   id: string,
   name?: string | null,
   appendProjectPrefix?: boolean
-): OnyxDocument => {
+): AlvioDocument => {
   const document_id = appendProjectPrefix ? `project_file__${id}` : id;
   return {
     document_id,
@@ -42,8 +42,8 @@ const buildOnyxDocumentFromFile = (
 
 interface DocumentResultsProps {
   closeSidebar: () => void;
-  selectedDocuments: OnyxDocument[] | null;
-  toggleDocumentSelection: (document: OnyxDocument) => void;
+  selectedDocuments: AlvioDocument[] | null;
+  toggleDocumentSelection: (document: AlvioDocument) => void;
   clearSelectedDocuments: () => void;
   selectedDocumentTokens: number;
   maxTokens: number;
@@ -51,7 +51,7 @@ interface DocumentResultsProps {
   isOpen: boolean;
   isSharedChat?: boolean;
   modal: boolean;
-  setPresentingDocument: Dispatch<SetStateAction<MinimalOnyxDocument | null>>;
+  setPresentingDocument: Dispatch<SetStateAction<MinimalAlvioDocument | null>>;
 }
 
 const DocumentResultsComponent = (
@@ -135,7 +135,7 @@ const DocumentResultsComponent = (
   return (
     <>
       <div
-        id="onyx-chat-sidebar"
+        id="alvio-chat-sidebar"
         className={`relative -mb-8 bg-background max-w-full ${
           !modal
             ? "border-l border-t h-[105vh]  border-sidebar-border dark:border-neutral-700"
@@ -271,7 +271,7 @@ const DocumentResultsComponent = (
                         setPresentingDocument={setPresentingDocument}
                         closeSidebar={closeSidebar}
                         modal={modal}
-                        document={buildOnyxDocumentFromFile(
+                        document={buildAlvioDocumentFromFile(
                           f.id,
                           f.name,
                           false

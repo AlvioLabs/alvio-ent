@@ -132,7 +132,7 @@ export function UserDropdown({
         onOpenChange={onOpenChange}
         content={
           <div
-            id="onyx-user-dropdown"
+            id="alvio-user-dropdown"
             onClick={() => setUserInfoVisible(!userInfoVisible)}
             className="flex relative cursor-pointer"
           >

@@ -2,7 +2,6 @@
 
 import { useContext } from "react";
 import { SettingsContext } from "../settings/SettingsProvider";
-import { OnyxIcon, OnyxLogoTypeIcon } from "../icons/icons";
 
 export function Logo({
   height,
@@ -27,29 +26,19 @@ export function Logo({
   height = height || defaultHeight;
   width = width || defaultWidth;
 
-  if (
-    !settings ||
-    !settings.enterpriseSettings ||
-    !settings.enterpriseSettings.use_custom_logo
-  ) {
-    return (
-      <div style={{ height, width }} className={className}>
-        <OnyxIcon
-          size={height}
-          className={`${className} dark:text-[#fff] text-[#000]`}
-        />
-      </div>
-    );
-  }
+  // Use custom uploaded logo if enabled, otherwise use default Alvio logo
+  const logoSrc = 
+    settings?.enterpriseSettings?.use_custom_logo
+      ? "/api/enterprise-settings/logo"
+      : "/logo.png";
 
   return (
     <div
       style={{ height, width }}
       className={`flex-none relative ${className}`}
     >
-      {/* TODO: figure out how to use Next Image here */}
       <img
-        src="/api/enterprise-settings/logo"
+        src={logoSrc}
         alt="Logo"
         style={{ objectFit: "contain", height, width }}
       />
@@ -62,10 +51,22 @@ export function LogoType({
 }: {
   size?: "small" | "default" | "large";
 }) {
+  const settings = useContext(SettingsContext);
+
+  // Use custom uploaded logotype if enabled, otherwise use default Alvio logotype
+  const logotypeSrc =
+    settings?.enterpriseSettings?.use_custom_logotype
+      ? "/api/enterprise-settings/logotype"
+      : "/logotype.png";
+
   return (
-    <OnyxLogoTypeIcon
-      size={115}
-      className={`items-center w-full dark:text-[#fff]`}
-    />
+    <div className="flex items-center w-full">
+      <img
+        src={logotypeSrc}
+        alt="Logotype"
+        style={{ objectFit: "contain", height: "32px" }}
+        className="w-auto h-8"
+      />
+    </div>
   );
 }

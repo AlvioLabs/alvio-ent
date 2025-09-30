@@ -83,10 +83,10 @@ test.describe("Default Assistant Tests", () => {
   });
 
   test.describe("Default Assistant Branding", () => {
-    test("should display Onyx logo for default assistant", async ({ page }) => {
-      // Look for Onyx logo
+    test("should display Alvio logo for default assistant", async ({ page }) => {
+      // Look for Alvio logo
       const logoElement = await page.waitForSelector(
-        '[data-testid="onyx-logo"]',
+        '[data-testid="alvio-logo"]',
         { timeout: 5000 }
       );
       expect(logoElement).toBeTruthy();
@@ -112,7 +112,7 @@ test.describe("Default Assistant Tests", () => {
       // Wait for assistant to be created and selected
       await verifyAssistantIsChosen(page, "Custom Assistant");
 
-      // Should show assistant name and icon, not Onyx logo
+      // Should show assistant name and icon, not Alvio logo
       const assistantNameElement = await page.waitForSelector(
         '[data-testid="assistant-name-display"]',
         { timeout: 5000 }
@@ -120,8 +120,8 @@ test.describe("Default Assistant Tests", () => {
       const nameText = await assistantNameElement.textContent();
       expect(nameText).toContain("Custom Assistant");
 
-      // Onyx logo should NOT be shown
-      const logoElement = await page.$('[data-testid="onyx-logo"]');
+      // Alvio logo should NOT be shown
+      const logoElement = await page.$('[data-testid="alvio-logo"]');
       expect(logoElement).toBeNull();
     });
   });
@@ -177,11 +177,11 @@ test.describe("Default Assistant Tests", () => {
     test("default assistant should be selected for new chats", async ({
       page,
     }) => {
-      // Verify the input placeholder indicates default assistant (Onyx)
+      // Verify the input placeholder indicates default assistant (Alvio)
       const inputPlaceholder = await page
-        .locator("#onyx-chat-input-textarea")
+        .locator("#alvio-chat-input-textarea")
         .getAttribute("placeholder");
-      expect(inputPlaceholder).toContain("Onyx");
+      expect(inputPlaceholder).toContain("Alvio");
     });
 
     test("default assistant should NOT appear in assistant selector", async ({
@@ -231,9 +231,9 @@ test.describe("Default Assistant Tests", () => {
       await startNewChat(page);
 
       // Should be back to default assistant
-      await expect(page.locator("#onyx-chat-input-textarea")).toHaveAttribute(
+      await expect(page.locator("#alvio-chat-input-textarea")).toHaveAttribute(
         "placeholder",
-        /Onyx/
+        /Alvio/
       );
     });
   });
@@ -392,9 +392,9 @@ test.describe("End-to-End Default Assistant Flow", () => {
     );
     expect(greetingElement).toBeTruthy();
 
-    // Verify Onyx logo is displayed
+    // Verify Alvio logo is displayed
     const logoElement = await page.waitForSelector(
-      '[data-testid="onyx-logo"]',
+      '[data-testid="alvio-logo"]',
       { timeout: 5000 }
     );
     expect(logoElement).toBeTruthy();
@@ -404,7 +404,7 @@ test.describe("End-to-End Default Assistant Flow", () => {
 
     // Verify AI response appears
     const aiResponse = await page.waitForSelector(
-      '[data-testid="onyx-ai-message"]',
+      '[data-testid="alvio-ai-message"]',
       { timeout: 10000 }
     );
     expect(aiResponse).toBeTruthy();

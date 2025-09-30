@@ -1,4 +1,4 @@
-name: Release Onyx Helm Charts
+name: Release Alvio Helm Charts
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
       - name: Add required Helm repositories
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo add onyx-vespa https://onyx-dot-app.github.io/vespa-helm-charts
+          helm repo add alvio-vespa https://alvio-dot-io.github.io/vespa-helm-charts
           helm repo add keda https://kedacore.github.io/charts
           helm repo update
 

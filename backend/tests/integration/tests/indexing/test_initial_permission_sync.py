@@ -4,15 +4,15 @@ import uuid
 import httpx
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.mock_connector.connector import EXTERNAL_USER_EMAILS
-from onyx.connectors.mock_connector.connector import EXTERNAL_USER_GROUP_IDS
-from onyx.connectors.mock_connector.connector import MockConnectorCheckpoint
-from onyx.connectors.models import InputType
-from onyx.db.document import get_documents_by_ids
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.enums import AccessType
-from onyx.db.enums import IndexingStatus
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.mock_connector.connector import EXTERNAL_USER_EMAILS
+from alvio.connectors.mock_connector.connector import EXTERNAL_USER_GROUP_IDS
+from alvio.connectors.mock_connector.connector import MockConnectorCheckpoint
+from alvio.connectors.models import InputType
+from alvio.db.document import get_documents_by_ids
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.enums import AccessType
+from alvio.db.enums import IndexingStatus
 from tests.integration.common_utils.constants import MOCK_CONNECTOR_SERVER_HOST
 from tests.integration.common_utils.constants import MOCK_CONNECTOR_SERVER_PORT
 from tests.integration.common_utils.managers.cc_pair import CCPairManager

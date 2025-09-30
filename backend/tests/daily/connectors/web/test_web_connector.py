@@ -1,8 +1,8 @@
 import pytest
 
-from onyx.connectors.models import Document
-from onyx.connectors.web.connector import WEB_CONNECTOR_VALID_SETTINGS
-from onyx.connectors.web.connector import WebConnector
+from alvio.connectors.models import Document
+from alvio.connectors.web.connector import WEB_CONNECTOR_VALID_SETTINGS
+from alvio.connectors.web.connector import WebConnector
 
 EXPECTED_QUOTE = (
     "If you can't explain it to a six year old, you don't understand it yourself."

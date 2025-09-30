@@ -76,7 +76,7 @@ export function SimplifiedChatInputBar({
 
   return (
     <div
-      id="onyx-chat-input"
+      id="alvio-chat-input"
       className="
             w-full
             relative

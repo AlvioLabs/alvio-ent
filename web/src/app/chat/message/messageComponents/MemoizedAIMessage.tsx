@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import { MinimalPersonaSnapshot } from "@/app/admin/assistants/interfaces";
 import { FeedbackType, Message, CitationMap } from "../../interfaces";
-import { OnyxDocument, MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument, MinimalAlvioDocument } from "@/lib/search/interfaces";
 import { AIMessage } from "./AIMessage";
 import { LlmDescriptor } from "@/lib/hooks";
 import { ProjectFile } from "@/app/chat/projects/projectsService";
@@ -9,9 +9,9 @@ import { ProjectFile } from "@/app/chat/projects/projectsService";
 interface BaseMemoizedAIMessageProps {
   rawPackets: any[];
   assistant: MinimalPersonaSnapshot;
-  docs: OnyxDocument[];
+  docs: AlvioDocument[];
   citations: CitationMap | undefined;
-  setPresentingDocument: (doc: MinimalOnyxDocument | null) => void;
+  setPresentingDocument: (doc: MinimalAlvioDocument | null) => void;
   overriddenModel?: string;
   nodeId: number;
   otherMessagesCanSwitchTo: number[];

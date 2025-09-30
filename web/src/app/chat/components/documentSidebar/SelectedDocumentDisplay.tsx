@@ -1,12 +1,12 @@
 import { SourceIcon } from "@/components/SourceIcon";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument } from "@/lib/search/interfaces";
 import { DocumentSelector } from "./DocumentSelector";
 
 export function SelectedDocumentDisplay({
   document,
   handleDeselect,
 }: {
-  document: OnyxDocument;
+  document: AlvioDocument;
   handleDeselect: (documentId: string) => void;
 }) {
   return (

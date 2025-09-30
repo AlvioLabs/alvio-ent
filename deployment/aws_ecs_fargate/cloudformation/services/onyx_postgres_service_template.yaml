@@ -11,7 +11,7 @@ Parameters:
     Default: vpc-098cfa79d637dabff
   ServiceName:
     Type: String
-    Default: onyx-postgres
+    Default: alvio-postgres
   TaskCpu:
     Type: String
     Default: "1024"
@@ -29,7 +29,7 @@ Resources:
     Properties:
       Cluster:
         Fn::ImportValue:
-          Fn::Sub: "${Environment}-onyx-cluster-ECSClusterName"
+          Fn::Sub: "${Environment}-alvio-cluster-ECSClusterName"
       CapacityProviderStrategy:
         - CapacityProvider: FARGATE
           Base: 0
@@ -60,7 +60,7 @@ Resources:
         - RegistryArn: !GetAtt ServiceDiscoveryService.Arn
       Tags:
         - Key: app
-          Value: onyx
+          Value: alvio
         - Key: service
           Value: !Ref ServiceName
         - Key: env
@@ -70,7 +70,7 @@ Resources:
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: !Sub Onyx SecurityGroup access to EFS mount and ${ServiceName}.
+      GroupDescription: !Sub Alvio SecurityGroup access to EFS mount and ${ServiceName}.
       GroupName: !Sub ${Environment}-${ServiceName}
       VpcId: !Ref VpcID
       SecurityGroupIngress:
@@ -87,7 +87,7 @@ Resources:
           IpProtocol: tcp
           SourceSecurityGroupId:
             Fn::ImportValue:
-              Fn::Sub: "${Environment}-onyx-efs-EFSSecurityGroupMountTargets"
+              Fn::Sub: "${Environment}-alvio-efs-EFSSecurityGroupMountTargets"
 
   ServiceDiscoveryService:
     Type: "AWS::ServiceDiscovery::Service"
@@ -99,7 +99,7 @@ Resources:
             TTL: 15
       NamespaceId:
         Fn::ImportValue:
-          Fn::Sub: "${Environment}-onyx-cluster-OnyxNamespace"
+          Fn::Sub: "${Environment}-alvio-cluster-AlvioNamespace"
       HealthCheckCustomConfig:
         FailureThreshold: 1
 
@@ -109,10 +109,10 @@ Resources:
       Family: !Sub ${Environment}-${ServiceName}-TaskDefinition
       TaskRoleArn:
         Fn::ImportValue:
-          Fn::Sub: "${Environment}-onyx-cluster-ECSTaskRole"
+          Fn::Sub: "${Environment}-alvio-cluster-ECSTaskRole"
       ExecutionRoleArn:
         Fn::ImportValue:
-          Fn::Sub: "${Environment}-onyx-cluster-ECSTaskExecutionRole"
+          Fn::Sub: "${Environment}-alvio-cluster-ECSTaskExecutionRole"
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
@@ -126,13 +126,13 @@ Resources:
           EFSVolumeConfiguration:
             FilesystemId:
               Fn::ImportValue:
-                Fn::Sub: "${Environment}-onyx-efs-OnyxEfsId"
+                Fn::Sub: "${Environment}-alvio-efs-AlvioEfsId"
             RootDirectory: "/"
             TransitEncryption: ENABLED
             AuthorizationConfig:
               AccessPointId:
                 Fn::ImportValue:
-                  Fn::Sub: "${Environment}-onyx-efs-PostgresDataEfsAccessPoint"
+                  Fn::Sub: "${Environment}-alvio-efs-PostgresDataEfsAccessPoint"
       ContainerDefinitions:
         - Name: !Ref ServiceName
           Image: postgres:15.2-alpine
@@ -169,7 +169,7 @@ Resources:
           LogConfiguration:
             LogDriver: awslogs
             Options:
-              awslogs-group: /ecs/OnyxPostgresTaskDefinition
+              awslogs-group: /ecs/AlvioPostgresTaskDefinition
               mode: non-blocking
               awslogs-create-group: "true"
               max-buffer-size: "25m"

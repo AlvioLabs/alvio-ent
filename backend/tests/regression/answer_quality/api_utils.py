@@ -1,16 +1,16 @@
 import requests
 from retry import retry
 
-from ee.onyx.server.query_and_chat.models import OneShotQARequest
-from onyx.chat.models import ThreadMessage
-from onyx.configs.constants import DocumentSource
-from onyx.configs.constants import MessageType
-from onyx.connectors.models import InputType
-from onyx.context.search.enums import OptionalSearchSetting
-from onyx.context.search.models import IndexFilters
-from onyx.context.search.models import RetrievalDetails
-from onyx.db.enums import IndexingStatus
-from onyx.server.documents.models import ConnectorBase
+from ee.alvio.server.query_and_chat.models import OneShotQARequest
+from alvio.chat.models import ThreadMessage
+from alvio.configs.constants import DocumentSource
+from alvio.configs.constants import MessageType
+from alvio.connectors.models import InputType
+from alvio.context.search.enums import OptionalSearchSetting
+from alvio.context.search.models import IndexFilters
+from alvio.context.search.models import RetrievalDetails
+from alvio.db.enums import IndexingStatus
+from alvio.server.documents.models import ConnectorBase
 from tests.regression.answer_quality.cli_utils import get_api_server_host_port
 
 GENERAL_HEADERS = {"Content-Type": "application/json"}

@@ -5,10 +5,10 @@ from typing import Any
 
 import pytest
 
-from onyx.connectors.hubspot.connector import AVAILABLE_OBJECT_TYPES
-from onyx.connectors.hubspot.connector import HubSpotConnector
-from onyx.connectors.models import ConnectorMissingCredentialError
-from onyx.connectors.models import Document
+from alvio.connectors.hubspot.connector import AVAILABLE_OBJECT_TYPES
+from alvio.connectors.hubspot.connector import HubSpotConnector
+from alvio.connectors.models import ConnectorMissingCredentialError
+from alvio.connectors.models import Document
 
 
 class TestHubSpotConnector:

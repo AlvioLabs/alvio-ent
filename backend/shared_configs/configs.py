@@ -18,13 +18,20 @@ INDEXING_MODEL_SERVER_PORT = int(
     os.environ.get("INDEXING_MODEL_SERVER_PORT") or MODEL_SERVER_PORT
 )
 
-# Onyx custom Deep Learning Models
-CONNECTOR_CLASSIFIER_MODEL_REPO = "Danswer/filter-extraction-model"
+# Alvio custom Deep Learning Models (using local copies)
+# Local paths when running in Docker, will fall back to HuggingFace if not found
+CONNECTOR_CLASSIFIER_MODEL_REPO = os.environ.get(
+    "CONNECTOR_CLASSIFIER_MODEL_REPO", "/app/models/filter-extraction-model"
+)
 CONNECTOR_CLASSIFIER_MODEL_TAG = "1.0.0"
-INTENT_MODEL_VERSION = "onyx-dot-app/hybrid-intent-token-classifier"
+INTENT_MODEL_VERSION = os.environ.get(
+    "INTENT_MODEL_VERSION", "/app/models/hybrid-intent-token-classifier"
+)
 # INTENT_MODEL_TAG = "v1.0.3"
 INTENT_MODEL_TAG: str | None = None
-INFORMATION_CONTENT_MODEL_VERSION = "onyx-dot-app/information-content-model"
+INFORMATION_CONTENT_MODEL_VERSION = os.environ.get(
+    "INFORMATION_CONTENT_MODEL_VERSION", "/app/models/information-content-model"
+)
 INFORMATION_CONTENT_MODEL_TAG: str | None = None
 
 # Bi-Encoder, other details
@@ -57,7 +64,7 @@ INDEXING_ONLY = os.environ.get("INDEXING_ONLY", "").lower() == "true"
 # The process needs to have this for the log file to write to
 # otherwise, it will not create additional log files
 # This should just be the filename base without extension or path.
-LOG_FILE_NAME = os.environ.get("LOG_FILE_NAME") or "onyx"
+LOG_FILE_NAME = os.environ.get("LOG_FILE_NAME") or "alvio"
 
 # Enable generating persistent log files for local dev environments
 DEV_LOGGING_ENABLED = os.environ.get("DEV_LOGGING_ENABLED", "").lower() == "true"

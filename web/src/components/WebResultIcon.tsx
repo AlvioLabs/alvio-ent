@@ -3,7 +3,7 @@
 import { ValidSources } from "@/lib/types";
 import { SourceIcon } from "./SourceIcon";
 import { useState } from "react";
-import { OnyxIcon } from "./icons/icons";
+import { AlvioIcon } from "./icons/icons";
 
 export function WebResultIcon({
   url,
@@ -17,12 +17,12 @@ export function WebResultIcon({
   try {
     hostname = new URL(url).hostname;
   } catch (e) {
-    hostname = "onyx.app";
+    hostname = "alvio.io";
   }
   return (
     <>
-      {hostname.includes("onyx.app") ? (
-        <OnyxIcon size={size} className="dark:text-[#fff] text-[#000]" />
+      {hostname.includes("alvio.io") ? (
+        <AlvioIcon size={size} className="dark:text-[#fff] text-[#000]" />
       ) : !error ? (
         <img
           className="my-0 rounded-full py-0"

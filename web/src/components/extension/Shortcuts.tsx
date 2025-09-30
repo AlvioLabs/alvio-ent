@@ -15,7 +15,7 @@ import { PencilIcon, PlusIcon } from "lucide-react";
 import Image from "next/image";
 import { PopupSpec } from "@/components/admin/connectors/Popup";
 import { Modal } from "../Modal";
-import { QuestionMarkIcon } from "../icons/icons";
+import { QuestionIcon } from "../icons/icons";
 
 export const validateUrl = (input: string) => {
   try {
@@ -61,7 +61,7 @@ export const ShortCut = ({
               onError={() => setFaviconError(true)}
             />
           ) : (
-            <QuestionMarkIcon size={32} className="text-[#fff] w-full h-full" />
+            <QuestionIcon size={32} className="text-[#fff] w-full h-full" />
           )}
         </div>
         <h1 className="text-[#fff] w-full text-center font-semibold text-sm truncate px-2">
@@ -114,7 +114,7 @@ export const NewShortCutModal = ({
       const faviconUrl = isValidUrl
         ? `https://www.google.com/s2/favicons?domain=${new URL(
             url
-          ).hostname.replace(/^(cloud\.)?onyx\.app$/, "onyx.app")}&sz=64`
+          ).hostname.replace(/^(cloud\.)?alvio\.io$/, "alvio.io")}&sz=64`
         : "";
       onAdd({ name, url, favicon: faviconUrl });
       onClose();
@@ -140,7 +140,7 @@ export const NewShortCutModal = ({
   const faviconUrl = isValidUrl
     ? `https://www.google.com/s2/favicons?domain=${new URL(
         url
-      ).hostname.replace(/^(cloud\.)?onyx\.app$/, "onyx.app")}&sz=64`
+      ).hostname.replace(/^(cloud\.)?alvio\.io$/, "alvio.io")}&sz=64`
     : "";
 
   return (
@@ -208,7 +208,7 @@ export const NewShortCutModal = ({
                     onError={() => setFaviconError(true)}
                   />
                 ) : (
-                  <QuestionMarkIcon size={32} className="w-full h-full" />
+                  <QuestionIcon size={32} className="w-full h-full" />
                 )}
               </div>
             </div>

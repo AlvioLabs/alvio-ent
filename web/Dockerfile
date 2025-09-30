@@ -1,16 +1,16 @@
 FROM node:20-alpine AS base
 
-LABEL com.onyx.maintainer="founders@onyx.app"
-LABEL com.onyx.description="This image is the web/frontend container of Onyx which \
-contains code for both the Community and Enterprise editions of Onyx. If you do not \
-have a contract or agreement with DanswerAI, you are not permitted to use the Enterprise \
+LABEL com.alvio.maintainer="info@alvio.io"
+LABEL com.alvio.description="This image is the web/frontend container of Alvio which \
+contains code for both the Community and Enterprise editions of Alvio. If you do not \
+have a contract or agreement with Alvio, you are not permitted to use the Enterprise \
 Edition features outside of personal development or testing purposes. Please reach out to \
-founders@onyx.app for more information. Please visit https://github.com/onyx-dot-app/onyx"
+info@alvio.io for more information. Please visit https://alvio.io"
 
-# Default ONYX_VERSION, typically overriden during builds by GitHub Actions.
-ARG ONYX_VERSION=0.0.0-dev
-ENV ONYX_VERSION=${ONYX_VERSION}
-RUN echo "ONYX_VERSION: ${ONYX_VERSION}"
+# Default ALVIO_VERSION, typically overriden during builds by GitHub Actions.
+ARG ALVIO_VERSION=0.0.0-dev
+ENV ALVIO_VERSION=${ALVIO_VERSION}
+RUN echo "ALVIO_VERSION: ${ALVIO_VERSION}"
 
 # Step 1. Install dependencies + rebuild the source code only when needed
 FROM base AS builder

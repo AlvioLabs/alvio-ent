@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalAlvioDocument } from "@/lib/search/interfaces";
 import { FileDescriptor } from "@/app/chat/interfaces";
 import { HumanMessage } from "./HumanMessage";
 
@@ -13,7 +13,7 @@ interface BaseMemoizedHumanMessageProps {
   shared?: boolean;
   stopGenerating?: () => void;
   disableSwitchingForStreaming?: boolean;
-  setPresentingDocument: (document: MinimalOnyxDocument) => void;
+  setPresentingDocument: (document: MinimalAlvioDocument) => void;
 }
 
 interface InternalMemoizedHumanMessageProps

@@ -9,21 +9,21 @@ os.environ["MODEL_SERVER_PORT"] = "9000"
 
 from sqlalchemy.orm import Session
 
-from onyx.configs.constants import FederatedConnectorSource
-from onyx.context.search.enums import RecencyBiasSetting
-from onyx.db.models import DocumentSet
-from onyx.db.models import FederatedConnector
-from onyx.db.models import LLMProvider
-from onyx.db.models import Persona
-from onyx.db.models import Persona__DocumentSet
-from onyx.db.models import Persona__Tool
-from onyx.db.models import SlackBot
-from onyx.db.models import SlackChannelConfig
-from onyx.db.models import User
-from onyx.onyxbot.slack.listener import process_message
-from onyx.onyxbot.slack.models import ChannelType
-from onyx.db.tools import get_builtin_tool
-from onyx.tools.built_in_tools import SearchTool
+from alvio.configs.constants import FederatedConnectorSource
+from alvio.context.search.enums import RecencyBiasSetting
+from alvio.db.models import DocumentSet
+from alvio.db.models import FederatedConnector
+from alvio.db.models import LLMProvider
+from alvio.db.models import Persona
+from alvio.db.models import Persona__DocumentSet
+from alvio.db.models import Persona__Tool
+from alvio.db.models import SlackBot
+from alvio.db.models import SlackChannelConfig
+from alvio.db.models import User
+from alvio.alviobot.slack.listener import process_message
+from alvio.alviobot.slack.models import ChannelType
+from alvio.db.tools import get_builtin_tool
+from alvio.tools.built_in_tools import SearchTool
 from tests.external_dependency_unit.conftest import create_test_user
 
 
@@ -267,9 +267,9 @@ class TestSlackBotFederatedSearch:
         """Setup only Slack API mocks - everything else runs live"""
         patches = [
             patch("slack_sdk.WebClient.search_messages"),
-            patch("onyx.context.search.federated.slack_search.query_slack"),
-            patch("onyx.onyxbot.slack.listener.get_channel_type_from_id"),
-            patch("onyx.context.search.utils.get_query_embeddings"),
+            patch("alvio.context.search.federated.slack_search.query_slack"),
+            patch("alvio.alviobot.slack.listener.get_channel_type_from_id"),
+            patch("alvio.context.search.utils.get_query_embeddings"),
         ]
 
         started_patches = [p.start() for p in patches]
@@ -409,9 +409,9 @@ class TestSlackBotFederatedSearch:
         for p in patches:
             p.stop()
 
-    @patch("onyx.utils.gpu_utils.fast_gpu_status_request", return_value=False)
+    @patch("alvio.utils.gpu_utils.fast_gpu_status_request", return_value=False)
     @patch(
-        "onyx.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
+        "alvio.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
     )
     def test_slack_bot_public_channel_filtering(
         self, mock_vespa: Mock, mock_gpu_status: Mock, db_session: Session
@@ -464,9 +464,9 @@ class TestSlackBotFederatedSearch:
         finally:
             self._teardown_common_mocks(patches)
 
-    @patch("onyx.utils.gpu_utils.fast_gpu_status_request", return_value=False)
+    @patch("alvio.utils.gpu_utils.fast_gpu_status_request", return_value=False)
     @patch(
-        "onyx.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
+        "alvio.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
     )
     def test_slack_bot_private_channel_filtering(
         self, mock_vespa: Mock, mock_gpu_status: Mock, db_session: Session
@@ -519,9 +519,9 @@ class TestSlackBotFederatedSearch:
         finally:
             self._teardown_common_mocks(patches)
 
-    @patch("onyx.utils.gpu_utils.fast_gpu_status_request", return_value=False)
+    @patch("alvio.utils.gpu_utils.fast_gpu_status_request", return_value=False)
     @patch(
-        "onyx.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
+        "alvio.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
     )
     def test_slack_bot_dm_filtering(
         self, mock_vespa: Mock, mock_gpu_status: Mock, db_session: Session

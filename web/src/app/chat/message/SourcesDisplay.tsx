@@ -1,23 +1,23 @@
 import React from "react";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument } from "@/lib/search/interfaces";
 import { ResultIcon, SeeMoreBlock } from "@/components/chat/sources/SourceCard";
 import { openDocument } from "@/lib/search/utils";
 import { buildDocumentSummaryDisplay } from "@/components/search/DocumentDisplay";
 
 interface SourcesDisplayProps {
-  documents: OnyxDocument[];
+  documents: AlvioDocument[];
   toggleDocumentSelection: () => void;
   animateEntrance?: boolean;
   threeCols?: boolean;
   hideDocumentDisplay?: boolean;
   docSidebarToggled?: boolean;
-  setPresentingDocument: (document: OnyxDocument) => void;
+  setPresentingDocument: (document: AlvioDocument) => void;
 }
 
 export const SourceCard: React.FC<{
-  document: OnyxDocument;
+  document: AlvioDocument;
   hideDocumentDisplay?: boolean;
-  setPresentingDocument: (document: OnyxDocument) => void;
+  setPresentingDocument: (document: AlvioDocument) => void;
 }> = ({ document, hideDocumentDisplay = false, setPresentingDocument }) => {
   const truncatedtext = document.match_highlights[0]
     ? document.match_highlights[0].slice(0, 80)

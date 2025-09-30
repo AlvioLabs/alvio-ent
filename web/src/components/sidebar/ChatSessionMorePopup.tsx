@@ -18,7 +18,7 @@ import MoveCustomAgentChatModal from "@/components/modals/MoveCustomAgentChatMod
 
 // Constants
 const DEFAULT_PERSONA_ID = 0;
-const LS_HIDE_MOVE_CUSTOM_AGENT_MODAL_KEY = "onyx:hideMoveCustomAgentModal";
+const LS_HIDE_MOVE_CUSTOM_AGENT_MODAL_KEY = "alvio:hideMoveCustomAgentModal";
 
 interface ChatSessionMorePopupProps {
   chatSession: ChatSession;

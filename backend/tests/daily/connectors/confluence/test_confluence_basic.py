@@ -6,11 +6,11 @@ from unittest.mock import patch
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.confluence.connector import ConfluenceConnector
-from onyx.connectors.confluence.utils import AttachmentProcessingResult
-from onyx.connectors.credentials_provider import OnyxStaticCredentialsProvider
-from onyx.connectors.models import Document
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.confluence.connector import ConfluenceConnector
+from alvio.connectors.confluence.utils import AttachmentProcessingResult
+from alvio.connectors.credentials_provider import AlvioStaticCredentialsProvider
+from alvio.connectors.models import Document
 from tests.daily.connectors.utils import load_all_docs_from_checkpoint_connector
 
 
@@ -23,7 +23,7 @@ def confluence_connector(space: str) -> ConfluenceConnector:
         page_id=os.environ.get("CONFLUENCE_TEST_PAGE_ID", ""),
     )
 
-    credentials_provider = OnyxStaticCredentialsProvider(
+    credentials_provider = AlvioStaticCredentialsProvider(
         None,
         DocumentSource.CONFLUENCE,
         {
@@ -37,7 +37,7 @@ def confluence_connector(space: str) -> ConfluenceConnector:
 
 @pytest.mark.parametrize("space", [os.getenv("CONFLUENCE_TEST_SPACE") or "DailyConne"])
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "alvio.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_confluence_connector_basic(
@@ -97,7 +97,7 @@ def test_confluence_connector_basic(
 
 @pytest.mark.parametrize("space", ["MI"])
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "alvio.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_confluence_connector_skip_images(
@@ -127,11 +127,11 @@ def mock_process_image_attachment(
 
 @pytest.mark.parametrize("space", ["MI"])
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "alvio.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 @patch(
-    "onyx.connectors.confluence.utils._process_image_attachment",
+    "alvio.connectors.confluence.utils._process_image_attachment",
     side_effect=mock_process_image_attachment,
 )
 def test_confluence_connector_allow_images(

@@ -188,7 +188,7 @@ export default function FilesList({
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-transparent">
                     {String((f as any).status).toLowerCase() ===
                     "processing" ? (
-                      <Loader2 className="h-5 w-5 text-onyx-medium animate-spin" />
+                      <Loader2 className="h-5 w-5 text-alvio-medium animate-spin" />
                     ) : (
                       <div className="bg-accent-background p-2 rounded-lg shadow-sm">
                         {(() => {
@@ -205,10 +205,10 @@ export default function FilesList({
                           return isImage ? (
                             <ImageFileIcon
                               size={20}
-                              className="text-onyx-muted"
+                              className="text-alvio-muted"
                             />
                           ) : (
-                            <DocumentIcon className="h-5 w-5 text-onyx-muted" />
+                            <DocumentIcon className="h-5 w-5 text-alvio-muted" />
                           );
                         })()}
                       </div>

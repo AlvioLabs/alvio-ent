@@ -20,7 +20,7 @@ import {
 } from "../services/messageTree";
 import { MinimalPersonaSnapshot } from "@/app/admin/assistants/interfaces";
 import { SEARCH_PARAM_NAMES } from "../services/searchParams";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument } from "@/lib/search/interfaces";
 import { FilterManager, LlmDescriptor, LlmManager } from "@/lib/hooks";
 import {
   BackendMessage,
@@ -90,7 +90,7 @@ interface UseChatControllerProps {
   liveAssistant: MinimalPersonaSnapshot | undefined;
   availableAssistants: MinimalPersonaSnapshot[];
   existingChatSessionId: string | null;
-  selectedDocuments: OnyxDocument[];
+  selectedDocuments: AlvioDocument[];
   searchParams: ReadonlyURLSearchParams;
   setPopup: (popup: PopupSpec) => void;
 
@@ -560,7 +560,7 @@ export function useChatController({
         selectedDocuments.length > 0
           ? RetrievalType.SelectedDocs
           : RetrievalType.None;
-      let documents: OnyxDocument[] = selectedDocuments;
+      let documents: AlvioDocument[] = selectedDocuments;
       let citations: CitationMap | null = null;
       let aiMessageImages: FileDescriptor[] | null = null;
       let error: string | null = null;

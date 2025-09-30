@@ -75,10 +75,10 @@ export function AdminSidebar({ collections }: { collections: Collection[] }) {
       {combinedSettings.webVersion && (
         <div
           className="flex flex-col mt-12 items-center justify-center w-full"
-          key={"onyxVersion"}
+          key={"alvioVersion"}
         >
           <h2 className="text-xs text-text/40 w-52 font-medium">
-            Onyx version: {combinedSettings.webVersion}
+            Alvio version: {combinedSettings.webVersion}
           </h2>
         </div>
       )}

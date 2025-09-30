@@ -5,11 +5,11 @@ from unittest.mock import MagicMock
 import pytest
 from pydantic import BaseModel
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.airtable.airtable_connector import AirtableConnector
-from onyx.connectors.models import Document
-from onyx.connectors.models import ImageSection
-from onyx.connectors.models import TextSection
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.airtable.airtable_connector import AirtableConnector
+from alvio.connectors.models import Document
+from alvio.connectors.models import ImageSection
+from alvio.connectors.models import TextSection
 
 BASE_VIEW_ID = "viwVUEJjWPd8XYjh8"
 
@@ -223,8 +223,8 @@ def test_airtable_connector_basic(
             created_time="2024-12-24T21:02:49.000Z",
             status_last_changed="2024-12-24T21:02:49.000Z",
             days_since_status_change=0,
-            assignee="Chris Weaver (chris@onyx.app)",
-            submitted_by="Chris Weaver (chris@onyx.app)",
+            assignee="Chris Weaver (chris@alvio.io)",
+            submitted_by="Chris Weaver (chris@alvio.io)",
             all_fields_as_metadata=False,
             view_id=BASE_VIEW_ID,
         ),
@@ -238,8 +238,8 @@ def test_airtable_connector_basic(
             created_time="2024-12-24T21:02:49.000Z",
             status_last_changed="2024-12-24T21:02:49.000Z",
             days_since_status_change=0,
-            assignee="Chris Weaver (chris@onyx.app)",
-            submitted_by="Chris Weaver (chris@onyx.app)",
+            assignee="Chris Weaver (chris@alvio.io)",
+            submitted_by="Chris Weaver (chris@alvio.io)",
             attachments=[
                 (
                     "Test.pdf:\ntesting!!!",
@@ -289,8 +289,8 @@ def test_airtable_connector_all_metadata(
             created_time="2024-12-24T21:02:49.000Z",
             status_last_changed="2024-12-24T21:02:49.000Z",
             days_since_status_change=0,
-            assignee="Chris Weaver (chris@onyx.app)",
-            submitted_by="Chris Weaver (chris@onyx.app)",
+            assignee="Chris Weaver (chris@alvio.io)",
+            submitted_by="Chris Weaver (chris@alvio.io)",
             attachments=[
                 (
                     "Test.pdf:\ntesting!!!",
@@ -343,8 +343,8 @@ def test_airtable_connector_with_share_and_view(
             created_time="2024-12-24T21:02:49.000Z",
             status_last_changed="2024-12-24T21:02:49.000Z",
             days_since_status_change=0,
-            assignee="Chris Weaver (chris@onyx.app)",
-            submitted_by="Chris Weaver (chris@onyx.app)",
+            assignee="Chris Weaver (chris@alvio.io)",
+            submitted_by="Chris Weaver (chris@alvio.io)",
             all_fields_as_metadata=False,
             share_id=SHARE_ID,
             view_id=BASE_VIEW_ID,
@@ -359,8 +359,8 @@ def test_airtable_connector_with_share_and_view(
             created_time="2024-12-24T21:02:49.000Z",
             status_last_changed="2024-12-24T21:02:49.000Z",
             days_since_status_change=0,
-            assignee="Chris Weaver (chris@onyx.app)",
-            submitted_by="Chris Weaver (chris@onyx.app)",
+            assignee="Chris Weaver (chris@alvio.io)",
+            submitted_by="Chris Weaver (chris@alvio.io)",
             attachments=[
                 (
                     "Test.pdf:\ntesting!!!",

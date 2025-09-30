@@ -42,9 +42,15 @@ export const LogoComponent = memo(function LogoComponent({
               {enterpriseSettings.application_name}
             </HeaderTitle>
             {!NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED && (
-              <p className="text-xs text-left text-subtle whitespace-nowrap overflow-hidden text-ellipsis">
-                Powered by Onyx
-              </p>
+              <div className="flex items-center gap-1 text-xs text-left text-subtle whitespace-nowrap overflow-hidden">
+                <span>Powered by</span>
+                <img
+                  src="/logo.png"
+                  alt="Alvio"
+                  className="h-3 w-auto inline-block"
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
             )}
           </div>
         </>

@@ -1,7 +1,7 @@
 "use client";
 
 import { AdminDateRangeSelector } from "../../../../../components/dateRangeSelectors/AdminDateRangeSelector";
-import { OnyxBotChart } from "./OnyxBotChart";
+import { AlvioBotChart } from "./AlvioBotChart";
 import { FeedbackChart } from "./FeedbackChart";
 import { QueryPerformanceChart } from "./QueryPerformanceChart";
 import { PersonaMessagesChart } from "./PersonaMessagesChart";
@@ -28,7 +28,7 @@ export default function AnalyticsPage() {
       />
       <QueryPerformanceChart timeRange={timeRange} />
       <FeedbackChart timeRange={timeRange} />
-      <OnyxBotChart timeRange={timeRange} />
+      <AlvioBotChart timeRange={timeRange} />
       <PersonaMessagesChart
         availablePersonas={personas}
         timeRange={timeRange}

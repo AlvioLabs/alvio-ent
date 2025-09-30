@@ -6,9 +6,9 @@ from typing import cast
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import Document
-from onyx.connectors.zendesk.connector import ZendeskConnector
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.models import Document
+from alvio.connectors.zendesk.connector import ZendeskConnector
 from tests.daily.connectors.utils import load_all_docs_from_checkpoint_connector
 
 

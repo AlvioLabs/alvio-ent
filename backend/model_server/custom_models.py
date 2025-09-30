@@ -12,10 +12,10 @@ from transformers import PreTrainedTokenizer  # type: ignore
 
 from model_server.constants import INFORMATION_CONTENT_MODEL_WARM_UP_STRING
 from model_server.constants import MODEL_WARM_UP_STRING
-from model_server.onyx_torch_model import ConnectorClassifier
-from model_server.onyx_torch_model import HybridClassifier
+from model_server.alvio_torch_model import ConnectorClassifier
+from model_server.alvio_torch_model import HybridClassifier
 from model_server.utils import simple_log_function_time
-from onyx.utils.logger import setup_logger
+from alvio.utils.logger import setup_logger
 from shared_configs.configs import CONNECTOR_CLASSIFIER_MODEL_REPO
 from shared_configs.configs import CONNECTOR_CLASSIFIER_MODEL_TAG
 from shared_configs.configs import (
@@ -113,28 +113,34 @@ def get_local_intent_model(
 ) -> HybridClassifier:
     global _INTENT_MODEL
     if _INTENT_MODEL is None:
-        try:
-            # Calculate where the cache should be, then load from local if available
-            logger.notice(f"Loading model from local cache: {model_name_or_path}")
-            local_path = snapshot_download(
-                repo_id=model_name_or_path, revision=tag, local_files_only=True
-            )
-            _INTENT_MODEL = HybridClassifier.from_pretrained(local_path)
-            logger.notice(f"Loaded model from local cache: {local_path}")
-        except Exception as e:
-            logger.warning(f"Failed to load model directly: {e}")
+        # Check if it's a local path (starts with /)
+        if model_name_or_path.startswith("/"):
+            logger.notice(f"Loading model from local path: {model_name_or_path}")
+            _INTENT_MODEL = HybridClassifier.from_pretrained(model_name_or_path)
+            logger.notice(f"Loaded model from local path: {model_name_or_path}")
+        else:
             try:
-                # Attempt to download the model snapshot
-                logger.notice(f"Downloading model snapshot for {model_name_or_path}")
+                # Calculate where the cache should be, then load from local if available
+                logger.notice(f"Loading model from local cache: {model_name_or_path}")
                 local_path = snapshot_download(
-                    repo_id=model_name_or_path, revision=tag, local_files_only=False
+                    repo_id=model_name_or_path, revision=tag, local_files_only=True
                 )
                 _INTENT_MODEL = HybridClassifier.from_pretrained(local_path)
+                logger.notice(f"Loaded model from local cache: {local_path}")
             except Exception as e:
-                logger.error(
-                    f"Failed to load model even after attempted snapshot download: {e}"
-                )
-                raise
+                logger.warning(f"Failed to load model directly: {e}")
+                try:
+                    # Attempt to download the model snapshot
+                    logger.notice(f"Downloading model snapshot for {model_name_or_path}")
+                    local_path = snapshot_download(
+                        repo_id=model_name_or_path, revision=tag, local_files_only=False
+                    )
+                    _INTENT_MODEL = HybridClassifier.from_pretrained(local_path)
+                except Exception as e:
+                    logger.error(
+                        f"Failed to load model even after attempted snapshot download: {e}"
+                    )
+                    raise
     return _INTENT_MODEL
 
 
@@ -144,34 +150,40 @@ def get_local_information_content_model(
 ) -> SetFitModel:
     global _INFORMATION_CONTENT_MODEL
     if _INFORMATION_CONTENT_MODEL is None:
-        try:
-            # Calculate where the cache should be, then load from local if available
-            logger.notice(
-                f"Loading content information model from local cache: {model_name_or_path}"
-            )
-            local_path = snapshot_download(
-                repo_id=model_name_or_path, revision=tag, local_files_only=True
-            )
-            _INFORMATION_CONTENT_MODEL = SetFitModel.from_pretrained(local_path)
-            logger.notice(
-                f"Loaded content information model from local cache: {local_path}"
-            )
-        except Exception as e:
-            logger.warning(f"Failed to load content information model directly: {e}")
+        # Check if it's a local path (starts with /)
+        if model_name_or_path.startswith("/"):
+            logger.notice(f"Loading information content model from local path: {model_name_or_path}")
+            _INFORMATION_CONTENT_MODEL = SetFitModel.from_pretrained(model_name_or_path)
+            logger.notice(f"Loaded information content model from local path: {model_name_or_path}")
+        else:
             try:
-                # Attempt to download the model snapshot
+                # Calculate where the cache should be, then load from local if available
                 logger.notice(
-                    f"Downloading content information model snapshot for {model_name_or_path}"
+                    f"Loading content information model from local cache: {model_name_or_path}"
                 )
                 local_path = snapshot_download(
-                    repo_id=model_name_or_path, revision=tag, local_files_only=False
+                    repo_id=model_name_or_path, revision=tag, local_files_only=True
                 )
                 _INFORMATION_CONTENT_MODEL = SetFitModel.from_pretrained(local_path)
-            except Exception as e:
-                logger.error(
-                    f"Failed to load content information model even after attempted snapshot download: {e}"
+                logger.notice(
+                    f"Loaded content information model from local cache: {local_path}"
                 )
-                raise
+            except Exception as e:
+                logger.warning(f"Failed to load content information model directly: {e}")
+                try:
+                    # Attempt to download the model snapshot
+                    logger.notice(
+                        f"Downloading content information model snapshot for {model_name_or_path}"
+                    )
+                    local_path = snapshot_download(
+                        repo_id=model_name_or_path, revision=tag, local_files_only=False
+                    )
+                    _INFORMATION_CONTENT_MODEL = SetFitModel.from_pretrained(local_path)
+                except Exception as e:
+                    logger.error(
+                        f"Failed to load content information model even after attempted snapshot download: {e}"
+                    )
+                    raise
 
     return _INFORMATION_CONTENT_MODEL
 
@@ -234,7 +246,7 @@ def warm_up_connector_classifier_model() -> None:
 
     input_ids, attention_mask = tokenize_connector_classification_query(
         ["GitHub"],
-        "onyx classifier query google doc",
+        "alvio classifier query google doc",
         connector_classifier_tokenizer,
         connector_classifier.connector_end_token_id,
     )

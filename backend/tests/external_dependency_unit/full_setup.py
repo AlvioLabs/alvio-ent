@@ -6,16 +6,16 @@ from typing import Optional
 
 import nltk  # type: ignore
 
-from onyx.configs import app_configs as app_configs_module
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.engine.sql_engine import SqlEngine
-from onyx.db.search_settings import get_active_search_settings
-from onyx.document_index.factory import get_default_document_index
-from onyx.file_store.file_store import get_default_file_store
-from onyx.indexing.models import IndexingSetting
-from onyx.seeding.load_docs import seed_initial_documents
-from onyx.setup import setup_postgres
-from onyx.setup import setup_vespa
+from alvio.configs import app_configs as app_configs_module
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.engine.sql_engine import SqlEngine
+from alvio.db.search_settings import get_active_search_settings
+from alvio.document_index.factory import get_default_document_index
+from alvio.file_store.file_store import get_default_file_store
+from alvio.indexing.models import IndexingSetting
+from alvio.seeding.load_docs import seed_initial_documents
+from alvio.setup import setup_postgres
+from alvio.setup import setup_vespa
 from shared_configs.contextvars import CURRENT_TENANT_ID_CONTEXTVAR
 from tests.external_dependency_unit.constants import TEST_TENANT_ID
 
@@ -30,7 +30,7 @@ def ensure_full_deployment_setup(
 
     - Initializes DB engine and sets tenant context
     - Skips model warm-ups during setup
-    - Runs setup_onyx (Postgres defaults, Vespa indices, seeded docs)
+    - Runs setup_alvio (Postgres defaults, Vespa indices, seeded docs)
     - Initializes file store (best-effort)
     - Ensures Vespa indices exist
     - Installs NLTK stopwords and punkt_tab

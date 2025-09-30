@@ -1,4 +1,4 @@
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument } from "@/lib/search/interfaces";
 
 // Base interface for all streaming objects
 interface BaseObj {
@@ -39,7 +39,7 @@ export interface MessageStart extends BaseObj {
   type: "message_start";
   content: string;
 
-  final_documents: OnyxDocument[] | null;
+  final_documents: AlvioDocument[] | null;
 }
 
 export interface MessageDelta extends BaseObj {
@@ -69,7 +69,7 @@ export interface SearchToolStart extends BaseObj {
 export interface SearchToolDelta extends BaseObj {
   type: "internal_search_tool_delta";
   queries: string[] | null;
-  documents: OnyxDocument[] | null;
+  documents: AlvioDocument[] | null;
 }
 
 interface GeneratedImage {

@@ -20,7 +20,7 @@ def run_jobs() -> None:
     cmd_worker_primary = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.primary",
+        "alvio.background.celery.versioned_apps.primary",
         "worker",
         "--pool=threads",
         "--concurrency=6",
@@ -34,7 +34,7 @@ def run_jobs() -> None:
     cmd_worker_light = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.light",
+        "alvio.background.celery.versioned_apps.light",
         "worker",
         "--pool=threads",
         "--concurrency=16",
@@ -48,7 +48,7 @@ def run_jobs() -> None:
     cmd_worker_heavy = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.heavy",
+        "alvio.background.celery.versioned_apps.heavy",
         "worker",
         "--pool=threads",
         "--concurrency=6",
@@ -62,7 +62,7 @@ def run_jobs() -> None:
     cmd_worker_docprocessing = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.docprocessing",
+        "alvio.background.celery.versioned_apps.docprocessing",
         "worker",
         "--pool=threads",
         "--concurrency=6",
@@ -75,7 +75,7 @@ def run_jobs() -> None:
     cmd_worker_user_files = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.user_file_processing",
+        "alvio.background.celery.versioned_apps.user_file_processing",
         "worker",
         "--pool=threads",
         "--concurrency=1",
@@ -88,7 +88,7 @@ def run_jobs() -> None:
     cmd_worker_monitoring = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.monitoring",
+        "alvio.background.celery.versioned_apps.monitoring",
         "worker",
         "--pool=threads",
         "--concurrency=1",
@@ -101,7 +101,7 @@ def run_jobs() -> None:
     cmd_worker_kg_processing = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.kg_processing",
+        "alvio.background.celery.versioned_apps.kg_processing",
         "worker",
         "--pool=threads",
         "--concurrency=4",
@@ -114,7 +114,7 @@ def run_jobs() -> None:
     cmd_worker_docfetching = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.docfetching",
+        "alvio.background.celery.versioned_apps.docfetching",
         "worker",
         "--pool=threads",
         "--concurrency=1",
@@ -127,7 +127,7 @@ def run_jobs() -> None:
     cmd_beat = [
         "celery",
         "-A",
-        "onyx.background.celery.versioned_apps.beat",
+        "alvio.background.celery.versioned_apps.beat",
         "beat",
         "--loglevel=INFO",
     ]

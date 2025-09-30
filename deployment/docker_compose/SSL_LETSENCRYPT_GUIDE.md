@@ -245,10 +245,10 @@ echo | openssl s_client -connect enterprise.alvio.io:443 -servername enterprise.
 
 ```bash
 # Check nginx is serving SSL
-docker logs onyx-nginx-1
+docker logs alvio-nginx-1
 
 # Check certbot renewal status
-docker logs onyx-certbot-1
+docker logs alvio-certbot-1
 ```
 
 ---
@@ -278,7 +278,7 @@ certbot: Challenge failed for domain enterprise.alvio.io
 3. **Check nginx is running**
    ```bash
    docker ps | grep nginx
-   docker logs onyx-nginx-1
+   docker logs alvio-nginx-1
    ```
 
 ### Issue: Rate Limit Hit
@@ -311,7 +311,7 @@ nginx: [emerg] cannot load certificate
 **Solution:**
 ```bash
 # Check certificate files exist
-docker exec onyx-nginx-1 ls -la /etc/letsencrypt/live/enterprise.alvio.io/
+docker exec alvio-nginx-1 ls -la /etc/letsencrypt/live/enterprise.alvio.io/
 
 # Recreate certificates
 docker compose -f docker-compose.prod-cloud.yml down

@@ -11,7 +11,7 @@ from sentence_transformers import CrossEncoder  # type: ignore
 from sentence_transformers import SentenceTransformer  # type: ignore
 
 from model_server.utils import simple_log_function_time
-from onyx.utils.logger import setup_logger
+from alvio.utils.logger import setup_logger
 from shared_configs.configs import INDEXING_ONLY
 from shared_configs.enums import EmbedTextType
 from shared_configs.model_server_models import Embedding

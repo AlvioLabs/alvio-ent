@@ -22,7 +22,7 @@ test("Chat workflow", async ({ page }) => {
   await startNewChat(page);
 
   // Verify the presence of the expected text
-  await verifyAssistantIsChosen(page, "Onyx");
+  await verifyAssistantIsChosen(page, "Alvio");
 
   // Test creation of a new assistant
   await page.getByRole("button", { name: "Explore Assistants" }).click();
@@ -43,7 +43,7 @@ test("Chat workflow", async ({ page }) => {
 
   // Verify the presence of the default assistant text
   try {
-    await verifyAssistantIsChosen(page, "Onyx");
+    await verifyAssistantIsChosen(page, "Alvio");
   } catch (error) {
     console.error("Live Assistant final page content:");
     console.error(await page.content());

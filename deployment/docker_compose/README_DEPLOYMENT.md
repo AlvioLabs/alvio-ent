@@ -110,14 +110,14 @@ After deployment:
 
 ```bash
 # Check environment variables
-docker exec onyx-api_server-1 env | grep MULTI_TENANT
+docker exec alvio-api_server-1 env | grep MULTI_TENANT
 # Output: MULTI_TENANT=true
 
-docker exec onyx-api_server-1 env | grep ENABLE_PAID
+docker exec alvio-api_server-1 env | grep ENABLE_PAID
 # Output: ENABLE_PAID_ENTERPRISE_EDITION_FEATURES=true
 
 # Check migrations (should use schema_private)
-docker exec onyx-api_server-1 alembic -n schema_private current
+docker exec alvio-api_server-1 alembic -n schema_private current
 
 # Check API health
 curl https://enterprise.alvio.io/api/health
@@ -216,10 +216,10 @@ nginx (SSL termination)
 docker ps
 
 # Check nginx logs
-docker logs onyx-nginx-1
+docker logs alvio-nginx-1
 
 # Check API logs
-docker logs onyx-api_server-1
+docker logs alvio-api_server-1
 
 # Test locally first
 curl http://localhost/api/health
@@ -232,7 +232,7 @@ curl http://localhost/api/health
 dig enterprise.alvio.io +short
 
 # Check certbot logs
-docker logs onyx-certbot-1
+docker logs alvio-certbot-1
 
 # Try staging mode (edit init-letsencrypt.sh: staging=1)
 ./init-letsencrypt.sh
@@ -242,10 +242,10 @@ docker logs onyx-certbot-1
 
 ```bash
 # Verify environment
-docker exec onyx-api_server-1 env | grep MULTI_TENANT
+docker exec alvio-api_server-1 env | grep MULTI_TENANT
 
 # Check migrations
-docker exec onyx-api_server-1 alembic -n schema_private current
+docker exec alvio-api_server-1 alembic -n schema_private current
 
 # Restart if needed
 docker compose -f docker-compose.prod-cloud.yml restart api_server background

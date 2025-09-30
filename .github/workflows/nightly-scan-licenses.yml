@@ -95,7 +95,7 @@ jobs:
 
     # Backend
     - name: Pull backend docker image
-      run: docker pull onyxdotapp/onyx-backend:latest
+      run: docker pull alviodotio/alvio-backend:latest
 
     - name: Run Trivy vulnerability scanner on backend
       uses: aquasecurity/trivy-action@0.29.0
@@ -103,7 +103,7 @@ jobs:
         TRIVY_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
         TRIVY_JAVA_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-java-db:1'
       with:
-        image-ref: onyxdotapp/onyx-backend:latest
+        image-ref: alviodotio/alvio-backend:latest
         scanners: license
         severity: HIGH,CRITICAL
         vuln-type: library
@@ -111,7 +111,7 @@ jobs:
 
     # Web server
     - name: Pull web server docker image
-      run: docker pull onyxdotapp/onyx-web-server:latest
+      run: docker pull alviodotio/alvio-web-server:latest
           
     - name: Run Trivy vulnerability scanner on web server
       uses: aquasecurity/trivy-action@0.29.0
@@ -119,7 +119,7 @@ jobs:
         TRIVY_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
         TRIVY_JAVA_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-java-db:1'
       with:
-        image-ref: onyxdotapp/onyx-web-server:latest
+        image-ref: alviodotio/alvio-web-server:latest
         scanners: license
         severity: HIGH,CRITICAL
         vuln-type: library
@@ -127,7 +127,7 @@ jobs:
 
     # Model server
     - name: Pull model server docker image
-      run: docker pull onyxdotapp/onyx-model-server:latest
+      run: docker pull alviodotio/alvio-model-server:latest
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.29.0
@@ -135,7 +135,7 @@ jobs:
         TRIVY_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
         TRIVY_JAVA_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-java-db:1'
       with:
-        image-ref: onyxdotapp/onyx-model-server:latest
+        image-ref: alviodotio/alvio-model-server:latest
         scanners: license
         severity: HIGH,CRITICAL
         vuln-type: library

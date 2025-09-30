@@ -1,5 +1,5 @@
 import {
-  OnyxDocument,
+  AlvioDocument,
   Filters,
   DocumentInfoPacket,
   StreamStopInfo,
@@ -420,7 +420,7 @@ export function getCitedDocumentsFromMessage(message: Message) {
     return [];
   }
 
-  const documentsWithCitationKey: [string, OnyxDocument][] = [];
+  const documentsWithCitationKey: [string, AlvioDocument][] = [];
   Object.entries(message.citations).forEach(([citationKey, documentDbId]) => {
     const matchingDocument = message.documents!.find(
       (document) => document.db_doc_id === documentDbId

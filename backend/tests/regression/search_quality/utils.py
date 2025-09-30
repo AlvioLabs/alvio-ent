@@ -14,17 +14,17 @@ from ragas.metrics import Faithfulness  # type: ignore
 from ragas.metrics import ResponseRelevancy  # type: ignore
 from sqlalchemy.orm import Session
 
-from onyx.configs.constants import DocumentSource
-from onyx.context.search.models import IndexFilters
-from onyx.context.search.models import SavedSearchDoc
-from onyx.db.engine.sql_engine import get_session_with_tenant
-from onyx.db.models import Document
-from onyx.db.models import FederatedConnector
-from onyx.db.search_settings import get_current_search_settings
-from onyx.document_index.factory import get_default_document_index
-from onyx.document_index.interfaces import VespaChunkRequest
-from onyx.prompts.prompt_utils import build_doc_context_str
-from onyx.utils.logger import setup_logger
+from alvio.configs.constants import DocumentSource
+from alvio.context.search.models import IndexFilters
+from alvio.context.search.models import SavedSearchDoc
+from alvio.db.engine.sql_engine import get_session_with_tenant
+from alvio.db.models import Document
+from alvio.db.models import FederatedConnector
+from alvio.db.search_settings import get_current_search_settings
+from alvio.document_index.factory import get_default_document_index
+from alvio.document_index.interfaces import VespaChunkRequest
+from alvio.prompts.prompt_utils import build_doc_context_str
+from alvio.utils.logger import setup_logger
 from tests.regression.search_quality.models import CombinedMetrics
 from tests.regression.search_quality.models import GroundTruth
 from tests.regression.search_quality.models import RetrievedDocument

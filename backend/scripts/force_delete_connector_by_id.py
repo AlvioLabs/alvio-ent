@@ -5,10 +5,10 @@ import sys
 from sqlalchemy import delete
 from sqlalchemy.orm import Session
 
-from onyx.db.document import delete_documents_complete__no_commit
-from onyx.db.enums import ConnectorCredentialPairStatus
-from onyx.db.search_settings import get_active_search_settings
-from onyx.db.tag import delete_orphan_tags__no_commit
+from alvio.db.document import delete_documents_complete__no_commit
+from alvio.db.enums import ConnectorCredentialPairStatus
+from alvio.db.search_settings import get_active_search_settings
+from alvio.db.tag import delete_orphan_tags__no_commit
 from shared_configs.configs import POSTGRES_DEFAULT_SCHEMA
 
 # Modify sys.path
@@ -19,28 +19,28 @@ sys.path.append(parent_dir)
 # pylint: disable=E402
 # flake8: noqa: E402
 
-# Now import Onyx modules
-from onyx.db.models import (
+# Now import Alvio modules
+from alvio.db.models import (
     DocumentSet__ConnectorCredentialPair,
     UserGroup__ConnectorCredentialPair,
 )
-from onyx.db.connector import fetch_connector_by_id
-from onyx.db.document import get_documents_for_connector_credential_pair
-from onyx.db.index_attempt import (
+from alvio.db.connector import fetch_connector_by_id
+from alvio.db.document import get_documents_for_connector_credential_pair
+from alvio.db.index_attempt import (
     delete_index_attempts,
     cancel_indexing_attempts_for_ccpair,
 )
-from onyx.db.models import ConnectorCredentialPair
-from onyx.document_index.interfaces import DocumentIndex
-from onyx.utils.logger import setup_logger
-from onyx.configs.constants import DocumentSource
-from onyx.db.connector_credential_pair import (
+from alvio.db.models import ConnectorCredentialPair
+from alvio.document_index.interfaces import DocumentIndex
+from alvio.utils.logger import setup_logger
+from alvio.configs.constants import DocumentSource
+from alvio.db.connector_credential_pair import (
     get_connector_credential_pair_from_id,
     get_connector_credential_pair,
 )
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.document_index.factory import get_default_document_index
-from onyx.file_store.file_store import get_default_file_store
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.document_index.factory import get_default_document_index
+from alvio.file_store.file_store import get_default_file_store
 
 # pylint: enable=E402
 # flake8: noqa: E402
@@ -136,7 +136,7 @@ def _unsafe_deletion(
 def _delete_connector(cc_pair_id: int, db_session: Session) -> None:
     user_input = input(
         "DO NOT USE THIS UNLESS YOU KNOW WHAT YOU ARE DOING. \
-        IT MAY CAUSE ISSUES with your Onyx instance! \
+        IT MAY CAUSE ISSUES with your Alvio instance! \
         Are you SURE you want to continue? (enter 'Y' to continue): "
     )
     if user_input != "Y":

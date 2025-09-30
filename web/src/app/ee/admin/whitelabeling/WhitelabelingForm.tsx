@@ -140,8 +140,8 @@ export function WhitelabelingForm() {
             <TextFormField
               label="Application Name"
               name="application_name"
-              subtext={`The custom name you are giving Onyx for your team. This will replace 'Onyx' everywhere in the UI.`}
-              placeholder="Custom name which will replace 'Onyx'"
+              subtext={`The custom name you are giving Alvio for your team. This will replace 'Alvio' everywhere in the UI.`}
+              placeholder="Custom name which will replace 'Alvio'"
               disabled={isSubmitting}
             />
             <div>
@@ -181,7 +181,7 @@ export function WhitelabelingForm() {
                 </div>
               ) : (
                 <SubLabel>
-                  Specify your own logo to replace the standard Onyx logo.
+                  Specify your own logo to replace the standard Alvio logo.
                 </SubLabel>
               )}
 
@@ -204,7 +204,7 @@ export function WhitelabelingForm() {
                   Read{" "}
                   <Link
                     href={
-                      "https://docs.onyx.app/admin/advanced_configs/white_labeling"
+                      "https://docs.alvio.io/admin/advanced_configs/white_labeling"
                     }
                     className="text-link cursor-pointer"
                   >
@@ -240,7 +240,7 @@ export function WhitelabelingForm() {
                     values.enable_consent_screen
                       ? `The title for the consent screen that will be displayed for each user on their initial visit to the application. If left blank, title will default to "Terms of Use".`
                       : `The title for the popup that will be displayed for each user on their initial visit to the application. If left blank AND Custom Popup Content is specified, will use "Welcome to ${
-                          values.application_name || "Onyx"
+                          values.application_name || "Alvio"
                         }!".`
                   }
                   placeholder={

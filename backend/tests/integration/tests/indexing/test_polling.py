@@ -5,11 +5,11 @@ from datetime import timezone
 
 import httpx
 
-from onyx.configs.app_configs import POLL_CONNECTOR_OFFSET
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.mock_connector.connector import MockConnectorCheckpoint
-from onyx.connectors.models import InputType
-from onyx.db.enums import IndexingStatus
+from alvio.configs.app_configs import POLL_CONNECTOR_OFFSET
+from alvio.configs.constants import DocumentSource
+from alvio.connectors.mock_connector.connector import MockConnectorCheckpoint
+from alvio.connectors.models import InputType
+from alvio.db.enums import IndexingStatus
 from tests.integration.common_utils.constants import MOCK_CONNECTOR_SERVER_HOST
 from tests.integration.common_utils.constants import MOCK_CONNECTOR_SERVER_PORT
 from tests.integration.common_utils.managers.cc_pair import CCPairManager

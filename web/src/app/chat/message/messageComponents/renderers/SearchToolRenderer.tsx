@@ -10,7 +10,7 @@ import {
 import { MessageRenderer } from "../interfaces";
 import { ResultIcon } from "@/components/chat/sources/SourceCard";
 import { truncateString } from "@/lib/utils";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { AlvioDocument } from "@/lib/search/interfaces";
 import { SourceChip2 } from "@/app/chat/components/SourceChip2";
 import { BlinkingDot } from "../../BlinkingDot";
 
@@ -28,7 +28,7 @@ const constructCurrentSearchState = (
   packets: SearchToolPacket[]
 ): {
   queries: string[];
-  results: OnyxDocument[];
+  results: AlvioDocument[];
   isSearching: boolean;
   isComplete: boolean;
   isInternetSearch: boolean;

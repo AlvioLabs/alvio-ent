@@ -5,21 +5,21 @@ from unittest.mock import patch
 
 import pytest
 
-from onyx.tools.models import ToolResponse
-from onyx.tools.tool_implementations.images.image_generation_tool import (
+from alvio.tools.models import ToolResponse
+from alvio.tools.tool_implementations.images.image_generation_tool import (
     IMAGE_GENERATION_HEARTBEAT_ID,
 )
-from onyx.tools.tool_implementations.images.image_generation_tool import (
+from alvio.tools.tool_implementations.images.image_generation_tool import (
     IMAGE_GENERATION_RESPONSE_ID,
 )
-from onyx.tools.tool_implementations.images.image_generation_tool import ImageFormat
-from onyx.tools.tool_implementations.images.image_generation_tool import (
+from alvio.tools.tool_implementations.images.image_generation_tool import ImageFormat
+from alvio.tools.tool_implementations.images.image_generation_tool import (
     ImageGenerationResponse,
 )
-from onyx.tools.tool_implementations.images.image_generation_tool import (
+from alvio.tools.tool_implementations.images.image_generation_tool import (
     ImageGenerationTool,
 )
-from onyx.tools.tool_implementations.images.image_generation_tool import ImageShape
+from alvio.tools.tool_implementations.images.image_generation_tool import ImageShape
 
 
 @pytest.fixture

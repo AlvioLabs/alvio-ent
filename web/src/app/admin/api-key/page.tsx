@@ -25,11 +25,11 @@ import { FiCopy, FiEdit2, FiRefreshCw } from "react-icons/fi";
 import { Modal } from "@/components/Modal";
 import { Spinner } from "@/components/Spinner";
 import { deleteApiKey, regenerateApiKey } from "./lib";
-import { OnyxApiKeyForm } from "./OnyxApiKeyForm";
+import { AlvioApiKeyForm } from "./AlvioApiKeyForm";
 import { APIKey } from "./types";
 import CreateButton from "@/components/ui/createButton";
 
-const API_KEY_TEXT = `API Keys allow you to access Onyx APIs programmatically. Click the button below to generate a new API Key.`;
+const API_KEY_TEXT = `API Keys allow you to access Alvio APIs programmatically. Click the button below to generate a new API Key.`;
 
 function NewApiKeyModal({
   apiKey,
@@ -122,7 +122,7 @@ function Main() {
         {newApiKeyButton}
 
         {showCreateUpdateForm && (
-          <OnyxApiKeyForm
+          <AlvioApiKeyForm
             onCreateApiKey={(apiKey) => {
               setFullApiKey(apiKey.api_key);
             }}
@@ -250,7 +250,7 @@ function Main() {
       </Table>
 
       {showCreateUpdateForm && (
-        <OnyxApiKeyForm
+        <AlvioApiKeyForm
           onCreateApiKey={(apiKey) => {
             setFullApiKey(apiKey.api_key);
           }}

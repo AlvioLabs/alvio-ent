@@ -6,7 +6,7 @@ on:
       - "*"
 
 env:
-  REGISTRY_IMAGE: onyxdotapp/onyx-web-server
+  REGISTRY_IMAGE: alviodotio/alvio-web-server
   LATEST_TAG: ${{ contains(github.ref_name, 'latest') }}
   DEPLOYMENT: standalone
 
@@ -77,7 +77,7 @@ jobs:
           platforms: ${{ matrix.platform }}
           push: true
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            ALVIO_VERSION=${{ github.ref_name }}
             NODE_OPTIONS=--max-old-space-size=8192
 
           labels: ${{ steps.meta.outputs.labels }}

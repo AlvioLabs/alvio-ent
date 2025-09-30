@@ -85,7 +85,7 @@ ENABLE_EMAIL_INVITES=true
 
 ### What is `AUTH_TYPE=cloud`?
 
-`AUTH_TYPE=cloud` is designed for Onyx's hosted cloud service with centralized authentication. 
+`AUTH_TYPE=cloud` is designed for Alvio's hosted cloud service with centralized authentication. 
 
 **For self-hosted deployments**, it may not work correctly because:
 - It expects cloud infrastructure
@@ -100,7 +100,7 @@ ENABLE_EMAIL_INVITES=true
 | `google_oauth` | Google Workspace teams | ✅ Yes - You have credentials! |
 | `oidc` | SSO with Okta/Auth0/etc | ✅ Yes - If you have OIDC provider |
 | `saml` | Enterprise SSO | ✅ Yes - Enterprise edition |
-| `cloud` | Onyx Cloud hosting | ⚠️ May not work self-hosted |
+| `cloud` | Alvio Cloud hosting | ⚠️ May not work self-hosted |
 
 **I changed `.env.prod` to use `AUTH_TYPE=google_oauth`** since you already have Google OAuth credentials configured.
 
@@ -148,15 +148,15 @@ docker compose -f docker-compose.prod-cloud.yml config | grep -A 5 "MULTI_TENANT
 
 ```bash
 # Check MULTI_TENANT is enabled
-docker exec onyx-api_server-1 env | grep MULTI_TENANT
+docker exec alvio-api_server-1 env | grep MULTI_TENANT
 # Should output: MULTI_TENANT=true
 
 # Check AUTH_TYPE
-docker exec onyx-api_server-1 env | grep AUTH_TYPE
+docker exec alvio-api_server-1 env | grep AUTH_TYPE
 # Should output: AUTH_TYPE=google_oauth
 
 # Check WEB_DOMAIN
-docker exec onyx-api_server-1 env | grep WEB_DOMAIN
+docker exec alvio-api_server-1 env | grep WEB_DOMAIN
 # Should output: WEB_DOMAIN=https://enterprise.alvio.io
 ```
 

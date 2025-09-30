@@ -51,13 +51,13 @@ docker compose -f docker-compose.prod-cloud.yml -f docker-compose.build-only.yml
 
 ```bash
 # Verify MULTI_TENANT is enabled
-docker exec onyx-api_server-1 env | grep MULTI_TENANT
+docker exec alvio-api_server-1 env | grep MULTI_TENANT
 # Should output: MULTI_TENANT=true
 
-docker exec onyx-api_server-1 env | grep AUTH_TYPE
+docker exec alvio-api_server-1 env | grep AUTH_TYPE
 # Should output: AUTH_TYPE=basic
 
-docker exec onyx-api_server-1 env | grep WEB_DOMAIN
+docker exec alvio-api_server-1 env | grep WEB_DOMAIN
 # Should output: WEB_DOMAIN=http://localhost:3000
 ```
 
@@ -67,10 +67,10 @@ Multi-tenant uses **schema_private** migrations:
 
 ```bash
 # Check current migration (multi-tenant)
-docker exec onyx-api_server-1 alembic -n schema_private current
+docker exec alvio-api_server-1 alembic -n schema_private current
 
 # If migrations didn't run, run them manually:
-docker exec onyx-api_server-1 alembic -n schema_private upgrade head
+docker exec alvio-api_server-1 alembic -n schema_private upgrade head
 ```
 
 ---
@@ -228,10 +228,10 @@ With your current setup, you can now test:
 
 ```bash
 # Check migration status
-docker exec onyx-api_server-1 alembic -n schema_private current
+docker exec alvio-api_server-1 alembic -n schema_private current
 
 # Run migrations manually
-docker exec onyx-api_server-1 alembic -n schema_private upgrade head
+docker exec alvio-api_server-1 alembic -n schema_private upgrade head
 
 # Restart API server
 docker compose -f docker-compose.multitenant-dev.yml restart api_server
@@ -241,23 +241,23 @@ docker compose -f docker-compose.multitenant-dev.yml restart api_server
 
 ```bash
 # Check API logs
-docker logs onyx-api_server-1
+docker logs alvio-api_server-1
 
 # Check database connection
-docker exec onyx-relational_db-1 psql -U postgres -c "SELECT 1"
+docker exec alvio-relational_db-1 psql -U postgres -c "SELECT 1"
 
 # Verify MULTI_TENANT is set
-docker exec onyx-api_server-1 env | grep MULTI_TENANT
+docker exec alvio-api_server-1 env | grep MULTI_TENANT
 ```
 
 ### Issue: Email Invites Not Sending
 
 ```bash
 # Check SMTP settings in container
-docker exec onyx-api_server-1 env | grep SMTP
+docker exec alvio-api_server-1 env | grep SMTP
 
 # Check API logs for SMTP errors
-docker logs onyx-api_server-1 | grep -i smtp
+docker logs alvio-api_server-1 | grep -i smtp
 
 # Test SMTP connection
 # Make sure verify@alvio.io can send emails via Gmail

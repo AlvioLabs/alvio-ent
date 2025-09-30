@@ -5,15 +5,15 @@ from uuid import UUID
 import pytest
 from sqlalchemy.orm import Session
 
-from ee.onyx.access.access import _get_access_for_documents
-from ee.onyx.db.external_perm import fetch_external_groups_for_user
-from onyx.access.utils import prefix_external_group
-from onyx.access.utils import prefix_user_email
-from onyx.configs.constants import PUBLIC_DOC_PAT
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.models import User
-from onyx.db.users import fetch_user_by_id
-from onyx.utils.logger import setup_logger
+from ee.alvio.access.access import _get_access_for_documents
+from ee.alvio.db.external_perm import fetch_external_groups_for_user
+from alvio.access.utils import prefix_external_group
+from alvio.access.utils import prefix_user_email
+from alvio.configs.constants import PUBLIC_DOC_PAT
+from alvio.db.engine.sql_engine import get_session_with_current_tenant
+from alvio.db.models import User
+from alvio.db.users import fetch_user_by_id
+from alvio.utils.logger import setup_logger
 from tests.integration.common_utils.test_models import DATestCCPair
 from tests.integration.common_utils.test_models import DATestUser
 from tests.integration.connector_job_tests.sharepoint.conftest import (
@@ -72,7 +72,7 @@ def get_user_document_access_via_acl(
 def get_all_connector_documents(
     cc_pair: DATestCCPair, db_session: Session
 ) -> List[str]:
-    from onyx.db.models import DocumentByConnectorCredentialPair
+    from alvio.db.models import DocumentByConnectorCredentialPair
     from sqlalchemy import select
 
     stmt = select(DocumentByConnectorCredentialPair.id).where(
