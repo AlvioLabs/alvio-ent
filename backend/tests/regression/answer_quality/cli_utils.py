@@ -99,14 +99,14 @@ def manage_data_directories(env_name: str, base_path: str, use_cloud_gpu: bool) 
     # Use the user's home directory as the base path
     target_path = os.path.join(os.path.expanduser(base_path), env_name)
     directories = {
-        "DANSWER_POSTGRES_DATA_DIR": os.path.join(target_path, "postgres/"),
-        "DANSWER_VESPA_DATA_DIR": os.path.join(target_path, "vespa/"),
+        "ALVIO_POSTGRES_DATA_DIR": os.path.join(target_path, "postgres/"),
+        "ALVIO_VESPA_DATA_DIR": os.path.join(target_path, "vespa/"),
     }
     if not use_cloud_gpu:
-        directories["DANSWER_INDEX_MODEL_CACHE_DIR"] = os.path.join(
+        directories["ALVIO_INDEX_MODEL_CACHE_DIR"] = os.path.join(
             target_path, "index_model_cache/"
         )
-        directories["DANSWER_INFERENCE_MODEL_CACHE_DIR"] = os.path.join(
+        directories["ALVIO_INFERENCE_MODEL_CACHE_DIR"] = os.path.join(
             target_path, "inference_model_cache/"
         )
 

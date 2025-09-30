@@ -18,7 +18,7 @@ outside of those directories.
 
 ## Project Overview
 
-**Alvio** (formerly Danswer) is an open-source Gen-AI and Enterprise Search platform that connects to company documents, apps, and people. It features a modular architecture with both Community Edition (MIT licensed) and Enterprise Edition offerings.
+**Alvio** (formerly Alvio) is an open-source Gen-AI and Enterprise Search platform that connects to company documents, apps, and people. It features a modular architecture with both Community Edition (MIT licensed) and Enterprise Edition offerings.
 
 
 ### Background Workers (Celery)

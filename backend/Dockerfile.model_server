@@ -1,7 +1,7 @@
 FROM python:3.11.7-slim-bookworm
 
-LABEL com.danswer.maintainer="founders@alvio.io"
-LABEL com.danswer.description="This image is for the Alvio model server which runs all of the \
+LABEL com.alvio.maintainer="founders@alvio.io"
+LABEL com.alvio.description="This image is for the Alvio model server which runs all of the \
 AI models for Alvio. This container and all the code is MIT Licensed and free for all to use. \
 You can find it at https://hub.docker.com/r/alvio/alvio-model-server. For more details, \
 visit https://github.com/alvio-dot-io/alvio."
@@ -9,7 +9,7 @@ visit https://github.com/alvio-dot-io/alvio."
 # Default ALVIO_VERSION, typically overriden during builds by GitHub Actions.
 ARG ALVIO_VERSION=0.0.0-dev
 ENV ALVIO_VERSION=${ALVIO_VERSION} \
-    DANSWER_RUNNING_IN_DOCKER="true" \
+    ALVIO_RUNNING_IN_DOCKER="true" \
     HF_HOME=/app/.cache/huggingface
 
 RUN echo "ALVIO_VERSION: ${ALVIO_VERSION}"

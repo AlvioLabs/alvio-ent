@@ -184,7 +184,7 @@ def add_ngrams_to_schema(schema_content: str) -> str:
 
 class VespaIndex(DocumentIndex):
 
-    VESPA_SCHEMA_JINJA_FILENAME = "danswer_chunk.sd.jinja"
+    VESPA_SCHEMA_JINJA_FILENAME = "alvio_chunk.sd.jinja"
 
     def __init__(
         self,

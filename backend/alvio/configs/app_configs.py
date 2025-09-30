@@ -164,7 +164,7 @@ TRACK_EXTERNAL_IDP_EXPIRY = (
 #####
 # DB Configs
 #####
-DOCUMENT_INDEX_NAME = "danswer_index"
+DOCUMENT_INDEX_NAME = "alvio_index"
 # Vespa is now the default document index store for both keyword and vector
 DOCUMENT_INDEX_TYPE = os.environ.get(
     "DOCUMENT_INDEX_TYPE", DocumentIndexType.COMBINED.value

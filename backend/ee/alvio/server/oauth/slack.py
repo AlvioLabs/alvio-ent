@@ -39,7 +39,7 @@ class SlackOAuth:
 
     TOKEN_URL = "https://slack.com/api/oauth.v2.access"
 
-    # SCOPE is per https://docs.danswer.dev/connectors/slack
+    # SCOPE is per https://docs.alvio.dev/connectors/slack
     BOT_SCOPE = (
         "channels:history,"
         "channels:read,"

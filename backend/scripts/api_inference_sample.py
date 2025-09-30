@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
     # Not needed if Auth is disabled
     # Or for Alvio MIT API key must be replaced with session cookie
-    api_key = os.environ.get("DANSWER_API_KEY")
+    api_key = os.environ.get("ALVIO_API_KEY")
 
     args = parser.parse_args()
     process_question(

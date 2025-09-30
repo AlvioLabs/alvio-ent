@@ -136,7 +136,7 @@ def remove_old_tags() -> None:
         index_name = document_index.index_name
     else:
         # Default index name if we can't get it from the document_index
-        index_name = "danswer_index"
+        index_name = "alvio_index"
 
     for batch in _get_batch_documents_with_multiple_tags():
         n_deleted = 0

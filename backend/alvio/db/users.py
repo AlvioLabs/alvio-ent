@@ -14,7 +14,7 @@ from sqlalchemy.sql.elements import KeyedColumnElement
 
 from alvio.auth.invited_users import remove_user_from_invited_users
 from alvio.auth.schemas import UserRole
-from alvio.db.api_key import DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN
+from alvio.db.api_key import ALVIO_API_KEY_DUMMY_EMAIL_DOMAIN
 from alvio.db.models import DocumentSet__User
 from alvio.db.models import Persona__User
 from alvio.db.models import SamlAccount
@@ -148,7 +148,7 @@ def _get_accepted_user_where_clause(
     is_active_col: KeyedColumnElement[Any] = User.__table__.c.is_active
 
     where_clause: list[ColumnElement[bool]] = [
-        expression.not_(email_col.endswith(DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN))
+        expression.not_(email_col.endswith(ALVIO_API_KEY_DUMMY_EMAIL_DOMAIN))
     ]
 
     if not include_external:

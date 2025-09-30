@@ -348,7 +348,7 @@ def configure_default_api_keys(db_session: Session) -> None:
                 )
                 current_search_settings.provider_type = EmbeddingProvider.COHERE
                 current_search_settings.index_name = (
-                    "danswer_chunk_cohere_embed_english_v3_0"
+                    "alvio_chunk_cohere_embed_english_v3_0"
                 )
                 current_search_settings.query_prefix = ""
                 current_search_settings.passage_prefix = ""

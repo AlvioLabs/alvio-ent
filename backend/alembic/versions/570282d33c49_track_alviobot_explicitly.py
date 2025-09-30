@@ -18,11 +18,11 @@ depends_on: None = None
 
 def upgrade() -> None:
     op.add_column(
-        "chat_session", sa.Column("danswerbot_flow", sa.Boolean(), nullable=True)
+        "chat_session", sa.Column("alviobot_flow", sa.Boolean(), nullable=True)
     )
-    op.execute("UPDATE chat_session SET danswerbot_flow = one_shot")
-    op.alter_column("chat_session", "danswerbot_flow", nullable=False)
+    op.execute("UPDATE chat_session SET alviobot_flow = one_shot")
+    op.alter_column("chat_session", "alviobot_flow", nullable=False)
 
 
 def downgrade() -> None:
-    op.drop_column("chat_session", "danswerbot_flow")
+    op.drop_column("chat_session", "alviobot_flow")

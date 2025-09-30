@@ -38,7 +38,7 @@ INFORMATION_CONTENT_MODEL_TAG: str | None = None
 DOC_EMBEDDING_CONTEXT_SIZE = 512
 
 # Used to distinguish alternative indices
-ALT_INDEX_SUFFIX = "__danswer_alt_index"
+ALT_INDEX_SUFFIX = "__alvio_alt_index"
 
 # Used for loading defaults for automatic deployments and dev flows
 # For local, use: mixedbread-ai/mxbai-rerank-xsmall-v1

@@ -19,7 +19,7 @@ from alvio.utils.logger import setup_logger
 logger = setup_logger()
 
 
-_DANSWER_DATETIME_REPLACEMENT_PAT = "[[CURRENT_DATETIME]]"
+_ALVIO_DATETIME_REPLACEMENT_PAT = "[[CURRENT_DATETIME]]"
 _BASIC_TIME_STR = "The current date is {datetime_info}."
 
 
@@ -43,11 +43,11 @@ def replace_current_datetime_tag(
     full_sentence: bool = False,
     include_day_of_week: bool = True,
 ) -> str:
-    if _DANSWER_DATETIME_REPLACEMENT_PAT not in prompt_str:
+    if _ALVIO_DATETIME_REPLACEMENT_PAT not in prompt_str:
         return prompt_str
 
     return prompt_str.replace(
-        _DANSWER_DATETIME_REPLACEMENT_PAT,
+        _ALVIO_DATETIME_REPLACEMENT_PAT,
         get_current_llm_day_time(
             full_sentence=full_sentence,
             include_day_of_week=include_day_of_week,
@@ -81,7 +81,7 @@ def handle_alvio_date_awareness(
     if prompt_with_datetime != prompt_str:
         return prompt_with_datetime
     any_tag_present = any(
-        _DANSWER_DATETIME_REPLACEMENT_PAT in text
+        _ALVIO_DATETIME_REPLACEMENT_PAT in text
         for text in [prompt_str, prompt_config.system_prompt, prompt_config.task_prompt]
     )
     if add_additional_info_if_no_tag and not any_tag_present:

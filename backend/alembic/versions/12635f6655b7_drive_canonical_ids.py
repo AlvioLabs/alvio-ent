@@ -530,7 +530,7 @@ def upgrade() -> None:
         index_name = document_index.index_name
     else:
         # Default index name if we can't get it from the document_index
-        index_name = "danswer_index"
+        index_name = "alvio_index"
 
     # Get all Google Drive documents from the database (this is faster and more reliable)
     gdrive_documents = get_google_drive_documents_from_database()

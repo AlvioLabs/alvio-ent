@@ -53,7 +53,7 @@ def analyze_topics(topics: list[str]) -> None:
         "OPENAI_API_KEY", "<your OpenAI API key if not set as env var>"
     )
     alvio_api_key = os.environ.get(
-        "DANSWER_API_KEY", "<your Alvio API key if not set as env var>"
+        "ALVIO_API_KEY", "<your Alvio API key if not set as env var>"
     )
     client = OpenAI(
         api_key=openai_api_key,

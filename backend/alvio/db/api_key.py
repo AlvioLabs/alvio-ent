@@ -10,8 +10,8 @@ from alvio.auth.api_key import ApiKeyDescriptor
 from alvio.auth.api_key import build_displayable_api_key
 from alvio.auth.api_key import generate_api_key
 from alvio.auth.api_key import hash_api_key
-from alvio.configs.constants import DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN
-from alvio.configs.constants import DANSWER_API_KEY_PREFIX
+from alvio.configs.constants import ALVIO_API_KEY_DUMMY_EMAIL_DOMAIN
+from alvio.configs.constants import ALVIO_API_KEY_PREFIX
 from alvio.configs.constants import UNNAMED_KEY_PLACEHOLDER
 from alvio.db.models import ApiKey
 from alvio.db.models import User
@@ -20,7 +20,7 @@ from shared_configs.contextvars import get_current_tenant_id
 
 
 def get_api_key_email_pattern() -> str:
-    return DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN
+    return ALVIO_API_KEY_DUMMY_EMAIL_DOMAIN
 
 
 def is_api_key_email_address(email: str) -> bool:
@@ -61,7 +61,7 @@ def get_api_key_fake_email(
     name: str,
     unique_id: str,
 ) -> str:
-    return f"{DANSWER_API_KEY_PREFIX}{name}@{unique_id}{DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN}"
+    return f"{ALVIO_API_KEY_PREFIX}{name}@{unique_id}{ALVIO_API_KEY_DUMMY_EMAIL_DOMAIN}"
 
 
 def insert_api_key(

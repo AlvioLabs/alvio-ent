@@ -64,7 +64,7 @@ def test_confluence_connector_basic(
     assert page_within_a_page_doc is not None
     assert page_within_a_page_doc.semantic_identifier == "Page Within A Page"
     assert page_within_a_page_doc.primary_owners
-    assert page_within_a_page_doc.primary_owners[0].email == "hagen@danswer.ai"
+    assert page_within_a_page_doc.primary_owners[0].email == "hagen@alvio.ai"
     assert len(page_within_a_page_doc.sections) == 1
 
     page_within_a_page_section = page_within_a_page_doc.sections[0]
@@ -72,21 +72,21 @@ def test_confluence_connector_basic(
     assert page_within_a_page_section.text == page_within_a_page_text
     assert (
         page_within_a_page_section.link
-        == "https://danswerai.atlassian.net/wiki/spaces/DailyConne/pages/200769540/Page+Within+A+Page"
+        == "https://alvioai.atlassian.net/wiki/spaces/DailyConne/pages/200769540/Page+Within+A+Page"
     )
 
     assert page_doc is not None
     assert page_doc.semantic_identifier == "DailyConnectorTestSpace Home"
     assert page_doc.metadata["labels"] == ["testlabel"]
     assert page_doc.primary_owners
-    assert page_doc.primary_owners[0].email == "hagen@danswer.ai"
+    assert page_doc.primary_owners[0].email == "hagen@alvio.ai"
     assert len(page_doc.sections) == 2  # page text + attachment text
 
     page_section = page_doc.sections[0]
     assert page_section.text == "test123 " + page_within_a_page_text
     assert (
         page_section.link
-        == "https://danswerai.atlassian.net/wiki/spaces/DailyConne/overview"
+        == "https://alvioai.atlassian.net/wiki/spaces/DailyConne/overview"
     )
 
     text_attachment_section = page_doc.sections[1]

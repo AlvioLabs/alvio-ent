@@ -14,7 +14,7 @@ from alvio.indexing.models import MultipassConfig
 from shared_configs.configs import MULTI_TENANT
 
 DEFAULT_BATCH_SIZE = 30
-DEFAULT_INDEX_NAME = "danswer_chunk"
+DEFAULT_INDEX_NAME = "alvio_chunk"
 
 
 def should_use_multipass(search_settings: SearchSettings | None) -> bool:

@@ -41,7 +41,7 @@ def sharepoint_test_env_setup() -> Generator[SharepointTestEnvSetupTuple]:
         "PERM_SYNC_SHAREPOINT_CERTIFICATE_PASSWORD"
     )
     sp_directory_id = os.environ.get("PERM_SYNC_SHAREPOINT_DIRECTORY_ID")
-    sharepoint_sites = "https://danswerai.sharepoint.com/sites/Permisisonsync"
+    sharepoint_sites = "https://alvioai.sharepoint.com/sites/Permisisonsync"
     admin_email = "admin@alvio.io"
     user1_email = "subash@alvio.io"
     user2_email = "raunak@alvio.io"

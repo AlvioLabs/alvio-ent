@@ -134,7 +134,7 @@ export default function AccessRestricted() {
           Need help? Join our{" "}
           <a
             className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-            href="https://join.slack.com/t/danswer/shared_invite/zt-1w76msxmd-HJHLe3KNFIAIzk_0dSOKaQ"
+            href="https://join.slack.com/t/alvio/shared_invite/zt-1w76msxmd-HJHLe3KNFIAIzk_0dSOKaQ"
             target="_blank"
             rel="noopener noreferrer"
           >

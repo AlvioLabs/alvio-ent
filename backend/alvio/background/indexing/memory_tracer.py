@@ -4,7 +4,7 @@ from alvio.utils.logger import setup_logger
 
 logger = setup_logger()
 
-DANSWER_TRACEMALLOC_FRAMES = 10
+ALVIO_TRACEMALLOC_FRAMES = 10
 
 
 class MemoryTracer:
@@ -20,7 +20,7 @@ class MemoryTracer:
         """Start the memory tracer if interval is greater than 0."""
         if self.interval > 0:
             logger.debug(f"Memory tracer starting: interval={self.interval}")
-            tracemalloc.start(DANSWER_TRACEMALLOC_FRAMES)
+            tracemalloc.start(ALVIO_TRACEMALLOC_FRAMES)
             self._take_snapshot()
 
     def stop(self) -> None:

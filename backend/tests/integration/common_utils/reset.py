@@ -320,7 +320,7 @@ def reset_vespa() -> None:
             continuation = None
             should_continue = True
             while should_continue:
-                params = {"selection": "true", "cluster": "danswer_index"}
+                params = {"selection": "true", "cluster": "alvio_index"}
                 if continuation:
                     params = {**params, "continuation": continuation}
                 response = requests.delete(
@@ -379,7 +379,7 @@ def reset_vespa_multitenant() -> None:
                 continuation = None
                 should_continue = True
                 while should_continue:
-                    params = {"selection": "true", "cluster": "danswer_index"}
+                    params = {"selection": "true", "cluster": "alvio_index"}
                     if continuation:
                         params = {**params, "continuation": continuation}
                     response = requests.delete(

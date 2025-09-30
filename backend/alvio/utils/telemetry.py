@@ -24,7 +24,7 @@ from alvio.utils.variable_functionality import noop_fallback
 from shared_configs.configs import MULTI_TENANT
 from shared_configs.contextvars import get_current_tenant_id
 
-_DANSWER_TELEMETRY_ENDPOINT = "https://telemetry.alvio.io/anonymous_telemetry"
+_ALVIO_TELEMETRY_ENDPOINT = "https://telemetry.alvio.io/anonymous_telemetry"
 _CACHED_UUID: str | None = None
 _CACHED_INSTANCE_DOMAIN: str | None = None
 
@@ -123,7 +123,7 @@ def optional_telemetry(
                 if ENTERPRISE_EDITION_ENABLED:
                     payload["instance_domain"] = _get_or_generate_instance_domain()
                 requests.post(
-                    _DANSWER_TELEMETRY_ENDPOINT,
+                    _ALVIO_TELEMETRY_ENDPOINT,
                     headers={"Content-Type": "application/json"},
                     json=payload,
                 )

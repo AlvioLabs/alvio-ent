@@ -7,17 +7,17 @@
             <server id="default" port="8081"/>
         </http>
         <nodes>
-            <node hostalias="danswer-node" />
+            <node hostalias="alvio-node" />
         </nodes>
     </container>
-    <content id="danswer_index" version="1.0">
+    <content id="alvio_index" version="1.0">
         <redundancy>1</redundancy>
         <documents>
-            <!-- <document type="danswer_chunk" mode="index" /> -->
+            <!-- <document type="alvio_chunk" mode="index" /> -->
             {{ document_elements }}
         </documents>
         <nodes>
-            <node hostalias="danswer-node" distribution-key="0" />
+            <node hostalias="alvio-node" distribution-key="0" />
         </nodes>
         <tuning>
             <resource-limits>

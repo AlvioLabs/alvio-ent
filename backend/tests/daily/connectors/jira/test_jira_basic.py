@@ -13,7 +13,7 @@ from tests.daily.connectors.utils import load_all_docs_from_checkpoint_connector
 @pytest.fixture
 def jira_connector() -> JiraConnector:
     connector = JiraConnector(
-        jira_base_url="https://danswerai.atlassian.net",
+        jira_base_url="https://alvioai.atlassian.net",
         project_key="AS",
         comment_email_blacklist=[],
     )
@@ -29,7 +29,7 @@ def jira_connector() -> JiraConnector:
 @pytest.fixture
 def jira_connector_with_jql() -> JiraConnector:
     connector = JiraConnector(
-        jira_base_url="https://danswerai.atlassian.net",
+        jira_base_url="https://alvioai.atlassian.net",
         jql_query="project = 'AS' AND issuetype = Story",
         comment_email_blacklist=[],
     )
@@ -67,7 +67,7 @@ def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> Non
     assert epic is not None
 
     # Check task
-    assert story.id == "https://danswerai.atlassian.net/browse/AS-3"
+    assert story.id == "https://alvioai.atlassian.net/browse/AS-3"
     assert story.semantic_identifier == "AS-3: Magic Answers"
     assert story.source == DocumentSource.JIRA
     assert story.metadata == {
@@ -98,10 +98,10 @@ def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> Non
         section.text
         == "This is a critical request for super-human answer quality in Alvio! We need magic!\n"
     )
-    assert section.link == "https://danswerai.atlassian.net/browse/AS-3"
+    assert section.link == "https://alvioai.atlassian.net/browse/AS-3"
 
     # Check epic
-    assert epic.id == "https://danswerai.atlassian.net/browse/AS-4"
+    assert epic.id == "https://alvioai.atlassian.net/browse/AS-4"
     assert epic.semantic_identifier == "AS-4: EPIC"
     assert epic.source == DocumentSource.JIRA
     assert epic.metadata == {
@@ -126,7 +126,7 @@ def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> Non
     assert len(epic.sections) == 1
     section = epic.sections[0]
     assert section.text == "example_text\n"
-    assert section.link == "https://danswerai.atlassian.net/browse/AS-4"
+    assert section.link == "https://alvioai.atlassian.net/browse/AS-4"
 
 
 @patch(
@@ -156,6 +156,6 @@ def test_jira_connector_with_jql(
 
     # Verify it's the expected Story
     story = docs[0]
-    assert story.id == "https://danswerai.atlassian.net/browse/AS-3"
+    assert story.id == "https://alvioai.atlassian.net/browse/AS-3"
     assert story.semantic_identifier == "AS-3: Magic Answers"
     assert story.metadata["issuetype"] == "Story"
