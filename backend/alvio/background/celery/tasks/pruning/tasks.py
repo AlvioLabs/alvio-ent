@@ -28,7 +28,7 @@ from alvio.configs.app_configs import JOB_TIMEOUT
 from alvio.configs.constants import CELERY_GENERIC_BEAT_LOCK_TIMEOUT
 from alvio.configs.constants import CELERY_PRUNING_LOCK_TIMEOUT
 from alvio.configs.constants import CELERY_TASK_WAIT_FOR_FENCE_TIMEOUT
-from alvio.configs.constants import DANSWER_REDIS_FUNCTION_LOCK_PREFIX
+from alvio.configs.constants import ALVIO_REDIS_FUNCTION_LOCK_PREFIX
 from alvio.configs.constants import AlvioCeleryPriority
 from alvio.configs.constants import AlvioCeleryQueues
 from alvio.configs.constants import AlvioCeleryTask
@@ -286,7 +286,7 @@ def try_creating_prune_generator_task(
     # we need to serialize starting pruning since it can be triggered either via
     # celery beat or manually (API call)
     lock: RedisLock = r.lock(
-        DANSWER_REDIS_FUNCTION_LOCK_PREFIX + "try_creating_prune_generator_task",
+        ALVIO_REDIS_FUNCTION_LOCK_PREFIX + "try_creating_prune_generator_task",
         timeout=LOCK_TIMEOUT,
     )
 
@@ -812,3 +812,4 @@ def validate_pruning_fence(
 
     redis_connector.prune.reset()
     return
+

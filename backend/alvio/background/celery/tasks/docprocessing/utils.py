@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 from alvio.background.celery.apps.app_base import task_logger
 from alvio.configs.app_configs import DISABLE_INDEX_UPDATE_ON_SWAP
 from alvio.configs.constants import CELERY_GENERIC_BEAT_LOCK_TIMEOUT
-from alvio.configs.constants import DANSWER_REDIS_FUNCTION_LOCK_PREFIX
+from alvio.configs.constants import ALVIO_REDIS_FUNCTION_LOCK_PREFIX
 from alvio.configs.constants import DocumentSource
 from alvio.configs.constants import AlvioCeleryPriority
 from alvio.configs.constants import AlvioCeleryQueues
@@ -323,7 +323,7 @@ def try_creating_docfetching_task(
     # we need to serialize any attempt to trigger indexing since it can be triggered
     # either via celery beat or manually (API call)
     lock: RedisLock = r.lock(
-        DANSWER_REDIS_FUNCTION_LOCK_PREFIX + "try_creating_indexing_task",
+        ALVIO_REDIS_FUNCTION_LOCK_PREFIX + "try_creating_indexing_task",
         timeout=LOCK_TIMEOUT,
     )
 
@@ -407,3 +407,4 @@ def try_creating_docfetching_task(
             lock.release()
 
     return index_attempt_id
+

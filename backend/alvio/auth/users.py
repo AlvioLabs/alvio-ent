@@ -85,8 +85,8 @@ from alvio.configs.app_configs import VALID_EMAIL_DOMAINS
 from alvio.configs.app_configs import WEB_DOMAIN
 from alvio.configs.constants import ANONYMOUS_USER_COOKIE_NAME
 from alvio.configs.constants import AuthType
-from alvio.configs.constants import DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN
-from alvio.configs.constants import DANSWER_API_KEY_PREFIX
+from alvio.configs.constants import ALVIO_API_KEY_DUMMY_EMAIL_DOMAIN
+from alvio.configs.constants import ALVIO_API_KEY_PREFIX
 from alvio.configs.constants import FASTAPI_USERS_AUTH_COOKIE_NAME
 from alvio.configs.constants import MilestoneRecordType
 from alvio.configs.constants import AlvioRedisLocks
@@ -143,9 +143,9 @@ def verify_auth_setting() -> None:
 
 
 def get_display_email(email: str | None, space_less: bool = False) -> str:
-    if email and email.endswith(DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN):
+    if email and email.endswith(ALVIO_API_KEY_DUMMY_EMAIL_DOMAIN):
         name = email.split("@")[0]
-        if name == DANSWER_API_KEY_PREFIX + UNNAMED_KEY_PLACEHOLDER:
+        if name == ALVIO_API_KEY_PREFIX + UNNAMED_KEY_PLACEHOLDER:
             return "Unnamed API Key"
 
         if space_less:
@@ -1392,3 +1392,4 @@ async def api_key_dep(
         raise HTTPException(status_code=401, detail="Invalid API key")
 
     return user
+
